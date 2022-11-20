@@ -14,9 +14,22 @@ root.geometry("300x300")
 
 
 def ecampusLink() :
+    # 보안상의 이유로 학번과 비밀번호는 지웠습니다.
+    myid = '학번'
+    mypw = '비밀번호'
     browser = webdriver.Chrome(service=Service(ChromeDriverManager().install()))
 
     browser.get('https://ecampus.chungbuk.ac.kr/')
+
+    id = browser.find_element(By.XPATH,'//*[@id="uid"]')
+    id.click()
+    id.send_keys(myid)
+
+    pw = browser.find_element(By.XPATH,'//*[@id="pswd"]')
+    pw.click()
+    pw.send_keys(mypw)
+
+    browser.find_element(By.XPATH,'//*[@id="entry-login"]').click()
 
 
 ecampusBtn = Button(root, text = "ecampus", font="나눔고딕 10", command = ecampusLink)

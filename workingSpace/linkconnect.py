@@ -5,6 +5,7 @@ from selenium.webdriver.common.by import By
 from selenium.webdriver.chrome.service import Service
 from webdriver_manager.chrome import ChromeDriverManager
 from selenium.webdriver.common.by import By
+from selenium.webdriver.chrome.options import Options
 from selenium import webdriver
 
 
@@ -14,10 +15,11 @@ root.geometry("300x300")
 
 
 def ecampusLink() :
-    # 보안상의 이유로 학번과 비밀번호는 지웠습니다.
     myid = '학번'
     mypw = '비밀번호'
-    browser = webdriver.Chrome(service=Service(ChromeDriverManager().install()))
+    chrome_options = Options()
+    chrome_options.add_experimental_option("detach", True)
+    browser = webdriver.Chrome(service=Service(ChromeDriverManager().install()),options=chrome_options)
 
     browser.get('https://ecampus.chungbuk.ac.kr/')
 

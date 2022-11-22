@@ -1,0 +1,25 @@
+import pygame       #게임 만들기 쉽도록
+import sys          #게임을 종료할 수 있게
+from pygame.locals import*  #pygame.locals 하위 모듈을 가져옴
+from rule import*
+
+board_color1 = (153, 102, 000)
+board_color2 = (153, 102, 51)
+board_color3 = (204, 153, 000)
+board_color4 = (204, 153, 51)
+bg_color = (128, 128, 128)
+black = (0, 0, 0)
+bule = (0, 50, 255)
+white = (255, 255, 255)
+red = (255, 0, 0)
+green = (0, 200, 0)
+
+window_width = 800
+window_height = 500
+board_width = 500
+board_size = 30
+grid_size = 30
+empty = 0
+black_stone = 1
+white_stone = 2
+tie = 100

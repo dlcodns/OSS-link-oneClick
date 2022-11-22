@@ -23,3 +23,6 @@ empty = 0
 black_stone = 1
 white_stone = 2
 tie = 100
+
+fps = 60
+fps_clock = pygame.time.Clock()

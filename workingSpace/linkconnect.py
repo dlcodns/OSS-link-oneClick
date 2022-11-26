@@ -127,6 +127,21 @@ def dormAutoWindow() :
 
     browser.find_element(By.XPATH,'//*[@id="memberLoginForm"]/fieldset/button').click()
 
+def geshinAutoWindow() :
+    args = ["hide_console", ]
+    browser = webdriver.Chrome(service=chrome_service, options=chrome_options)
+    browser.get('https://eis.cbnu.ac.kr/')
+
+    id = browser.find_element(By.XPATH,'//*[@id="uid"]')
+    id.click()
+    id.send_keys(myId)
+
+    pw = browser.find_element(By.XPATH,'//*[@id="pswd"]')
+    pw.click()
+    pw.send_keys(myPw)
+
+    browser.find_element(By.XPATH,'//*[@id="commonLoginBtn"]').click()
+
 # 그냥 링크 버튼
 ecampusBtn = Button(root, text = "ecampus", font="나눔고딕 10", command = ecampusWindow)
 ecampusBtn.config(width = 10, height = 3)
@@ -150,7 +165,7 @@ cieatAutoBtn = Button(root, text = "씨앗 A", font="나눔고딕 10", command =
 cieatAutoBtn.config(width = 10, height = 3)
 dormAutoBtn = Button(root, text = "학생생활관 A", font="나눔고딕 10", command = dormAutoWindow)
 dormAutoBtn.config(width = 10, height = 3)
-geshinAutoBtn = Button(root, text = "개신누리 A", font="나눔고딕 10")
+geshinAutoBtn = Button(root, text = "개신누리 A", font="나눔고딕 10", command = geshinAutoWindow)
 geshinAutoBtn.config(width = 10, height = 3)
 jobAutoBtn = Button(root, text = "취업지원본부 A", font="나눔고딕 10")
 jobAutoBtn.config(width = 10, height = 3)
@@ -165,5 +180,8 @@ jobBtn.grid(row=5, column=0, padx=5, pady=3)
 ecampusAutoBtn.grid(row=0, column=1, padx=5, pady=3)
 homepageAutoBtn.grid(row=1, column=1, padx=5, pady=3)
 cieatAutoBtn.grid(row=2, column=1, padx=5, pady=3)
+dormAutoBtn.grid(row=3, column=1, padx=5, pady=3)
+geshinAutoBtn.grid(row=4, column=1, padx=5, pady=3)
+jobAutoBtn.grid(row=5, column=1, padx=5, pady=3)
 
 root.mainloop() #위에서 생성한 객체.mainloop

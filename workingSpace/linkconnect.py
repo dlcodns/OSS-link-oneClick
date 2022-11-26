@@ -17,8 +17,10 @@ chrome_options.add_experimental_option("detach", True)      # 창 꺼지지 않�
 chrome_options.add_argument('incognito')                    # 시크릿 모드로 실행
 chrome_options.add_argument('start-maximized')              # 창 최대화
 chrome_options.add_experimental_option('excludeSwitches', ['enable-logging'])           # 로그 제거
+chrome_options.add_experimental_option("excludeSwitches", ["disable-popup-blocking"])   # 팝업 제거
 chrome_service = Service('chromedriver')
 chrome_service.creationflags = 0x08000000                   # 명령 프롬프트창 안뜨게 하는 옵션
+
 
 myId = '학번'
 myPw = '비밀번호'
@@ -34,7 +36,7 @@ def ecampusWindow() :
 def homepageWindow() :
     args = ["hide_console", ]
     browser = webdriver.Chrome(service=chrome_service, options=chrome_options)
-    browser.get('https://cbnu.ac.kr/')
+    browser.get('https://www.chungbuk.ac.kr/')
     
 def cieatWindow() :
     args = ["hide_console", ]
@@ -61,6 +63,7 @@ def jobWindow() :
 # 자동로그인 부분
 
 def ecampusAutoWindow() :
+    args = ["hide_console", ]
     browser = webdriver.Chrome(service=chrome_service, options=chrome_options)
     browser.get('https://ecampus.chungbuk.ac.kr/')
 
@@ -73,8 +76,25 @@ def ecampusAutoWindow() :
     pw.send_keys(myPw)
 
     browser.find_element(By.XPATH,'//*[@id="entry-login"]').click()
+    
+def homepageAutoWindow() :
+    args = ["hide_console", ]
+    browser = webdriver.Chrome(service=chrome_service, options=chrome_options)
+    browser.get('https://www.chungbuk.ac.kr/')
+    
+    browser.find_element(By.XPATH,'//*[@id="header"]/div/div[2]/ul/li[2]/a').click()
 
+    id = browser.find_element(By.XPATH,'//*[@id="userid"]')
+    id.click()
+    id.send_keys(myId)
 
+    pw = browser.find_element(By.XPATH,'//*[@id="userpw"]')
+    pw.click()
+    pw.send_keys(myPw)
+
+    browser.find_element(By.XPATH,'//*[@id="loginForm"]/fieldset/div/div/span/input').click()
+
+# 그냥 링크 버튼
 ecampusBtn = Button(root, text = "ecampus", font="나눔고딕 10", command = ecampusWindow)
 ecampusBtn.config(width = 10, height = 3)
 homepageBtn = Button(root, text = "홈피", font="나눔고딕 10", command = homepageWindow)
@@ -88,11 +108,20 @@ geshinBtn.config(width = 10, height = 3)
 jobBtn = Button(root, text = "취업지원본부", font="나눔고딕 10", command = jobWindow)
 jobBtn.config(width = 10, height = 3)
 
+# 자동로그인 버튼
+ecampusAutoBtn = Button(root, text = "ecampus A", font="나눔고딕 10", command = ecampusAutoWindow)
+ecampusAutoBtn.config(width = 10, height = 3)
+homepageAutoBtn = Button(root, text = "홈피 A", font="나눔고딕 10", command = homepageAutoWindow)
+homepageAutoBtn.config(width = 10, height = 3)
+
 ecampusBtn.grid(row=0, column=0, padx=5, pady=3)
 homepageBtn.grid(row=1, column=0, padx=5, pady=3)
 cieatBtn.grid(row=2, column=0, padx=5, pady=3)
 dormBtn.grid(row=3, column=0, padx=5, pady=3)
 geshinBtn.grid(row=4, column=0, padx=5, pady=3)
 jobBtn.grid(row=5, column=0, padx=5, pady=3)
+
+ecampusAutoBtn.grid(row=0, column=1, padx=5, pady=3)
+homepageAutoBtn.grid(row=1, column=1, padx=5, pady=3)
 
 root.mainloop() #위에서 생성한 객체.mainloop

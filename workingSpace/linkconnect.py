@@ -14,6 +14,9 @@ root.geometry("300x400")
 chromedriver_autoinstaller.install(True)                    # 크롬 드라이버 자동 설치
 chrome_options = Options()
 chrome_options.add_experimental_option("detach", True)      # 창 꺼지지 않는 옵션
+chrome_options.add_argument('incognito')                    # 시크릿 모드로 실행
+chrome_options.add_argument('start-maximized')              # 창 최대화
+chrome_options.add_experimental_option('excludeSwitches', ['enable-logging'])           # 로그 제거
 chrome_service = Service('chromedriver')
 chrome_service.creationflags = 0x08000000                   # 명령 프롬프트창 안뜨게 하는 옵션
 

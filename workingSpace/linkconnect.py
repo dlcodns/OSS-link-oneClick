@@ -142,6 +142,21 @@ def geshinAutoWindow() :
 
     browser.find_element(By.XPATH,'//*[@id="commonLoginBtn"]').click()
 
+def jobAutoWindow() :
+    args = ["hide_console", ]
+    browser = webdriver.Chrome(service=chrome_service, options=chrome_options)
+    browser.get('http://hrd.chungbuk.ac.kr/')
+
+    id = browser.find_element(By.XPATH,'//*[@id="id"]')
+    id.click()
+    id.send_keys(myId)
+
+    pw = browser.find_element(By.XPATH,'//*[@id="pw"]')
+    pw.click()
+    pw.send_keys(myPw)
+
+    browser.find_element(By.XPATH,'//*[@id="login"]/form/div[2]/div[2]/table/tbody/tr[1]/td[2]/input').click()
+
 # 그냥 링크 버튼
 ecampusBtn = Button(root, text = "ecampus", font="나눔고딕 10", command = ecampusWindow)
 ecampusBtn.config(width = 10, height = 3)
@@ -167,7 +182,7 @@ dormAutoBtn = Button(root, text = "학생생활관 A", font="나눔고딕 10", c
 dormAutoBtn.config(width = 10, height = 3)
 geshinAutoBtn = Button(root, text = "개신누리 A", font="나눔고딕 10", command = geshinAutoWindow)
 geshinAutoBtn.config(width = 10, height = 3)
-jobAutoBtn = Button(root, text = "취업지원본부 A", font="나눔고딕 10")
+jobAutoBtn = Button(root, text = "취업지원본부 A", font="나눔고딕 10", command = jobAutoWindow)
 jobAutoBtn.config(width = 10, height = 3)
 
 ecampusBtn.grid(row=0, column=0, padx=5, pady=3)

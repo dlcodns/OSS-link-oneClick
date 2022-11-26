@@ -94,6 +94,22 @@ def homepageAutoWindow() :
 
     browser.find_element(By.XPATH,'//*[@id="loginForm"]/fieldset/div/div/span/input').click()
 
+def cieatAutoWindow() :
+    args = ["hide_console", ]
+    browser = webdriver.Chrome(service=chrome_service, options=chrome_options)
+    browser.get('https://cieat.cbnu.ac.kr/')
+    browser.find_element(By.XPATH,'/html/body/div[3]/header/div[2]/div/a').click()
+    
+    id = browser.find_element(By.XPATH,'//*[@id="userId"]')
+    id.click()
+    id.send_keys(myId)
+
+    pw = browser.find_element(By.XPATH,'//*[@id="userPw"]')
+    pw.click()
+    pw.send_keys(myPw)
+
+    browser.find_element(By.XPATH,'//*[@id="loginBtnStd"]').click()
+
 # 그냥 링크 버튼
 ecampusBtn = Button(root, text = "ecampus", font="나눔고딕 10", command = ecampusWindow)
 ecampusBtn.config(width = 10, height = 3)
@@ -113,6 +129,8 @@ ecampusAutoBtn = Button(root, text = "ecampus A", font="나눔고딕 10", comman
 ecampusAutoBtn.config(width = 10, height = 3)
 homepageAutoBtn = Button(root, text = "홈피 A", font="나눔고딕 10", command = homepageAutoWindow)
 homepageAutoBtn.config(width = 10, height = 3)
+cieatAutoBtn = Button(root, text = "씨앗 A", font="나눔고딕 10", command = cieatAutoWindow)
+cieatAutoBtn.config(width = 10, height = 3)
 
 ecampusBtn.grid(row=0, column=0, padx=5, pady=3)
 homepageBtn.grid(row=1, column=0, padx=5, pady=3)
@@ -123,5 +141,6 @@ jobBtn.grid(row=5, column=0, padx=5, pady=3)
 
 ecampusAutoBtn.grid(row=0, column=1, padx=5, pady=3)
 homepageAutoBtn.grid(row=1, column=1, padx=5, pady=3)
+cieatAutoBtn.grid(row=2, column=1, padx=5, pady=3)
 
 root.mainloop() #위에서 생성한 객체.mainloop

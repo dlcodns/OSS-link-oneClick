@@ -9,7 +9,7 @@ from selenium import webdriver
 
 root = Tk()
 root.title("임시")
-root.geometry("300x300")
+root.geometry("300x400")
 
 chromedriver_autoinstaller.install(True)                    # 크롬 드라이버 자동 설치
 chrome_options = Options()
@@ -20,7 +20,44 @@ chrome_service.creationflags = 0x08000000                   # 명령 프롬프�
 myId = '학번'
 myPw = '비밀번호'
 
-def ecampusLink() :
+# ----------------------------------------------------------------------------------------
+# 링크 부분
+
+def ecampusWindow() :
+    args = ["hide_console", ]
+    browser = webdriver.Chrome(service=chrome_service, options=chrome_options)
+    browser.get('https://ecampus.chungbuk.ac.kr/')
+
+def homepageWindow() :
+    args = ["hide_console", ]
+    browser = webdriver.Chrome(service=chrome_service, options=chrome_options)
+    browser.get('https://cbnu.ac.kr/')
+    
+def cieatWindow() :
+    args = ["hide_console", ]
+    browser = webdriver.Chrome(service=chrome_service, options=chrome_options)
+    browser.get('https://cieat.cbnu.ac.kr/')
+
+def dormWindow() :
+    args = ["hide_console", ]
+    browser = webdriver.Chrome(service=chrome_service, options=chrome_options)
+    browser.get('https://dorm.chungbuk.ac.kr/')
+    
+def geshinWindow() :
+    args = ["hide_console", ]
+    browser = webdriver.Chrome(service=chrome_service, options=chrome_options)
+    browser.get('https://eis.cbnu.ac.kr/')
+    
+def jobWindow() :
+    args = ["hide_console", ]
+    browser = webdriver.Chrome(service=chrome_service, options=chrome_options)
+    browser.get('http://hrd.chungbuk.ac.kr/')
+
+
+# -------------------------------------------------------------------------------------    
+# 자동로그인 부분
+
+def ecampusAutoWindow() :
     browser = webdriver.Chrome(service=chrome_service, options=chrome_options)
     browser.get('https://ecampus.chungbuk.ac.kr/')
 
@@ -35,11 +72,24 @@ def ecampusLink() :
     browser.find_element(By.XPATH,'//*[@id="entry-login"]').click()
 
 
-ecampusBtn = Button(root, text = "ecampus", font="나눔고딕 10", command = ecampusLink)
-ecampusBtn.config(width = 20, height = 5)
-tmpBtn = Button(root, text = "임시버튼", font="나눔고딕 10")
-tmpBtn.config(width = 20, height = 5)
-ecampusBtn.pack()
-tmpBtn.pack()
+ecampusBtn = Button(root, text = "ecampus", font="나눔고딕 10", command = ecampusWindow)
+ecampusBtn.config(width = 10, height = 3)
+homepageBtn = Button(root, text = "홈피", font="나눔고딕 10", command = homepageWindow)
+homepageBtn.config(width = 10, height = 3)
+cieatBtn = Button(root, text = "씨앗", font="나눔고딕 10", command = cieatWindow)
+cieatBtn.config(width = 10, height = 3)
+dormBtn = Button(root, text = "학생생활관", font="나눔고딕 10", command = dormWindow)
+dormBtn.config(width = 10, height = 3)
+geshinBtn = Button(root, text = "개신누리", font="나눔고딕 10", command = geshinWindow)
+geshinBtn.config(width = 10, height = 3)
+jobBtn = Button(root, text = "취업지원본부", font="나눔고딕 10", command = jobWindow)
+jobBtn.config(width = 10, height = 3)
+
+ecampusBtn.grid(row=0, column=0, padx=5, pady=3)
+homepageBtn.grid(row=1, column=0, padx=5, pady=3)
+cieatBtn.grid(row=2, column=0, padx=5, pady=3)
+dormBtn.grid(row=3, column=0, padx=5, pady=3)
+geshinBtn.grid(row=4, column=0, padx=5, pady=3)
+jobBtn.grid(row=5, column=0, padx=5, pady=3)
 
 root.mainloop() #위에서 생성한 객체.mainloop

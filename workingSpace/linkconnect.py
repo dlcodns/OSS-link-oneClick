@@ -110,6 +110,23 @@ def cieatAutoWindow() :
 
     browser.find_element(By.XPATH,'//*[@id="loginBtnStd"]').click()
 
+def dormAutoWindow() :
+    args = ["hide_console", ]
+    browser = webdriver.Chrome(service=chrome_service, options=chrome_options)
+    browser.get('https://dorm.chungbuk.ac.kr/')
+
+    browser.find_element(By.XPATH,'//*[@id="gnb"]/ul/li[1]').click()
+
+    id = browser.find_element(By.XPATH,'//*[@id="info1"]')
+    id.click()
+    id.send_keys(myId)
+
+    pw = browser.find_element(By.XPATH,'//*[@id="info2"]')
+    pw.click()
+    pw.send_keys(myPw)
+
+    browser.find_element(By.XPATH,'//*[@id="memberLoginForm"]/fieldset/button').click()
+
 # 그냥 링크 버튼
 ecampusBtn = Button(root, text = "ecampus", font="나눔고딕 10", command = ecampusWindow)
 ecampusBtn.config(width = 10, height = 3)
@@ -131,6 +148,12 @@ homepageAutoBtn = Button(root, text = "홈피 A", font="나눔고딕 10", comman
 homepageAutoBtn.config(width = 10, height = 3)
 cieatAutoBtn = Button(root, text = "씨앗 A", font="나눔고딕 10", command = cieatAutoWindow)
 cieatAutoBtn.config(width = 10, height = 3)
+dormAutoBtn = Button(root, text = "학생생활관 A", font="나눔고딕 10", command = dormAutoWindow)
+dormAutoBtn.config(width = 10, height = 3)
+geshinAutoBtn = Button(root, text = "개신누리 A", font="나눔고딕 10")
+geshinAutoBtn.config(width = 10, height = 3)
+jobAutoBtn = Button(root, text = "취업지원본부 A", font="나눔고딕 10")
+jobAutoBtn.config(width = 10, height = 3)
 
 ecampusBtn.grid(row=0, column=0, padx=5, pady=3)
 homepageBtn.grid(row=1, column=0, padx=5, pady=3)

@@ -40,6 +40,27 @@ def main():
     while True:
         run_game(surface, omok, menu)
         menu.is_continue(omok)
+        
+def run_game(surface, omok, menu):
+    omok.init_game()
+    while True:
+        for event in pygame.event.get():
+            if event.type == QUIT:
+                menu.terminate()
+            elif event.type == MOUSEBUTTONUP:
+                if not omok.check_board(event.pos):
+                    if menu.check_rect(event.pos, omok):
+                        omok.init_game()
+
+        if omok.is_gameover:
+            return
+
+        fps_clock.tick(fps)
+        if not omok.check_board(event.pos):
+            if menu.check_rect(event.pos, omok):
+                omok.init_game()
+        if omok.is_gameover:
+            return
 
 class Omok(object):
     def init(self, surface):

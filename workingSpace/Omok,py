@@ -17,7 +17,7 @@ green = (0, 200, 0)
 window_width = 800
 window_height = 500
 board_width = 500
-board_size = 30
+board_size = 38
 grid_size = 30
 empty = 0
 black_stone = 1
@@ -40,3 +40,8 @@ def main():
     while True:
         run_game(surface, omok, menu)
         menu.is_continue(omok)
+
+class Omok(object):
+    def init(self, surface):
+        self.board = [[0 for i in range(board_size)] for j in range(board_size)]
+        self.menu = Menu(self.board)

@@ -26,3 +26,17 @@ tie = 100
 
 fps = 60
 fps_clock = pygame.time.Clock()
+
+def main():
+    pygame.init()
+    surface = pygame.display.set_mode((window_width, window_height))
+    pygame.display.set_caption("오목게임")
+    surface.fill(bg_color)
+    pygame.display.flip()
+
+    omok = Omok(surface)
+    menu = Menu(surface)
+    
+    while True:
+        run_game(surface, omok, menu)
+        menu.is_continue(omok)

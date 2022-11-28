@@ -1,4 +1,15 @@
+import csv
+
 phonebook = []
+
+data = list()
+f = open("phone_book.csv",'r')
+rdr = csv.reader(f)
+for row in rdr:
+    data.append(row)
+f.close
+
+phonebook = data
 
 while True:
     # 1. 검색, 2. 입력, 3. 삭제, 4. 전체 5. 종료

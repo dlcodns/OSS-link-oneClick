@@ -26,13 +26,16 @@ while True:
                 print("[{}] {} {}".format(i[0], i[1], i[2]))
 
     elif num == "2":# 입력
+        f = open("phone_book.csv",'a')
+        wr = csv.writer(f)
         a = input("부서 입력: ").strip()
         b = input("이름 입력: ").strip()
         c = input("전화번호 입력: ").strip()
+        wr.writerow([a,b,c])
+        f.close()
         if a == "" or b == "" or c == "":
             continue
 
-        phonebook.append([a, b, c]) #부서,이름,전화번호
         print("{} {} {} 입력".format(a, b, c))
 
     elif num == "3":# 삭제

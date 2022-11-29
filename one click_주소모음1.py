@@ -63,13 +63,14 @@ def check_data():
         print("Check your Username/Password")
 
 #원클릭 넣을 이미지라벨
-image = tkinter.PhotoImage(file = "color label.png")
-imageLabel=tkinter.Label(window, image=image, relief="flat", bg="cornsilk")
+oneclickimage = tkinter.PhotoImage(file = "color label.png")
+imageLabel=tkinter.Label(window, image=oneclickimage, relief="flat", bg="cornsilk")
 imageLabel.place(x=123,y=35)
 
 #휴게소 라벨(이미지 넣어야하고 게임시작 버튼 넣어야함)
-label2=tkinter.Label(window, text="휴게소", width=44,height=15, fg="blue",relief="solid")
-label2.place(x=113,y=215)
+playimage = tkinter.PhotoImage(file = "restroomlabel.png")
+playimagelabel=tkinter.Label(window, image=playimage, relief="flat", bg="cornsilk")
+playimagelabel.place(x=113,y=215)
 
 #폰트 설정
 font=tkinter.font.Font(family="맑은고딕", size=10, weight="bold")

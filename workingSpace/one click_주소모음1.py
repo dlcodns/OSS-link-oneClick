@@ -65,11 +65,11 @@ def check_data():
 #원클릭 넣을 이미지라벨
 oneclickimage = tkinter.PhotoImage(file = "color label.png")
 imageLabel=tkinter.Label(window, image=oneclickimage, relief="flat", bg="cornsilk")
-imageLabel.place(x=123,y=35)
+imageLabel.place(x=123,y=40)
 
 #휴게소 라벨(이미지 넣어야하고 게임시작 버튼 넣어야함)
-playimage = tkinter.PhotoImage(file = "restroomlabel.png")
-playimagelabel=tkinter.Label(window, image=playimage, relief="flat", bg="cornsilk")
+playimage = tkinter.PhotoImage(file = "123.png")
+playimagelabel=tkinter.Label(window, image=playimage, relief="solid", bg="cornsilk")
 playimagelabel.place(x=113,y=215)
 
 #폰트 설정
@@ -105,5 +105,11 @@ b10.place(x=440,y=240,width=80,height=50)
 b11.place(x=440,y=310,width=80,height=50)
 b12.place(x=440,y=380,width=80,height=50)
 
+#휴게소 버튼
+omokbttn=tkinter.Button(window, text="오목\n게임하기", bg="goldenrod")
+updownbttn=tkinter.Button(window, text="업다운\n게임하기", bg="goldenrod")
+
+omokbttn.place(x=160,y=390,width=70,height=36)
+updownbttn.place(x=310,y=390,width=70,height=36)
 
 window.mainloop()

@@ -63,7 +63,7 @@ def check_data():
         print("Check your Username/Password")
 
 #원클릭 넣을 이미지라벨
-image = tkinter.PhotoImage(file = "oneclick.png")
+image = tkinter.PhotoImage(file = "color label.png")
 imageLabel=tkinter.Label(window, image=image, relief="flat", bg="cornsilk")
 imageLabel.place(x=123,y=35)
 

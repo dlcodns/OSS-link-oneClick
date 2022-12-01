@@ -5,7 +5,7 @@ import tkinter.ttk
 #기본적인 윈도우창 설정
 window=tkinter.Tk()
 window.title("One Click")
-window.geometry("540x450+100+100")
+window.geometry("625x450+100+100")
 window.resizable(False,False)
 window['bg']='cornsilk'
 
@@ -65,23 +65,26 @@ def check_data():
 #원클릭 넣을 이미지라벨
 oneclickimage = tkinter.PhotoImage(file = "color label.png")
 imageLabel=tkinter.Label(window, image=oneclickimage, relief="flat", bg="cornsilk")
-imageLabel.place(x=123,y=40)
+imageLabel.place(x=158,y=40)
 
 #휴게소 라벨(이미지 넣어야하고 게임시작 버튼 넣어야함)
 playimage = tkinter.PhotoImage(file = "123.png")
 playimagelabel=tkinter.Label(window, image=playimage, relief="solid", bg="cornsilk")
-playimagelabel.place(x=113,y=215)
+playimagelabel.place(x=148,y=215)
 
 #폰트 설정
 font=tkinter.font.Font(family="맑은고딕", size=10, weight="bold")
 
+
+
+
 #주소모음 버튼
-b1=tkinter.Button(window, text="충북대학교\n홈페이지",bg="pink1", font=font,command=createLoginWindow)
-b2=tkinter.Button(window, text="충북대학교\necampus",bg="pink1", font=font,command=createLoginWindow)
-b3=tkinter.Button(window, text="충북대학교\n학생생활관",bg="pink1", font=font,command=createLoginWindow)
-b4=tkinter.Button(window, text="충북대학교\n개신누리",bg="pink1", font=font,command=createLoginWindow)
-b5=tkinter.Button(window, text="충북대학교\n씨앗",bg="pink1", font=font,command=createLoginWindow)
-b6=tkinter.Button(window, text="충북대학교\n취업지원본부",bg="pink1", font=font,command=createLoginWindow)
+b1=tkinter.Button(window, text="충북대학교\n홈페이지",bg="cornsilk",relief="flat",font=font,command=createLoginWindow)
+b2=tkinter.Button(window, text="충북대학교\necampus",bg="cornsilk",relief="flat", font=font,command=createLoginWindow)
+b3=tkinter.Button(window, text="충북대학교\n학생생활관",bg="cornsilk",relief="flat", font=font,command=createLoginWindow)
+b4=tkinter.Button(window, text="충북대학교\n개신누리",bg="cornsilk",relief="flat", font=font,command=createLoginWindow)
+b5=tkinter.Button(window, text="충북대학교\n씨앗",bg="cornsilk",relief="flat", font=font,command=createLoginWindow)
+b6=tkinter.Button(window, text="충북대학교\n취업지원본부",bg="cornsilk",relief="flat", font=font,command=createLoginWindow)
 
 b7=tkinter.Button(window, text="백준",bg="white", font=font)
 b8=tkinter.Button(window, text="코드업",bg="white", font=font)
@@ -91,25 +94,50 @@ b11=tkinter.Button(window, text="컴퓨터공학과\n공지사항",bg="white", f
 b12=tkinter.Button(window, text="충북대학교\n전화번호",bg="white", font=font,command=createNumberWindow)
 
 #주소버튼 절대위치
-b1.place(x=20,y=30,width=80,height=50)
-b2.place(x=20,y=100,width=80,height=50)
-b3.place(x=20,y=170,width=80,height=50)
-b4.place(x=20,y=240,width=80,height=50)
-b5.place(x=20,y=310,width=80,height=50)
-b6.place(x=20,y=380,width=80,height=50)
+b1.place(x=55,y=30,width=80,height=50)
+b2.place(x=55,y=100,width=80,height=50)
+b3.place(x=55,y=170,width=80,height=50)
+b4.place(x=55,y=240,width=80,height=50)
+b5.place(x=55,y=310,width=80,height=50)
+b6.place(x=55,y=380,width=80,height=50)
 
-b7.place(x=440,y=30,width=80,height=50)
-b8.place(x=440,y=100,width=80,height=50)
-b9.place(x=440,y=170,width=80,height=50)
-b10.place(x=440,y=240,width=80,height=50)
-b11.place(x=440,y=310,width=80,height=50)
-b12.place(x=440,y=380,width=80,height=50)
+b7.place(x=525,y=30,width=80,height=50)
+b8.place(x=525,y=100,width=80,height=50)
+b9.place(x=525,y=170,width=80,height=50)
+b10.place(x=525,y=240,width=80,height=50)
+b11.place(x=525,y=310,width=80,height=50)
+b12.place(x=525,y=380,width=80,height=50)
+
+#클로버 이미지
+homepageimage=tkinter.PhotoImage(file = "clover.png")
+homepagelabel=tkinter.Label(window, image = homepageimage, relief="flat",bg="cornsilk")
+homepagelabel.place(x=20, y=40, width=40 )
+
+ecampusimage=tkinter.PhotoImage(file = "clover.png")
+ecampuslabel=tkinter.Label(window, image = ecampusimage, relief="flat",bg="cornsilk")
+ecampuslabel.place(x=20, y=110, width=40 )
+
+dormimage=tkinter.PhotoImage(file = "clover.png")
+dormlabel=tkinter.Label(window, image = dormimage, relief="flat",bg="cornsilk")
+dormlabel.place(x=20, y=180, width=40 )
+
+gaesinimage=tkinter.PhotoImage(file = "clover.png")
+gaesinlabel=tkinter.Label(window, image = gaesinimage, relief="flat",bg="cornsilk")
+gaesinlabel.place(x=20, y=250, width=40 )
+
+siatimage=tkinter.PhotoImage(file = "clover.png")
+siatlabel=tkinter.Label(window, image = siatimage, relief="flat",bg="cornsilk")
+siatlabel.place(x=20, y=320, width=40 )
+
+jobimage=tkinter.PhotoImage(file = "clover.png")
+joblabel=tkinter.Label(window, image = jobimage, relief="flat",bg="cornsilk")
+joblabel.place(x=18, y=390, width=40 )
 
 #휴게소 버튼
-omokbttn=tkinter.Button(window, text="오목\n게임하기", bg="goldenrod")
-updownbttn=tkinter.Button(window, text="업다운\n게임하기", bg="goldenrod")
+omokbttn=tkinter.Button(window, text="오목\n게임하기", bg="PaleGreen4")
+updownbttn=tkinter.Button(window, text="업다운\n게임하기", bg="PaleGreen4")
 
-omokbttn.place(x=160,y=390,width=70,height=36)
-updownbttn.place(x=310,y=390,width=70,height=36)
+omokbttn.place(x=195,y=390,width=70,height=36)
+updownbttn.place(x=345,y=390,width=70,height=36)
 
 window.mainloop()

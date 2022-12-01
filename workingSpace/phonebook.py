@@ -2,11 +2,10 @@ import csv
 
 phonebook = []
 
-data = list()
 f = open("phone_book.csv",'r')
 rdr = csv.reader(f)
 for row in rdr:
-    data.append(row)
+    phonebook.append(row)
 f.close
 
 phonebook = data
@@ -26,7 +25,7 @@ while True:
                 print("[{}] {} {}".format(i[0], i[1], i[2]))
 
     elif num == "2":# 입력
-        f = open("phone_book.csv",'a')
+        f = open("phone_book.csv",'a',newline="")
         wr = csv.writer(f)
         a = input("부서 입력: ").strip()
         b = input("이름 입력: ").strip()

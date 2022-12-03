@@ -159,8 +159,9 @@ def jobAutoWindow() :
     browser.find_element(By.XPATH,'//*[@id="proceed-button"]').click()
    
 # Menu Bar
-menubar=tkinter.Menu(root)
+menubar = Menu(root)
 menubar.add_cascade(label="로그인", command=lambda:[loginMenu()])
+menubar.add_cascade(label="로그아웃", command=lambda:[logoutFunc()])
 root.config(menu=menubar)
 
 # 로그인 메뉴 설정
@@ -174,10 +175,14 @@ def whenOpen() :
     global windowOpen
     windowOpen = True
 
-def loginFunc(id, pw) :
+def logoutFunc() :
     global myId, myPw
-    myId = id
-    myPw = pw
+    if myId == '' or myPw == '' :
+        messagebox.showinfo("로그아웃", "로그인 되어있지 않습니다.")
+    else :
+        messagebox.showinfo("로그아웃", "로그아웃 되었습니다.")
+        myId = ''
+        myPw = ''
 
 def loginMenu() :
     if not windowOpen :       
@@ -189,17 +194,29 @@ def loginMenu() :
         loginWindow.bind('<Destroy>', whenClose)
      
         # 로그인 창에 들어갈 내용
-        idLabel = tkinter.Label(loginWindow, text="학번")
-        idEntry = tkinter.Entry(loginWindow)
-        pwLabel = tkinter.Label(loginWindow, text="비밀번호")
-        pwEntry = tkinter.Entry(loginWindow, show="*")
-        loginButton = tkinter.Button(loginWindow, text="로그인", command=lambda:[loginFunc(idEntry.get(), pwEntry.get()), loginWindow.destroy()])
-        
+        idLabel = Label(loginWindow, text="학번")
+        idEntry = Entry(loginWindow)
+        pwLabel = Label(loginWindow, text="비밀번호")
+        pwEntry = Entry(loginWindow, show="*")
+        loginButton = Button(loginWindow, text="로그인", command=lambda:[loginFunc(idEntry.get(), pwEntry.get())])
+
+        def loginFunc(id, pw) :
+            global myId, myPw
+            if id == '' or pw == '' :
+                messagebox.showerror("로그인 오류", "아이디와 비밀번호를 입력해주세요.")
+                loginWindow.lift()
+            else :
+                myId = id
+                myPw = pw
+                messagebox.showinfo("로그인", "로그인 되었습니다.")
+                loginWindow.destroy()
+            
         idLabel.grid(row=0, column=0, padx=10, pady=10)
         idEntry.grid(row=0, column=1, padx=10, pady=10)
         pwLabel.grid(row=1, column=0, padx=10, pady=10)
         pwEntry.grid(row=1, column=1, padx=10, pady=10)
         loginButton.grid(row=2, column=0, columnspan=2, padx=10, pady=10)
+        
     
 # 그냥 링크 버튼
 ecampusBtn = Button(root, text = "ecampus", font="나눔고딕 10", command = ecampusWindow)

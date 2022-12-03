@@ -156,6 +156,9 @@ def jobAutoWindow() :
     pw.send_keys(myPw)
 
     browser.find_element(By.XPATH,'//*[@id="login"]/form/div[2]/div[2]/table/tbody/tr[1]/td[2]/input').click()
+    
+    # 셀레니움 봇 사용으로 인한 안전하지 않음 표시 무시하기
+    browser.find_element(By.XPATH,'//*[@id="proceed-button"]').click()
 
 # 그냥 링크 버튼
 ecampusBtn = Button(root, text = "ecampus", font="나눔고딕 10", command = ecampusWindow)

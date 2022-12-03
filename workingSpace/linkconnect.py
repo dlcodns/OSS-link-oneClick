@@ -16,14 +16,12 @@ chrome_options = Options()
 chrome_options.add_experimental_option("detach", True)      # 창 꺼지지 않는 옵션
 chrome_options.add_argument('incognito')                    # 시크릿 모드로 실행
 chrome_options.add_argument('start-maximized')              # 창 최대화
-chrome_options.add_experimental_option('excludeSwitches', ['enable-logging'])           # 로그 제거
-chrome_options.add_experimental_option("excludeSwitches", ["disable-popup-blocking"])   # 팝업 제거
+chrome_options.add_experimental_option('excludeSwitches', ['enable-logging', 'disable-popup-blocking'])           # 로그 제거 및 팝업 차단
 chrome_service = Service('chromedriver')
 chrome_service.creationflags = 0x08000000                   # 명령 프롬프트창 안뜨게 하는 옵션
 
-
-myId = '학번'
-myPw = '비밀번호'
+myId = ''
+myPw = ''
 
 # ----------------------------------------------------------------------------------------
 # 링크 부분
@@ -165,30 +163,43 @@ menubar=tkinter.Menu(root)
 menubar.add_cascade(label="로그인", command=lambda:[loginMenu()])
 root.config(menu=menubar)
 
+# 로그인 메뉴 설정
+windowOpen = False
+
+def whenClose(event) :
+    global windowOpen
+    windowOpen = False
+
+def whenOpen() :
+    global windowOpen
+    windowOpen = True
+
 def loginFunc(id, pw) :
     global myId, myPw
     myId = id
     myPw = pw
 
-def loginMenu() :      
-    loginWindow = Tk()
-    loginWindow.title("로그인")
-    loginWindow.geometry("280x150+600+190")
-    loginWindow.resizable(width = False, height = False)
-    loginWindow.bind('<Destroy>')
-
-    # 로그인 창에 들어갈 내용
-    idLabel = tkinter.Label(loginWindow, text="학번")
-    idEntry = tkinter.Entry(loginWindow)
-    pwLabel = tkinter.Label(loginWindow, text="비밀번호")
-    pwEntry = tkinter.Entry(loginWindow, show="*")
-    loginButton = tkinter.Button(loginWindow, text="로그인", command=lambda:[loginFunc(idEntry.get(), pwEntry.get()), loginWindow.destroy()])
-
-    idLabel.grid(row=0, column=0, padx=10, pady=10)
-    idEntry.grid(row=0, column=1, padx=10, pady=10)
-    pwLabel.grid(row=1, column=0, padx=10, pady=10)
-    pwEntry.grid(row=1, column=1, padx=10, pady=10)
-    loginButton.grid(row=2, column=0, columnspan=2, padx=10, pady=10)
+def loginMenu() :
+    if not windowOpen :       
+        loginWindow = Tk()
+        loginWindow.title("로그인")
+        loginWindow.geometry("280x150+600+190")
+        loginWindow.resizable(width = False, height = False)
+        whenOpen()
+        loginWindow.bind('<Destroy>', whenClose)
+     
+        # 로그인 창에 들어갈 내용
+        idLabel = tkinter.Label(loginWindow, text="학번")
+        idEntry = tkinter.Entry(loginWindow)
+        pwLabel = tkinter.Label(loginWindow, text="비밀번호")
+        pwEntry = tkinter.Entry(loginWindow, show="*")
+        loginButton = tkinter.Button(loginWindow, text="로그인", command=lambda:[loginFunc(idEntry.get(), pwEntry.get()), loginWindow.destroy()])
+        
+        idLabel.grid(row=0, column=0, padx=10, pady=10)
+        idEntry.grid(row=0, column=1, padx=10, pady=10)
+        pwLabel.grid(row=1, column=0, padx=10, pady=10)
+        pwEntry.grid(row=1, column=1, padx=10, pady=10)
+        loginButton.grid(row=2, column=0, columnspan=2, padx=10, pady=10)
     
 # 그냥 링크 버튼
 ecampusBtn = Button(root, text = "ecampus", font="나눔고딕 10", command = ecampusWindow)

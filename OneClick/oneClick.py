@@ -3,13 +3,12 @@ import tkinter.font
 from tkinter.ttk import Combobox
 from tkinter import messagebox
 from selenium.webdriver.common.keys import Keys
-#웹드라이버 자동
 from selenium.webdriver.common.by import By
 from selenium.webdriver.chrome.service import Service
 from selenium.webdriver.chrome.options import Options
 from selenium import webdriver
-import chromedriver_autoinstaller
-from selenium.webdriver.common.alert import Alert # 팝업창 해결위해서
+import chromedriver_autoinstaller                           # 웹드라이버 자동
+from selenium.webdriver.common.alert import Alert           # 팝업창 해결위해서
 
 chromedriver_autoinstaller.install(True)                         # 크롬 드라이버 자동 설치
 chrome_options = Options()
@@ -64,7 +63,31 @@ def jobWindow() :
     args = ["hide_console", ]
     browser = webdriver.Chrome(service=chrome_service, options=chrome_options)
     browser.get('http://hrd.chungbuk.ac.kr/')
+    
+def baekjuneWindow() :
+    args = ["hide_console", ]
+    browser = webdriver.Chrome(service=chrome_service, options=chrome_options)
+    browser.get('https://www.acmicpc.net/')
+    
+def codeupWindow() :
+    args = ["hide_console", ]
+    browser = webdriver.Chrome(service=chrome_service, options=chrome_options)
+    browser.get('https://www.codeup.kr/')
 
+def replitWindow() :
+    args = ["hide_console", ]
+    browser = webdriver.Chrome(service=chrome_service, options=chrome_options)
+    browser.get('https://replit.com/')
+    
+def sojungWindow() :
+    args = ["hide_console", ]
+    browser = webdriver.Chrome(service=chrome_service, options=chrome_options)
+    browser.get('https://sw7up.cbnu.ac.kr/community/notice')
+    
+def majorWindow() :
+    args = ["hide_console", ]
+    browser = webdriver.Chrome(service=chrome_service, options=chrome_options)
+    browser.get('https://computer.cbnu.ac.kr/bbs/bbs.php?db=notice')
 
 # -------------------------------------------------------------------------------------    
 # 자동로그인 부분
@@ -248,28 +271,25 @@ def createNumberWindow():
     newwindow=Toplevel(root)
     newwindow.geometry("400x400")
 
-#교수님 이메일 찾기
+    #교수님 이메일 찾기
     label1=Label(newwindow, text="교수님 이메일 찾기")
     label1.pack()
 
     value=['교양', '컴퓨터공학과']
     combobox1=Combobox(newwindow, values=value)
-
     combobox1.pack()
-
     combobox1.set("목록 선택")
 
-#전화번호 찾기
+    #전화번호 찾기
     label2=Label(newwindow, text="전화번호 찾기")
     label2.pack()
 
     values=['교양교육본부', '행정지원실', '교양교육원', 'RC교육센터','의사소통센터','교양교수님', '컴공교수님']
     combobox2=Combobox(newwindow, values=values)
     combobox2.pack()
-
     combobox2.set("목록 선택")
 
-#전화번호 적을 리스트
+    #전화번호 적을 리스트
     listbox = Listbox(newwindow, selectmode='extended')
     listbox.insert(0,"0")
     listbox.insert(0,"1")
@@ -298,11 +318,11 @@ geshinBtn=Button(root, text="충북대학교\n개신누리", bg="cornsilk", reli
 cieatBtn=Button(root, text="충북대학교\n씨앗", bg="cornsilk", relief="solid", borderwidth=1, font=font, command=cieatAutoWindow)
 jobBtn=Button(root, text="충북대학교\n취업지원본부", bg="cornsilk", relief="solid", borderwidth=1, font=font, command=jobAutoWindow)
 
-baekjuneBtn=Button(root, text="백준", bg="cornsilk", relief="solid", borderwidth=1, font=font)
-codeupBtn=Button(root, text="코드업", bg="cornsilk", relief="solid", borderwidth=1, font=font)
-replitBtn=Button(root, text="replit", bg="cornsilk", relief="solid", borderwidth=1, font=font)
-sojungBtn=Button(root, text="SW사업단\n공지사항", bg="cornsilk", relief="solid", borderwidth=1, font=font)
-majorBtn=Button(root, text="컴공\n공지사항", bg="cornsilk", relief="solid", borderwidth=1, font=font)
+baekjuneBtn=Button(root, text="백준", bg="cornsilk", relief="solid", borderwidth=1, font=font, command=baekjuneWindow)
+codeupBtn=Button(root, text="코드업", bg="cornsilk", relief="solid", borderwidth=1, font=font, command=codeupWindow)
+replitBtn=Button(root, text="replit", bg="cornsilk", relief="solid", borderwidth=1, font=font, command=replitWindow)
+sojungBtn=Button(root, text="SW사업단\n공지사항", bg="cornsilk", relief="solid", borderwidth=1, font=font, command=sojungWindow)
+majorBtn=Button(root, text="컴공\n공지사항", bg="cornsilk", relief="solid", borderwidth=1, font=font, command=majorWindow)
 phonebookBtn=Button(root, text="충북대학교\n전화번호", bg="cornsilk", relief="solid", borderwidth=1, font=font, command=createNumberWindow)
 
 

@@ -61,102 +61,124 @@ def jobWindow() :
 # 자동로그인 부분
 
 def ecampusAutoWindow() :
-    args = ["hide_console", ]
-    browser = webdriver.Chrome(service=chrome_service, options=chrome_options)
-    browser.get('https://ecampus.chungbuk.ac.kr/')
+    if myId == '' or myPw == '' :
+        ecampusWindow()
+    else :
+        args = ["hide_console", ]
+        browser = webdriver.Chrome(service=chrome_service, options=chrome_options)
+        browser.get('https://ecampus.chungbuk.ac.kr/')
 
-    id = browser.find_element(By.XPATH,'//*[@id="uid"]')
-    id.click()
-    id.send_keys(myId)
+        id = browser.find_element(By.XPATH,'//*[@id="uid"]')
+        id.click()
+        id.send_keys(myId)
 
-    pw = browser.find_element(By.XPATH,'//*[@id="pswd"]')
-    pw.click()
-    pw.send_keys(myPw)
+        pw = browser.find_element(By.XPATH,'//*[@id="pswd"]')
+        pw.click()
+        pw.send_keys(myPw)
 
-    browser.find_element(By.XPATH,'//*[@id="entry-login"]').click()
+        browser.find_element(By.XPATH,'//*[@id="entry-login"]').click()
     
 def homepageAutoWindow() :
-    args = ["hide_console", ]
-    browser = webdriver.Chrome(service=chrome_service, options=chrome_options)
-    browser.get('https://www.chungbuk.ac.kr/')
+    if myId == '' or myPw == '' :
+        homepageWindow()
+    else :
+        args = ["hide_console", ]
+        browser = webdriver.Chrome(service=chrome_service, options=chrome_options)
+        browser.get('https://www.chungbuk.ac.kr/')
+        
+        browser.find_element(By.XPATH,'//*[@id="header"]/div/div[2]/ul/li[2]/a').click()
+
+        id = browser.find_element(By.XPATH,'//*[@id="userid"]')
+        id.click()
+        id.send_keys(myId)
+
+        pw = browser.find_element(By.XPATH,'//*[@id="userpw"]')
+        pw.click()
+        pw.send_keys(myPw)
+
+        browser.find_element(By.XPATH,'//*[@id="loginForm"]/fieldset/div/div/span/input').click()
     
-    browser.find_element(By.XPATH,'//*[@id="header"]/div/div[2]/ul/li[2]/a').click()
-
-    id = browser.find_element(By.XPATH,'//*[@id="userid"]')
-    id.click()
-    id.send_keys(myId)
-
-    pw = browser.find_element(By.XPATH,'//*[@id="userpw"]')
-    pw.click()
-    pw.send_keys(myPw)
-
-    browser.find_element(By.XPATH,'//*[@id="loginForm"]/fieldset/div/div/span/input').click()
-
 def cieatAutoWindow() :
-    args = ["hide_console", ]
-    browser = webdriver.Chrome(service=chrome_service, options=chrome_options)
-    browser.get('https://cieat.cbnu.ac.kr/')
-    browser.find_element(By.XPATH,'/html/body/div[3]/header/div[2]/div/a').click()
+    if myId == '' or myPw == '' :
+        cieatWindow()
+    else :
+        args = ["hide_console", ]
+        browser = webdriver.Chrome(service=chrome_service, options=chrome_options)
+        browser.get('https://cieat.cbnu.ac.kr/')
+        browser.find_element(By.XPATH,'/html/body/div[3]/header/div[2]/div/a').click()
+        
+        id = browser.find_element(By.XPATH,'//*[@id="userId"]')
+        id.click()
+        id.send_keys(myId)
+
+        pw = browser.find_element(By.XPATH,'//*[@id="userPw"]')
+        pw.click()
+        pw.send_keys(myPw)
+
+        browser.find_element(By.XPATH,'//*[@id="loginBtnStd"]').click()
     
-    id = browser.find_element(By.XPATH,'//*[@id="userId"]')
-    id.click()
-    id.send_keys(myId)
-
-    pw = browser.find_element(By.XPATH,'//*[@id="userPw"]')
-    pw.click()
-    pw.send_keys(myPw)
-
-    browser.find_element(By.XPATH,'//*[@id="loginBtnStd"]').click()
-
 def dormAutoWindow() :
-    args = ["hide_console", ]
-    browser = webdriver.Chrome(service=chrome_service, options=chrome_options)
-    browser.get('https://dorm.chungbuk.ac.kr/')
+    if myId == '' or myPw == '' :
+        dormWindow()
+    else :
+        args = ["hide_console", ]
+        browser = webdriver.Chrome(service=chrome_service, options=chrome_options)
+        browser.get('https://dorm.chungbuk.ac.kr/')
 
-    browser.find_element(By.XPATH,'//*[@id="gnb"]/ul/li[1]').click()
+        browser.find_element(By.XPATH,'//*[@id="gnb"]/ul/li[1]').click()
 
-    id = browser.find_element(By.XPATH,'//*[@id="info1"]')
-    id.click()
-    id.send_keys(myId)
+        id = browser.find_element(By.XPATH,'//*[@id="info1"]')
+        id.click()
+        id.send_keys(myId)
 
-    pw = browser.find_element(By.XPATH,'//*[@id="info2"]')
-    pw.click()
-    pw.send_keys(myPw)
+        pw = browser.find_element(By.XPATH,'//*[@id="info2"]')
+        pw.click()
+        pw.send_keys(myPw)
 
-    browser.find_element(By.XPATH,'//*[@id="memberLoginForm"]/fieldset/button').click()
+        browser.find_element(By.XPATH,'//*[@id="memberLoginForm"]/fieldset/button').click()
+        
+        # IP확인 팝업 뜨면 닫기
+        alert = Alert(browser)
+        alert.accept()
 
 def geshinAutoWindow() :
-    args = ["hide_console", ]
-    browser = webdriver.Chrome(service=chrome_service, options=chrome_options)
-    browser.get('https://eis.cbnu.ac.kr/')
+    if myId == '' or myPw == '' :
+        geshinWindow()
+    else :
+        args = ["hide_console", ]
+        browser = webdriver.Chrome(service=chrome_service, options=chrome_options)
+        browser.get('https://eis.cbnu.ac.kr/')
 
-    id = browser.find_element(By.XPATH,'//*[@id="uid"]')
-    id.click()
-    id.send_keys(myId)
+        id = browser.find_element(By.XPATH,'//*[@id="uid"]')
+        id.click()
+        id.send_keys(myId)
 
-    pw = browser.find_element(By.XPATH,'//*[@id="pswd"]')
-    pw.click()
-    pw.send_keys(myPw)
+        pw = browser.find_element(By.XPATH,'//*[@id="pswd"]')
+        pw.click()
+        pw.send_keys(myPw)
 
-    browser.find_element(By.XPATH,'//*[@id="commonLoginBtn"]').click()
-
-def jobAutoWindow() :
-    args = ["hide_console", ]
-    browser = webdriver.Chrome(service=chrome_service, options=chrome_options)
-    browser.get('http://hrd.chungbuk.ac.kr/')
-
-    id = browser.find_element(By.XPATH,'//*[@id="id"]')
-    id.click()
-    id.send_keys(myId)
-
-    pw = browser.find_element(By.XPATH,'//*[@id="pw"]')
-    pw.click()
-    pw.send_keys(myPw)
-
-    browser.find_element(By.XPATH,'//*[@id="login"]/form/div[2]/div[2]/table/tbody/tr[1]/td[2]/input').click()
+        browser.find_element(By.XPATH,'//*[@id="commonLoginBtn"]').click()
     
-    # 셀레니움 봇 사용으로 인한 안전하지 않음 표시 무시하기
-    browser.find_element(By.XPATH,'//*[@id="proceed-button"]').click()
+def jobAutoWindow() :
+    if myId == '' or myPw == '' :
+        jobWindow()
+    else :
+        args = ["hide_console", ]
+        browser = webdriver.Chrome(service=chrome_service, options=chrome_options)
+        browser.get('http://hrd.chungbuk.ac.kr/')
+
+        id = browser.find_element(By.XPATH,'//*[@id="id"]')
+        id.click()
+        id.send_keys(myId)
+
+        pw = browser.find_element(By.XPATH,'//*[@id="pw"]')
+        pw.click()
+        pw.send_keys(myPw)
+
+        browser.find_element(By.XPATH,'//*[@id="login"]/form/div[2]/div[2]/table/tbody/tr[1]/td[2]/input').click()
+
+        # 셀레니움 봇 사용으로 인한 안전하지 않음 표시 무시하기
+        browser.find_element(By.XPATH,'//*[@id="proceed-button"]').click()
    
 # Menu Bar
 menubar = Menu(root)

@@ -229,27 +229,41 @@ def whenOpen() :
 def logoutFunc() :
     global myId, myPw
     if myId == '' or myPw == '' :
-        messagebox.showinfo("로그아웃", "로그인 되어있지 않습니다.")
+        messagebox.showerror("로그아웃", "로그인 되어있지 않습니다.")
     else :
         messagebox.showinfo("로그아웃", "로그아웃 되었습니다.")
+        accountLabel.configure(text=" 비 로그인 이용 중 입니다. ", fg="blue", relief="solid")
+        accountLabel.place(x=230,y=170)
         myId = ''
         myPw = ''
 
+def duplicateLogin() :
+    if myId != '' and myPw != '' :
+            response = messagebox.askquestion(title="로그인 경고" , message = "이미 로그인이 되어있습니다.\n로그아웃하고 새로 로그인 하시겠습니까?" )
+            if response == "yes" :
+                logoutFunc()
+                loginMenu()
+    else :
+        loginMenu()
+                
+                
+# 로그인 창
 def loginMenu() :
-    if not windowOpen :       
+    if not windowOpen :
         loginWindow = Tk()
         loginWindow.title("로그인")
-        loginWindow.geometry("280x150+600+190")
+        loginWindow.geometry("250x130+600+190")
         loginWindow.resizable(width = False, height = False)
+        loginWindow['bg']='cornsilk'
         whenOpen()
         loginWindow.bind('<Destroy>', whenClose)
      
         # 로그인 창에 들어갈 내용
-        idLabel = Label(loginWindow, text="학번")
+        idLabel = Label(loginWindow, text="학번", bg='cornsilk')
         idEntry = Entry(loginWindow)
-        pwLabel = Label(loginWindow, text="비밀번호")
+        pwLabel = Label(loginWindow, text="비밀번호", bg='cornsilk')
         pwEntry = Entry(loginWindow, show="*")
-        loginButton = Button(loginWindow, text="로그인", command=lambda:[loginFunc(idEntry.get(), pwEntry.get())])
+        loginButton = Button(loginWindow, text="로그인", bg='lightblue',command=lambda:[loginFunc(idEntry.get(), pwEntry.get())])
 
         def loginFunc(id, pw) :
             global myId, myPw
@@ -261,6 +275,8 @@ def loginMenu() :
                 myPw = pw
                 messagebox.showinfo("로그인", "로그인 되었습니다.")
                 loginWindow.destroy()
+                accountLabel.configure(text=" {} 님이 로그인 중 입니다. ".format(myId), fg="blue", relief="solid")
+                accountLabel.place(x=205, y=170)
             
         idLabel.grid(row=0, column=0, padx=10, pady=10)
         idEntry.grid(row=0, column=1, padx=10, pady=10)
@@ -354,11 +370,15 @@ sojungBtn.place(x=505,y=240,width=80,height=50)
 majorBtn.place(x=505,y=310,width=80,height=50)
 phonebookBtn.place(x=505,y=380,width=80,height=50)
 
-#원클릭 넣을 이미지라벨
+#원클릭 로고
 oneclickimagePath=resource_path("src/oneclick_logo.png")
 oneclickimage = PhotoImage(file = oneclickimagePath)
 imageLabel=Label(root, image=oneclickimage, relief="flat", bg="cornsilk")
-imageLabel.place(x=158,y=40)
+imageLabel.place(x=158,y=25)
+
+# 사용자 계정 정보
+accountLabel=Label(root, text=" 비 로그인 이용 중 입니다. ", fg="blue", relief="solid")
+accountLabel.place(x=230,y=170)
 
 #휴게소 라벨
 playimagePath=resource_path("src/playroom.png")

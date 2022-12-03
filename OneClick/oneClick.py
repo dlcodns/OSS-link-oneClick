@@ -9,6 +9,8 @@ from selenium.webdriver.chrome.options import Options
 from selenium import webdriver
 import chromedriver_autoinstaller                           # 웹드라이버 자동
 from selenium.webdriver.common.alert import Alert           # 팝업창 해결위해서
+import os
+import sys
 
 chromedriver_autoinstaller.install(True)                         # 크롬 드라이버 자동 설치
 chrome_options = Options()
@@ -309,6 +311,17 @@ root.config(menu=menubar)
 #폰트 설정
 font=tkinter.font.Font(family="맑은고딕", size=10, weight="bold")
 
+# exe 제작을 위한 이미지 경로 설정 함수
+def resource_path(relative_path):
+    """ Get absolute path to resource, works for dev and for PyInstaller """
+    try:
+        # PyInstaller creates a temp folder and stores path in _MEIPASS
+        base_path = sys._MEIPASS
+    except Exception:
+        base_path = os.path.abspath(".")
+
+    return os.path.join(base_path, relative_path)
+
 
 #주소모음 버튼
 homepageBtn=Button(root, text="충북대학교\n홈페이지", bg="cornsilk", relief="solid", borderwidth=1, font=font, command=homepageAutoWindow)
@@ -342,12 +355,14 @@ majorBtn.place(x=505,y=310,width=80,height=50)
 phonebookBtn.place(x=505,y=380,width=80,height=50)
 
 #원클릭 넣을 이미지라벨
-oneclickimage = PhotoImage(file = "src/oneclick_logo.png")
+oneclickimagePath=resource_path("src/oneclick_logo.png")
+oneclickimage = PhotoImage(file = oneclickimagePath)
 imageLabel=Label(root, image=oneclickimage, relief="flat", bg="cornsilk")
 imageLabel.place(x=158,y=40)
 
 #휴게소 라벨
-playimage = PhotoImage(file = "src/playroom.png")
+playimagePath=resource_path("src/playroom.png")
+playimage = PhotoImage(file = playimagePath)
 playimagelabel=Label(root, image=playimage, relief="solid", bg="cornsilk")
 playimagelabel.place(x=148,y=215)
 
@@ -358,62 +373,57 @@ omokbttn.place(x=195,y=390,width=70,height=36)
 updownbttn.place(x=345,y=390,width=70,height=36)
 
 #휴게소 꽃 라벨
-omokimage=PhotoImage(file = "src/flower.png")
-omoklabel=Label(root, image=omokimage, relief="flat", bg="cornsilk")
+flowerImgPath=resource_path("src/flower.png")
+flowerImg = PhotoImage(file = flowerImgPath)
+
+omoklabel=Label(root, image=flowerImg, relief="flat", bg="cornsilk")
 omoklabel.place(x=175,y=401,width=30)
 
-updownimage=PhotoImage(file = "src/flower.png")
-updownlabel=Label(root, image=updownimage, relief="flat", bg="cornsilk")
+updownlabel=Label(root, image=flowerImg, relief="flat", bg="cornsilk")
 updownlabel.place(x=325,y=401,width=30)
 
 #클로버 이미지
-homepageimage=PhotoImage(file = "src/clover.png")
-homepagelabel=Label(root, image = homepageimage, relief="flat",bg="cornsilk")
+coloverImgPath=resource_path("src/clover.png")
+cloverImg = PhotoImage(file = coloverImgPath)
+
+homepagelabel=Label(root, image = cloverImg, relief="flat",bg="cornsilk")
 homepagelabel.place(x=23, y=48, width=40 )
 
-ecampusimage=PhotoImage(file = "src/clover.png")
-ecampuslabel=Label(root, image = ecampusimage, relief="flat",bg="cornsilk")
+ecampuslabel=Label(root, image = cloverImg, relief="flat",bg="cornsilk")
 ecampuslabel.place(x=23, y=118, width=40 )
 
-dormimage=PhotoImage(file = "src/clover.png")
-dormlabel=Label(root, image = dormimage, relief="flat",bg="cornsilk")
+dormlabel=Label(root, image = cloverImg, relief="flat",bg="cornsilk")
 dormlabel.place(x=23, y=188, width=40 )
 
-gaesinimage=PhotoImage(file = "src/clover.png")
-gaesinlabel=Label(root, image = gaesinimage, relief="flat",bg="cornsilk")
+gaesinlabel=Label(root, image = cloverImg, relief="flat",bg="cornsilk")
 gaesinlabel.place(x=23, y=258, width=40 )
 
-siatimage=PhotoImage(file = "src/clover.png")
-siatlabel=Label(root, image = siatimage, relief="flat",bg="cornsilk")
+siatlabel=Label(root, image = cloverImg, relief="flat",bg="cornsilk")
 siatlabel.place(x=23, y=328, width=40 )
 
-jobimage=PhotoImage(file = "src/clover.png")
-joblabel=Label(root, image = jobimage, relief="flat",bg="cornsilk")
+joblabel=Label(root, image = cloverImg, relief="flat",bg="cornsilk")
 joblabel.place(x=18, y=398, width=40 )
 
 #잎 라벨이미지
-baekjunimage=PhotoImage(file="src/leaf.png")
-baekjunlabel=Label(root, image=baekjunimage,relief="flat", bg="cornsilk")
+leafImgPath=resource_path("src/leaf.png")
+leafImg = PhotoImage(file = leafImgPath)
+
+baekjunlabel=Label(root, image=leafImg,relief="flat", bg="cornsilk")
 baekjunlabel.place(x=475, y=40, width=40)
 
-codeupimage=PhotoImage(file="src/leaf.png")
-codeuplabel=Label(root, image=codeupimage,relief="flat", bg="cornsilk")
+codeuplabel=Label(root, image=leafImg,relief="flat", bg="cornsilk")
 codeuplabel.place(x=475, y=110, width=40)
 
-replitimage=PhotoImage(file="src/leaf.png")
-replitlabel=Label(root, image=replitimage,relief="flat", bg="cornsilk")
+replitlabel=Label(root, image=leafImg,relief="flat", bg="cornsilk")
 replitlabel.place(x=475, y=180, width=40)
 
-swimage=PhotoImage(file="src/leaf.png")
-swlabel=Label(root, image=swimage,relief="flat", bg="cornsilk")
+swlabel=Label(root, image=leafImg,relief="flat", bg="cornsilk")
 swlabel.place(x=475, y=250, width=40)
 
-noticeimage=PhotoImage(file="src/leaf.png")
-noticelabel=Label(root, image=noticeimage,relief="flat", bg="cornsilk")
+noticelabel=Label(root, image=leafImg,relief="flat", bg="cornsilk")
 noticelabel.place(x=475, y=320, width=40)
 
-numberimage=PhotoImage(file="src/leaf.png")
-numberlabel=Label(root, image=numberimage,relief="flat", bg="cornsilk")
+numberlabel=Label(root, image=leafImg,relief="flat", bg="cornsilk")
 numberlabel.place(x=475, y=390, width=40)
 
 root.mainloop()

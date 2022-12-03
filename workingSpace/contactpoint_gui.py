@@ -34,6 +34,14 @@ def contactpointWindow():
 
     ent = Entry(label4)  
     ent.pack() 
+    def ent1_s():
+        a = ent1.get() 
+#여기에 검색 코드가 들어오면 되려나
+    btn = Button(label4) 
+    btn.config(text = "확인")
+    btn.config(command = ent1_s)
+    btn.pack() 
+
 
 #전화번호 
     label5=tkinter.ttk.Label(newwindow, text="")
@@ -58,6 +66,13 @@ def contactpointWindow():
 
     ent = Entry(label9) 
     ent.pack() 
+    def ent2_s():
+        a = ent2.get() 
+#아마도 여기?
+    btn = Button(label9) 
+    btn.config(text = "확인")
+    btn.config(command = ent2_s)
+    btn.pack() 
     
     
 font=tkinter.font.Font(family="맑은고딕", size=10, weight="bold")    

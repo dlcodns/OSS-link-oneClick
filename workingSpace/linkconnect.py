@@ -162,9 +162,34 @@ def jobAutoWindow() :
    
 # Menu Bar
 menubar=tkinter.Menu(root)
-menubar.add_cascade(label="로그인")
+menubar.add_cascade(label="로그인", command=lambda:[loginMenu()])
 root.config(menu=menubar)
 
+def loginFunc(id, pw) :
+    global myId, myPw
+    myId = id
+    myPw = pw
+
+def loginMenu() :      
+    loginWindow = Tk()
+    loginWindow.title("로그인")
+    loginWindow.geometry("280x150+600+190")
+    loginWindow.resizable(width = False, height = False)
+    loginWindow.bind('<Destroy>')
+
+    # 로그인 창에 들어갈 내용
+    idLabel = tkinter.Label(loginWindow, text="학번")
+    idEntry = tkinter.Entry(loginWindow)
+    pwLabel = tkinter.Label(loginWindow, text="비밀번호")
+    pwEntry = tkinter.Entry(loginWindow, show="*")
+    loginButton = tkinter.Button(loginWindow, text="로그인", command=lambda:[loginFunc(idEntry.get(), pwEntry.get()), loginWindow.destroy()])
+
+    idLabel.grid(row=0, column=0, padx=10, pady=10)
+    idEntry.grid(row=0, column=1, padx=10, pady=10)
+    pwLabel.grid(row=1, column=0, padx=10, pady=10)
+    pwEntry.grid(row=1, column=1, padx=10, pady=10)
+    loginButton.grid(row=2, column=0, columnspan=2, padx=10, pady=10)
+    
 # 그냥 링크 버튼
 ecampusBtn = Button(root, text = "ecampus", font="나눔고딕 10", command = ecampusWindow)
 ecampusBtn.config(width = 10, height = 3)

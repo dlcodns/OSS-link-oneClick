@@ -12,27 +12,54 @@ window['bg']='cornsilk'
 #연락망 새창
 def contactpointWindow():
     newwindow=tkinter.Toplevel(window)
-    newwindow.geometry("400x400")
-
+    newwindow.geometry("400x300")
+    
 #교수님 이메일 
-    label1=tkinter.ttk.Label(newwindow, text="교수님 이메일")
+    label1=tkinter.ttk.Label(newwindow, text="")
     label1.pack()
 
-    value=['컴퓨터공학과', '교양']
-    combobox1=tkinter.ttk.Combobox(newwindow, values=value)
-    combobox1.pack()
-    combobox1.set("목록 선택")
-
-    label2=tkinter.ttk.Label(newwindow, text="교수님 이메일 검색")
+    label2=tkinter.ttk.Label(newwindow, text="교수님 이메일")
     label2.pack()
 
-    label3=tkinter.ttk.Label(newwindow, text="")
+    value=['컴퓨터공학과', '교양']
+    combobox2=tkinter.ttk.Combobox(newwindow, values=value)
+    combobox2.pack()
+    combobox2.set("목록 선택")
+
+    label3=tkinter.ttk.Label(newwindow, text="교수님 이메일 검색")
     label3.pack()
 
-    ent = Entry(label3) 
+    label4=tkinter.ttk.Label(newwindow, text="")
+    label4.pack()
+
+    ent = Entry(label4)  
     ent.pack() 
 
+#전화번호 
+    label5=tkinter.ttk.Label(newwindow, text="")
+    label5.pack()
 
+    label6=tkinter.ttk.Label(newwindow, text="")
+    label6.pack()
+
+    label7=tkinter.ttk.Label(newwindow, text="전화번호 찾기")
+    label7.pack()
+
+    values=['컴퓨터공학과', '교양 교수님', '교양교육본부']
+    combobox7=tkinter.ttk.Combobox(newwindow, values=values)
+    combobox7.pack()
+    combobox7.set("목록 선택")
+
+    label8=tkinter.ttk.Label(newwindow, text="전화번호 검색")
+    label8.pack()
+
+    label9=tkinter.ttk.Label(newwindow, text="")
+    label9.pack()
+
+    ent = Entry(label9) 
+    ent.pack() 
+    
+    
 font=tkinter.font.Font(family="맑은고딕", size=10, weight="bold")    
 
 b12=tkinter.Button(window, text="충북대학교\n연락망",bg="cornsilk", relief="solid",borderwidth=1,font=font,command=contactpointWindow)

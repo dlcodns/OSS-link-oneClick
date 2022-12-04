@@ -67,8 +67,9 @@ def readAccount():
             for i in range(1, len(tmp)) :
                 myId = tmp[i][0]
                 myPw = tmp[i][1]
-                accountLabel.configure(text=" {} 님이 로그인 중 입니다. ".format(myId), fg="blue", relief="solid")
-                accountLabel.place(x=205, y=170)
+                if myId != '' and myPw != '' :
+                    accountLabel.configure(text=" {} 님이 로그인 중 입니다. ".format(myId), fg="blue", relief="solid")
+                    accountLabel.place(x=205, y=170)
 
 try:
     with open('userAccount.csv') as f:

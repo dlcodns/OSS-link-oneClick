@@ -11,6 +11,7 @@ import chromedriver_autoinstaller                           # 웹드라이버 �
 from selenium.webdriver.common.alert import Alert           # 팝업창 해결위해서
 import os
 import sys
+import csv
 
 chromedriver_autoinstaller.install(True)                         # 크롬 드라이버 자동 설치
 chrome_options = Options()
@@ -33,6 +34,10 @@ root['bg']='cornsilk'
 myId = ''
 myPw = ''
 
+# 사용자 계정 정보
+accountLabel=Label(root, text=" 비 로그인 이용 중 입니다. ", fg="blue", relief="solid")
+accountLabel.place(x=230,y=170)
+
 def setAccount(myId, myPw) :
     accountHeader = [['학번','비밀번호']]
     def writeCsv(filename, the_list):
@@ -50,8 +55,30 @@ def writeAccount(myId, myPw):
             accountHeader.writerows(the_list)
     accountHeader.append([myId, myPw])
     writeCsv('userAccount.csv',accountHeader)
-   
-setAccount(myId, myPw)
+
+def readAccount():
+    global myId, myPw
+    tmp = []
+    with open('userAccount.csv', 'r') as f:
+        reader = csv.reader(f)
+        for row in reader:
+            tmp.append(row)
+        if len(tmp) > 1 :
+            for i in range(1, len(tmp)) :
+                myId = tmp[i][0]
+                myPw = tmp[i][1]
+                accountLabel.configure(text=" {} 님이 로그인 중 입니다. ".format(myId), fg="blue", relief="solid")
+                accountLabel.place(x=205, y=170)
+    f.close()
+
+try:
+    with open('userAccount.csv') as f:
+        if myId != '' and myPw != '' :
+            readAccount()
+        # Do something with the file
+except IOError:
+    setAccount(myId, myPw)
+
 
 # ----------------------------------------------------------------------------------------
 # 일반 링크 부분
@@ -319,6 +346,8 @@ def loginMenu() :
         pwEntry.grid(row=1, column=1, padx=10, pady=10)
         loginBtn.grid(row=2, column=0, padx=10, pady=10)
         saveAccountBtn.grid(row=2, column=1, padx=10, pady=10)
+        
+        
 
 #전화번호부 새창
 def createNumberWindow():
@@ -356,7 +385,7 @@ def createNumberWindow():
 
 # Menu Bar
 menubar=Menu(root)
-menubar.add_cascade(label="로그인", command=lambda:[loginMenu()])
+menubar.add_cascade(label="로그인", command=lambda:[duplicateLogin()])
 menubar.add_cascade(label="로그아웃", command=lambda:[logoutFunc()])
 root.config(menu=menubar)
 
@@ -411,10 +440,6 @@ oneclickimagePath=resource_path("src/oneclick_logo.png")
 oneclickimage = PhotoImage(file = oneclickimagePath)
 imageLabel=Label(root, image=oneclickimage, relief="flat", bg="cornsilk")
 imageLabel.place(x=158,y=25)
-
-# 사용자 계정 정보
-accountLabel=Label(root, text=" 비 로그인 이용 중 입니다. ", fg="blue", relief="solid")
-accountLabel.place(x=230,y=170)
 
 #휴게소 라벨
 playimagePath=resource_path("src/playroom.png")

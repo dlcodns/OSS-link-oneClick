@@ -69,13 +69,10 @@ def readAccount():
                 myPw = tmp[i][1]
                 accountLabel.configure(text=" {} 님이 로그인 중 입니다. ".format(myId), fg="blue", relief="solid")
                 accountLabel.place(x=205, y=170)
-    f.close()
 
 try:
     with open('userAccount.csv') as f:
-        if myId != '' and myPw != '' :
-            readAccount()
-        # Do something with the file
+        readAccount()
 except IOError:
     setAccount(myId, myPw)
 

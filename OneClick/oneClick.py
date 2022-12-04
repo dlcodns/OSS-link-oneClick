@@ -33,6 +33,26 @@ root['bg']='cornsilk'
 myId = ''
 myPw = ''
 
+def setAccount(myId, myPw) :
+    accountHeader = [['학번','비밀번호']]
+    def writeCsv(filename, the_list):
+        with open(filename, 'w', newline = '') as f:
+            accountHeader = csv.writer(f, delimiter = ',')
+            accountHeader.writerows(the_list)
+    accountHeader.append([myId, myPw])
+    writeCsv('userAccount.csv',accountHeader)
+
+def writeAccount(myId, myPw):
+    accountHeader = [['학번','비밀번호']]
+    def writeCsv(filename, the_list):
+        with open(filename, 'w', newline = '') as f:
+            accountHeader = csv.writer(f, delimiter = ',')
+            accountHeader.writerows(the_list)
+    accountHeader.append([myId, myPw])
+    writeCsv('userAccount.csv',accountHeader)
+   
+setAccount(myId, myPw)
+
 # ----------------------------------------------------------------------------------------
 # 일반 링크 부분
 
@@ -252,7 +272,7 @@ def loginMenu() :
     if not windowOpen :
         loginWindow = Tk()
         loginWindow.title("로그인")
-        loginWindow.geometry("250x130+600+190")
+        loginWindow.geometry("280x130+600+190")
         loginWindow.resizable(width = False, height = False)
         loginWindow['bg']='cornsilk'
         whenOpen()
@@ -263,7 +283,8 @@ def loginMenu() :
         idEntry = Entry(loginWindow)
         pwLabel = Label(loginWindow, text="비밀번호", bg='cornsilk')
         pwEntry = Entry(loginWindow, show="*")
-        loginButton = Button(loginWindow, text="로그인", bg='lightblue',command=lambda:[loginFunc(idEntry.get(), pwEntry.get())])
+        loginBtn = Button(loginWindow, text="일회용 로그인", bg='lightblue',command=lambda:[loginFunc(idEntry.get(), pwEntry.get())])
+        saveAccountBtn = Button(loginWindow, text="로그인 및 계정 저장", bg='lightblue',command=lambda:[saveLoginFunc(idEntry.get(), pwEntry.get())])
 
         def loginFunc(id, pw) :
             global myId, myPw
@@ -273,7 +294,21 @@ def loginMenu() :
             else :
                 myId = id
                 myPw = pw
-                messagebox.showinfo("로그인", "로그인 되었습니다.")
+                messagebox.showinfo("일회용 로그인", "로그인 되었습니다.")
+                loginWindow.destroy()
+                accountLabel.configure(text=" {} 님이 로그인 중 입니다. ".format(myId), fg="blue", relief="solid")
+                accountLabel.place(x=205, y=170)
+
+        def saveLoginFunc(id, pw) :
+            global myId, myPw
+            if id == '' or pw == '' :
+                messagebox.showerror("로그인 오류", "아이디와 비밀번호를 입력해주세요.")
+                loginWindow.lift()
+            else :
+                myId = id
+                myPw = pw
+                messagebox.showinfo("일회용 로그인", "로그인 되었습니다.")
+                writeAccount(myId, myPw)
                 loginWindow.destroy()
                 accountLabel.configure(text=" {} 님이 로그인 중 입니다. ".format(myId), fg="blue", relief="solid")
                 accountLabel.place(x=205, y=170)
@@ -282,7 +317,8 @@ def loginMenu() :
         idEntry.grid(row=0, column=1, padx=10, pady=10)
         pwLabel.grid(row=1, column=0, padx=10, pady=10)
         pwEntry.grid(row=1, column=1, padx=10, pady=10)
-        loginButton.grid(row=2, column=0, columnspan=2, padx=10, pady=10)
+        loginBtn.grid(row=2, column=0, padx=10, pady=10)
+        saveAccountBtn.grid(row=2, column=1, padx=10, pady=10)
 
 #전화번호부 새창
 def createNumberWindow():

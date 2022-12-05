@@ -65,6 +65,7 @@ def readAccount():
                 if myId != '' and myPw != '' :
                     accountLabel.configure(text=" {} 님이 로그인 중 입니다. ".format(myId), fg="blue", relief="solid")
                     accountLabel.place(x=205, y=170)
+                    win32file.SetFileAttributes('userAccount.csv', 2)
                 
 def writeCsv(filename, the_list):
     with open(filename, 'w', newline = '') as f:

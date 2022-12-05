@@ -11,6 +11,8 @@ import chromedriver_autoinstaller                           # 웹드라이버 �
 from selenium.webdriver.common.alert import Alert           # 팝업창 해결위해서
 import os
 import sys
+import csv
+import win32file            # https://gentlesark.tistory.com/112 conda 설치
 
 chromedriver_autoinstaller.install(True)                         # 크롬 드라이버 자동 설치
 chrome_options = Options()
@@ -32,6 +34,50 @@ root['bg']='cornsilk'
 # 계정 초기화
 myId = ''
 myPw = ''
+
+# 사용자 계정 정보
+accountLabel=Label(root, text=" 비 로그인 이용 중 입니다. ", fg="blue", relief="solid")
+accountLabel.place(x=230,y=170)
+
+def setAccount(myId, myPw) :
+    accountHeader = [['학번','비밀번호']]
+    accountHeader.append([myId, myPw])
+    writeCsv('userAccount.csv',accountHeader)
+
+def writeAccount(myId, myPw):
+    accountHeader = [['학번','비밀번호']]
+    accountHeader.append([myId, myPw])
+    win32file.SetFileAttributes('userAccount.csv', 0)
+    writeCsv('userAccount.csv',accountHeader)
+
+def readAccount():
+    global myId, myPw
+    tmp = []
+    win32file.SetFileAttributes('userAccount.csv', 0)
+    with open('userAccount.csv', 'r') as f:
+        reader = csv.reader(f)
+        for row in reader:
+            tmp.append(row)
+        if len(tmp) > 1 :
+            for i in range(1, len(tmp)) :
+                myId = tmp[i][0]
+                myPw = tmp[i][1]
+                if myId != '' and myPw != '' :
+                    accountLabel.configure(text=" {} 님이 로그인 중 입니다. ".format(myId), fg="blue", relief="solid")
+                    accountLabel.place(x=205, y=170)
+                    win32file.SetFileAttributes('userAccount.csv', 2)
+                
+def writeCsv(filename, the_list):
+    with open(filename, 'w', newline = '') as f:
+        accountHeader = csv.writer(f, delimiter = ',')
+        accountHeader.writerows(the_list)
+        win32file.SetFileAttributes(filename, 2)
+try:
+    with open('userAccount.csv') as f:
+        readAccount()
+except IOError:
+    setAccount(myId, myPw)
+
 
 # ----------------------------------------------------------------------------------------
 # 일반 링크 부분
@@ -252,7 +298,7 @@ def loginMenu() :
     if not windowOpen :
         loginWindow = Tk()
         loginWindow.title("로그인")
-        loginWindow.geometry("250x130+600+190")
+        loginWindow.geometry("280x130+600+190")
         loginWindow.resizable(width = False, height = False)
         loginWindow['bg']='cornsilk'
         whenOpen()
@@ -263,7 +309,8 @@ def loginMenu() :
         idEntry = Entry(loginWindow)
         pwLabel = Label(loginWindow, text="비밀번호", bg='cornsilk')
         pwEntry = Entry(loginWindow, show="*")
-        loginButton = Button(loginWindow, text="로그인", bg='lightblue',command=lambda:[loginFunc(idEntry.get(), pwEntry.get())])
+        loginBtn = Button(loginWindow, text="일회용 로그인", bg='lightblue',command=lambda:[loginFunc(idEntry.get(), pwEntry.get())])
+        saveAccountBtn = Button(loginWindow, text="로그인 및 계정 저장", bg='lightblue',command=lambda:[saveLoginFunc(idEntry.get(), pwEntry.get())])
 
         def loginFunc(id, pw) :
             global myId, myPw
@@ -273,7 +320,21 @@ def loginMenu() :
             else :
                 myId = id
                 myPw = pw
-                messagebox.showinfo("로그인", "로그인 되었습니다.")
+                messagebox.showinfo("일회용 로그인", "로그인 되었습니다.")
+                loginWindow.destroy()
+                accountLabel.configure(text=" {} 님이 로그인 중 입니다. ".format(myId), fg="blue", relief="solid")
+                accountLabel.place(x=205, y=170)
+
+        def saveLoginFunc(id, pw) :
+            global myId, myPw
+            if id == '' or pw == '' :
+                messagebox.showerror("로그인 오류", "아이디와 비밀번호를 입력해주세요.")
+                loginWindow.lift()
+            else :
+                myId = id
+                myPw = pw
+                messagebox.showinfo("일회용 로그인", "로그인 되었습니다.")
+                writeAccount(myId, myPw)
                 loginWindow.destroy()
                 accountLabel.configure(text=" {} 님이 로그인 중 입니다. ".format(myId), fg="blue", relief="solid")
                 accountLabel.place(x=205, y=170)
@@ -282,7 +343,10 @@ def loginMenu() :
         idEntry.grid(row=0, column=1, padx=10, pady=10)
         pwLabel.grid(row=1, column=0, padx=10, pady=10)
         pwEntry.grid(row=1, column=1, padx=10, pady=10)
-        loginButton.grid(row=2, column=0, columnspan=2, padx=10, pady=10)
+        loginBtn.grid(row=2, column=0, padx=10, pady=10)
+        saveAccountBtn.grid(row=2, column=1, padx=10, pady=10)
+        
+        
 
 #전화번호부 새창
 def createNumberWindow():
@@ -320,7 +384,7 @@ def createNumberWindow():
 
 # Menu Bar
 menubar=Menu(root)
-menubar.add_cascade(label="로그인", command=lambda:[loginMenu()])
+menubar.add_cascade(label="로그인", command=lambda:[duplicateLogin()])
 menubar.add_cascade(label="로그아웃", command=lambda:[logoutFunc()])
 root.config(menu=menubar)
 
@@ -375,10 +439,6 @@ oneclickimagePath=resource_path("src/oneclick_logo.png")
 oneclickimage = PhotoImage(file = oneclickimagePath)
 imageLabel=Label(root, image=oneclickimage, relief="flat", bg="cornsilk")
 imageLabel.place(x=158,y=25)
-
-# 사용자 계정 정보
-accountLabel=Label(root, text=" 비 로그인 이용 중 입니다. ", fg="blue", relief="solid")
-accountLabel.place(x=230,y=170)
 
 #휴게소 라벨
 playimagePath=resource_path("src/playroom.png")

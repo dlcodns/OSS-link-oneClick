@@ -12,6 +12,7 @@ from selenium.webdriver.common.alert import Alert           # 팝업창 해결�
 import os
 import sys
 import csv
+import win32file            # https://gentlesark.tistory.com/112 conda 설치
 
 chromedriver_autoinstaller.install(True)                         # 크롬 드라이버 자동 설치
 chrome_options = Options()
@@ -40,25 +41,19 @@ accountLabel.place(x=230,y=170)
 
 def setAccount(myId, myPw) :
     accountHeader = [['학번','비밀번호']]
-    def writeCsv(filename, the_list):
-        with open(filename, 'w', newline = '') as f:
-            accountHeader = csv.writer(f, delimiter = ',')
-            accountHeader.writerows(the_list)
     accountHeader.append([myId, myPw])
     writeCsv('userAccount.csv',accountHeader)
 
 def writeAccount(myId, myPw):
     accountHeader = [['학번','비밀번호']]
-    def writeCsv(filename, the_list):
-        with open(filename, 'w', newline = '') as f:
-            accountHeader = csv.writer(f, delimiter = ',')
-            accountHeader.writerows(the_list)
     accountHeader.append([myId, myPw])
+    win32file.SetFileAttributes('userAccount.csv', 0)
     writeCsv('userAccount.csv',accountHeader)
 
 def readAccount():
     global myId, myPw
     tmp = []
+    win32file.SetFileAttributes('userAccount.csv', 0)
     with open('userAccount.csv', 'r') as f:
         reader = csv.reader(f)
         for row in reader:
@@ -70,7 +65,12 @@ def readAccount():
                 if myId != '' and myPw != '' :
                     accountLabel.configure(text=" {} 님이 로그인 중 입니다. ".format(myId), fg="blue", relief="solid")
                     accountLabel.place(x=205, y=170)
-
+                
+def writeCsv(filename, the_list):
+    with open(filename, 'w', newline = '') as f:
+        accountHeader = csv.writer(f, delimiter = ',')
+        accountHeader.writerows(the_list)
+        win32file.SetFileAttributes(filename, 2)
 try:
     with open('userAccount.csv') as f:
         readAccount()

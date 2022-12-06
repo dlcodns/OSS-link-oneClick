@@ -45,10 +45,10 @@ def calc(enteredNum):
     if count < 6 :
         if ran > num:
             if count !=5:
-                tkinter.Label(window, text="up!", font=font4, bg="olivedrab",fg="white",borderwidth=2,relief="flat").place(x=190,y=220,width=124,height=50)
+                tkinter.Label(window, text="up!", font=font4, bg="olivedrab",fg="white",borderwidth=2,relief="flat").place(x=168,y=220,width=170,height=50)
         elif ran < num:
             if count !=5:
-                tkinter.Label(window, text="down!", font=font4, bg="olivedrab",fg="white",borderwidth=2,relief="flat").place(x=165,y=220,width=170,height=30)
+                tkinter.Label(window, text="down!", font=font4, bg="olivedrab",fg="white",borderwidth=2,relief="flat").place(x=167,y=220,width=170,height=50)
         elif ran == num:
             win = random.randint(1,3)
             if win == 1:

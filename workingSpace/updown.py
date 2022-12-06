@@ -9,7 +9,10 @@ window.geometry("500x400")
 window.resizable(False,False)
 window["bg"]="olivedrab"
 
-font=tkinter.font.Font(family="맑은고딕", size=10, weight="bold")
+font1=tkinter.font.Font(family="맑은 고딕", size=10, weight="bold")
+font2=tkinter.font.Font(family="맑은 고딕", size=15, weight="bold")
+font3=tkinter.font.Font(family="맑은 고딕", size=20, weight="bold")
+font4=tkinter.font.Font(family="맑은 고딕", size=25, weight="bold")
 
 ran = random.randint(1,100)
 count = 0
@@ -17,7 +20,7 @@ count = 0
 def updown():
   global ran, count
 
-  b2=tkinter.Button(window, text="게임 종료",bg="olivedrab",relief="raised",borderwidth=1,font=font,command=exit_game)
+  b2=tkinter.Button(window, text="게임 종료",bg="olivedrab",relief="raised",borderwidth=1,font=font2,command=exit_game)
   b2.place(x=200,y=300,width=100,height=50)
   
   while(True):
@@ -28,10 +31,10 @@ def updown():
         number_entered.place(x=180,y=180)
     
         action = tkinter.Button(window, text="확인", command=lambda:[calc(number_entered)])
-        action.place(x=330,y=178)
+        action.place(x=330,y=176)
         
         if count == 6:
-            print('\n정답은 %d였습니다~ 메롱 ㅋㅋㄹㅃㅃ', %(ran))
+            tkinter.Label(window, text="정답은 ran이었습니다! 메롱", font=font4, bg="olivedrab",fg="white",borderwidth=2,relief="flat").place(x=160,y=220,width=200,height=30)
             break
             
 def calc(enteredNum):
@@ -41,24 +44,24 @@ def calc(enteredNum):
         
     if ran > num:
         if count != 5:
-                print('up!\n')
+            tkinter.Label(window, text="up!", font=font4, bg="olivedrab",fg="white",borderwidth=2,relief="flat").place(x=190,y=220,width=124,height=50)
     elif ran < num:
         if count != 5:
-            print('down!\n')
+            tkinter.Label(window, text="down!", font=font4, bg="olivedrab",fg="white",borderwidth=2,relief="flat").place(x=165,y=220,width=170,height=30)
     elif ran == num:
         win = random.randint(1,3)
         if win == 1:
-            print('딩동댕~ 정답!')
+            tkinter.Label(window, text="딩동댕~ 정답!", font=font4, bg="olivedrab",fg="white",borderwidth=2,relief="flat").place(x=190,y=220,width=124,height=30)
         if win == 2:
-            print('운이 좋으시네요! :)')
+            tkinter.Label(window, text="운이 좋으시네요. :)", font=font4, bg="olivedrab",fg="white",borderwidth=2,relief="flat").place(x=190,y=220,width=124,height=30)
         if win == 3:
-            print('올ㅋ')
+            tkinter.Label(window, text="올ㅋ",bg="olivedrab", font=font4, fg="white",borderwidth=2,relief="flat").place(x=190,y=220,width=124,height=30)
     count += 1
   
 def exit_game():
     window.destroy()
   
-b1=tkinter.Button(window, text="게임 시작",bg="olivedrab",relief="raised",borderwidth=1,font=font,command=updown)
+b1=tkinter.Button(window, text="게임 시작",bg="olivedrab",relief="raised",borderwidth=1,font=font2,command=updown)
 b1.place(x=200,y=300,width=100,height=50)
 
 window.mainloop()

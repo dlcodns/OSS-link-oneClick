@@ -2,6 +2,7 @@ import tkinter
 import tkinter.font
 import tkinter.ttk
 from tkinter import *
+import csv
 
 window=tkinter.Tk()
 window.title("One Click")
@@ -34,9 +35,23 @@ def contactpointWindow():
 
     ent = Entry(label4)  
     ent.pack() 
+    
     def ent1_s():
-        a = ent1.get() 
-#여기에 검색 코드가 들어오면 되려나
+        mailbook = []
+
+        f = open("mail_book.csv",'r')
+        rdr = csv.reader(f)
+        for row in rdr:
+            mailbook.append(row)
+        f.close
+
+        a = ent1.get()
+        for i in mailbook:
+                if a == "":
+                    print("[{}] {} {}".format(i[0], i[1], i[2])) 
+                elif a in i[0] or a in i[1] or a in i[2]:
+                    print("[{}] {} {}".format(i[0], i[1], i[2]))
+                    
     btn = Button(label4) 
     btn.config(text = "확인")
     btn.config(command = ent1_s)

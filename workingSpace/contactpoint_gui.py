@@ -81,14 +81,26 @@ def contactpointWindow():
 
     ent = Entry(label9) 
     ent.pack() 
-    def ent2_s():
-        a = ent2.get() 
-#아마도 여기?
+    def ent2_s(): 
+        phonebook = []
+
+        f = open("phone_book.csv",'r')
+        rdr = csv.reader(f)
+        for row in rdr:
+            phonebook.append(row)
+        f.close
+
+        a = ent2.get()
+        for i in phonebook:
+                if a == "":
+                    print("[{}] {} {}".format(i[0], i[1], i[2])) 
+                elif a in i[0] or a in i[1] or a in i[2]:
+                    print("[{}] {} {}".format(i[0], i[1], i[2]))
+                    
     btn = Button(label9) 
     btn.config(text = "확인")
     btn.config(command = ent2_s)
     btn.pack() 
-    
     
 font=tkinter.font.Font(family="맑은고딕", size=10, weight="bold")    
 

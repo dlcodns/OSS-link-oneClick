@@ -5,20 +5,25 @@ import random
 import os
 import sys
 
+#윈도우 창 설정
 window = tkinter.Tk()
 window.title("업다운 게임")
 window.geometry("500x400")
 window.resizable(False,False)
-window["bg"]="olivedrab"
+window["bg"]="#d4e157"
 
+#폰트 크기 설정
 font1=tkinter.font.Font(family="맑은 고딕", size=10, weight="bold")
 font2=tkinter.font.Font(family="맑은 고딕", size=15, weight="bold")
 font3=tkinter.font.Font(family="맑은 고딕", size=20, weight="bold")
 font4=tkinter.font.Font(family="맑은 고딕", size=25, weight="bold")
 
+#난수 설정
 ran = random.randint(1,100)
 count = 0
 
+
+#게임 진행 함수
 def updown():
     global ran, count
   
@@ -26,24 +31,24 @@ def updown():
     b2.place(x=200,y=300,width=100,height=50)
     
  
-    tkinter.Label(window, text="숫자 하나를 적으세요.",bg="darkslategray",fg="white",borderwidth=2,relief="raised", font=font1).place(x=190,y=130,width=124,height=30)
+    tkinter.Label(window, text="숫자 하나를 적으세요.",bg="darkslategray",fg="white",borderwidth=2,relief="raised", font=font1).place(x=181,y=130,width=140,height=30)
 
     number = tkinter.StringVar()
     number_entered = tkinter.ttk.Entry(window, width=20, textvariable=number)
-    number_entered.place(x=180,y=180)
+    number_entered.place(x=178,y=180)
 
     action = tkinter.Button(window, text="확인", font=font1, command=lambda:[calc(number_entered)])
     action.place(x=330,y=176)
     
 
-            
+#업다운 비교 함수          
 def calc(enteredNum):
     global ran, count
     
     num = int(enteredNum.get())
      
     #b3=tkinter.Button(window, text="재시작",bg="olivedrab",relief="raised",borderwidth=1,font=font2,command=restart_game)
-    #b3.place(x=30,y=30,width=100,height=50)
+   # b3.place(x=30,y=30,width=100,height=50)
      
     if count < 6 :
         if ran > num:
@@ -61,15 +66,18 @@ def calc(enteredNum):
             if win == 3:
                 tkinter.Label(window, text="올ㅋ",bg="olivedrab", font=font4, fg="white",borderwidth=2,relief="flat").place(x=190,y=220,width=124,height=30)
         count= count+1
+        msg = "정답은" + str(ran)
         if count == 6 :
-            tkinter.Label(window, text="정답은 ran이었습니다! 메롱", font=font4, bg="olivedrab",fg="white",borderwidth=2,relief="flat").place(x=160,y=220,width=200,height=30)
+            tkinter.Label(window, text=msg, font=font4, bg="olivedrab",fg="white",borderwidth=2,relief="flat").place(x=160,y=220,width=200,height=30)
 
-
+#게임을 나가는 함수
 def exit_game():
     window.destroy()
-    
-#def restart_game():
 
+#재시작 버튼 함수
+#def restart_game():
+    
+# exe 제작을 위한 이미지 경로 설정 함수
 def resource_path(relative_path):
     """ Get absolute path to resource, works for dev and for PyInstaller """
     try:
@@ -79,8 +87,20 @@ def resource_path(relative_path):
         base_path = os.path.abspath(".")
 
     return os.path.join(base_path, relative_path)
-    
-b1=tkinter.Button(window, text="게임 시작",bg="olivedrab",relief="raised",borderwidth=1,font=font2,command=updown)
-b1.place(x=200,y=300,width=100,height=50)
+
+
+
+#기본 이미지
+grassImgPath=resource_path("src/grass.png")
+grassImg=tkinter.PhotoImage(file = grassImgPath)
+grassImglabel=tkinter.Label(window, image=grassImg, relief="flat", bg="#d4e157").place(x=-2,y=1)
+
+#버튼 이미지
+startImgPath=resource_path("src/start.png")
+startImg=tkinter.PhotoImage(file = startImgPath)
+
+#시작 버튼 위치
+startBtn=tkinter.Button(window, image=startImg ,relief="flat",bg="#d4e157", command=updown).place(x=143.5,y=240)
+
     
 window.mainloop()

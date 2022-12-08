@@ -94,6 +94,9 @@ def resource_path(relative_path):
 grassImgPath=resource_path("src/grass.png")
 grassImg=tkinter.PhotoImage(file = grassImgPath)
 grassImglabel=tkinter.Label(window, image=grassImg, relief="flat", bg="#d4e157").place(x=-2,y=1)
+titleImgPath=resource_path("src/title.png")
+titleImg=tkinter.PhotoImage(file = titleImgPath)
+titleImglabel=tkinter.Label(window, image=titleImg, relief="flat", bg="#d4e157").place(x=77.5,y=110)
 
 #버튼 이미지
 startImgPath=resource_path("src/start.png")

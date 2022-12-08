@@ -91,19 +91,18 @@ def resource_path(relative_path):
 
 
 #기본 이미지
-grassImgPath=resource_path("src/grass.png")
-grassImg=tkinter.PhotoImage(file = grassImgPath)
-grassImglabel=tkinter.Label(window, image=grassImg, relief="flat", bg="#d4e157").place(x=-2,y=1)
+playgroundImgPath=resource_path("src/playground.png")
+playgroundImg=tkinter.PhotoImage(file = playgroundImgPath)
+playgroundImglabel=tkinter.Label(window, image=playgroundImg, relief="flat", bg="#d4e157").place(x=-2,y=1)
 titleImgPath=resource_path("src/title.png")
 titleImg=tkinter.PhotoImage(file = titleImgPath)
-titleImglabel=tkinter.Label(window, image=titleImg, relief="flat", bg="#d4e157").place(x=77.5,y=110)
+titleImglabel=tkinter.Label(window, image=titleImg, relief="flat", bg="#d4e157").place(x=77.5,y=80)
 
 #버튼 이미지
 startImgPath=resource_path("src/start.png")
 startImg=tkinter.PhotoImage(file = startImgPath)
 
 #시작 버튼 위치
-startBtn=tkinter.Button(window, image=startImg ,relief="flat",bg="#d4e157", command=updown).place(x=143.5,y=240)
-
+startBtn=tkinter.Button(window, image=startImg ,relief="flat", command=updown).place(x=163.5,y=230)
     
 window.mainloop()

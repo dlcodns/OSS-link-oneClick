@@ -22,9 +22,17 @@ font4=tkinter.font.Font(family="맑은 고딕", size=25, weight="bold")
 ran = random.randint(1,100)
 count = 0
 
+# 위젯 없애는 함수
+def hide_button(widget):
+    widget.pack_forget()
+  
+# 위젯 다시 보여주는 함수
+def show_button(widget):
+    widget.pack()
 
 #게임 진행 함수
 def updown():
+    hide_button(startBtn)
     global ran, count
   
     b2=tkinter.Button(window, text="게임 종료",bg="olivedrab",relief="raised",borderwidth=1,font=font2,command=exit_game)
@@ -104,5 +112,6 @@ startImg=tkinter.PhotoImage(file = startImgPath)
 
 #시작 버튼 위치
 startBtn=tkinter.Button(window, image=startImg ,relief="flat", command=updown).place(x=163.5,y=230)
+startBtn.pack()
     
 window.mainloop()

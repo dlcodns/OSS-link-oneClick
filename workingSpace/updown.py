@@ -2,6 +2,8 @@ import tkinter
 import tkinter.font
 import tkinter.ttk
 import random
+import os
+import sys
 
 window = tkinter.Tk()
 window.title("업다운 게임")
@@ -40,7 +42,8 @@ def calc(enteredNum):
     
     num = int(enteredNum.get())
      
-     
+    #b3=tkinter.Button(window, text="재시작",bg="olivedrab",relief="raised",borderwidth=1,font=font2,command=restart_game)
+    #b3.place(x=30,y=30,width=100,height=50)
      
     if count < 6 :
         if ran > num:
@@ -64,7 +67,18 @@ def calc(enteredNum):
 
 def exit_game():
     window.destroy()
+    
+#def restart_game():
 
+def resource_path(relative_path):
+    """ Get absolute path to resource, works for dev and for PyInstaller """
+    try:
+        # PyInstaller creates a temp folder and stores path in _MEIPASS
+        base_path = sys._MEIPASS
+    except Exception:
+        base_path = os.path.abspath(".")
+
+    return os.path.join(base_path, relative_path)
     
 b1=tkinter.Button(window, text="게임 시작",bg="olivedrab",relief="raised",borderwidth=1,font=font2,command=updown)
 b1.place(x=200,y=300,width=100,height=50)

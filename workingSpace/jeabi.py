@@ -29,7 +29,7 @@ def jeabi():
     #재시작, 종료 버튼 만들기(완료)
     
     #tkinter.Label(window, image=jnum,bg="darkslategray",fg="white",borderwidth=2,relief="raised").place(x=110,y=80,width=80,height=30)
-    jnumImglabel=tkinter.Label(window, image=jnumImg, relief="flat", bg="#FEE58A").place(x=90,y=80)
+    tkinter.Label(window, text="인원 수 입력", relief="ridge", font=font2,bg="#FAD2AA",fg="black").place(x=90,y=87,width=160)
     
     number = tkinter.StringVar()
     number_entered = tkinter.ttk.Entry(window, font=font2, width=10, textvariable=number)
@@ -58,7 +58,56 @@ def input(action, enteredNum):
         jeabi()
            
     a = []
-    print('역할을 정해주세요.')
+    
+    tkinter.Label(window, text="-- 제비마다 역할을 정해주세요. --",bg="#FDEDA6",fg="black",relief="flat", font=font1).place(x=150,y=145,width=200)
+    
+    jeabi_1 = tkinter.StringVar()
+    jeabi_1_entered = tkinter.ttk.Entry(window, font=font1, width=6, textvariable=jeabi_1)
+    jeabi_2 = tkinter.StringVar()
+    jeabi_2_entered = tkinter.ttk.Entry(window, font=font1, width=6, textvariable=jeabi_1)
+    jeabi_3 = tkinter.StringVar()
+    jeabi_3_entered = tkinter.ttk.Entry(window, font=font1, width=6, textvariable=jeabi_1)
+    jeabi_4 = tkinter.StringVar()
+    jeabi_4_entered = tkinter.ttk.Entry(window, font=font1, width=6, textvariable=jeabi_1)
+    jeabi_5 = tkinter.StringVar()
+    jeabi_5_entered = tkinter.ttk.Entry(window, font=font1, width=6, textvariable=jeabi_1)
+    jeabi_6 = tkinter.StringVar()
+    jeabi_6_entered = tkinter.ttk.Entry(window, font=font1, width=6, textvariable=jeabi_1)
+    jeabi_7 = tkinter.StringVar()
+    jeabi_7_entered = tkinter.ttk.Entry(window, font=font1, width=6, textvariable=jeabi_1)
+    jeabi_8 = tkinter.StringVar()
+    jeabi_8_entered = tkinter.ttk.Entry(window, font=font1, width=6, textvariable=jeabi_1)
+
+    
+    if num<=4:
+        for i in range(0,num):
+            tkinter.Label(window, text=i+1, relief="flat",font=font3, bg="darkslategray",fg="white").place(x=80+i*90,y=190) 
+        jeabi_1_entered.place(x=105,y=208)
+        jeabi_2_entered.place(x=195,y=208)
+        if num>=3:
+            jeabi_3_entered.place(x=285,y=208)
+        if num>=4:
+            jeabi_4_entered.place(x=375,y=208)   
+                      
+    if num>4 and num<=8:
+        for i in range(0,4):
+            tkinter.Label(window, text=i+1, relief="flat",font=font3, bg="darkslategray",fg="white").place(x=80+i*90,y=170,height=33)
+        for i in range(4,num):
+            tkinter.Label(window, text=i+1, relief="flat",font=font3, bg="darkslategray",fg="white").place(x=80+(i-4)*90,y=210,height=33)
+        jeabi_1_entered.place(x=105,y=180)
+        jeabi_2_entered.place(x=195,y=180)
+        jeabi_3_entered.place(x=285,y=180)
+        jeabi_4_entered.place(x=375,y=180)         
+        if num>=5:
+            jeabi_5_entered.place(x=105,y=220)
+        if num>=6:
+            jeabi_6_entered.place(x=195,y=220)  
+        if num>=7:
+            jeabi_7_entered.place(x=285,y=220)
+        if num==8:
+            jeabi_8_entered.place(x=375,y=220) 
+  
+     
     for i in range(0,num):
         print('제비',i+1,' = ')
         input(a[i])

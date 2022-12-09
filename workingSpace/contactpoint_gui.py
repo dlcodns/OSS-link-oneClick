@@ -101,24 +101,28 @@ def contactpointWindow():
     btn.config(command = ent2_s)
     btn.grid(column=4,row=6)
     
-    #전화번호 추가
+   
+#메일 추가
     label10=tkinter.ttk.Label(newwindow, text="")
-    label10.grid(column=3,row=7)
+    label10.grid(column=0,row=9)
 
     label11=tkinter.ttk.Label(newwindow, text="")
-    label11.grid(column=3,row=8)
+    label11.grid(column=0,row=10)
 
-    label12=tkinter.ttk.Label(newwindow, text="전화번호 추가")
-    label12.grid(column=1,row=9)
+    label12=tkinter.ttk.Label(newwindow, text="예시) 컴공/김민서/010-0000-0000")
+    label12.grid(column=1,row=11)   
+
+
+    label13=tkinter.ttk.Label(newwindow, text="메일 추가")
+    label13.grid(column=1,row=12)   
 
     ent3 = Entry(newwindow) 
-    ent3.grid(column=1,row=10)
+    ent3.grid(column=1,row=13)
     def ent3_s():
-        i = []
-        f = open("phone_book.csv",'a',newline="")
+        f = open("mail_book.csv",'a',newline="")
         wr = csv.writer(f) 
 
-        a = ent3.get().split()
+        a = ent3.get().split('/')
         
         wr.writerow([a[0],a[1],a[2]])
         f.close()
@@ -126,7 +130,27 @@ def contactpointWindow():
     btn = Button(newwindow) 
     btn.config(text = "확인")
     btn.config(command = ent3_s)
-    btn.grid(column=2,row=10)
+    btn.grid(column=2,row=13)
+
+#전화번호 추가
+    label14=tkinter.ttk.Label(newwindow, text="전화번호 추가")
+    label14.grid(column=1,row=14)
+
+    ent4 = Entry(newwindow) 
+    ent4.grid(column=1,row=15)
+    def ent3_s():
+        f = open("phone_book.csv",'a',newline="")
+        wr = csv.writer(f) 
+
+        a = ent4.get().split('/')
+        
+        wr.writerow([a[0],a[1],a[2]])
+        f.close()
+
+    btn = Button(newwindow) 
+    btn.config(text = "확인")
+    btn.config(command = ent3_s)
+    btn.grid(column=2,row=15)
     
 font=tkinter.font.Font(family="맑은고딕", size=10, weight="bold")    
 

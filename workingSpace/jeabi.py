@@ -18,7 +18,7 @@ font2=tkinter.font.Font(family="맑은 고딕", size=15, weight="bold")
 font3=tkinter.font.Font(family="맑은 고딕", size=20, weight="bold")
 font4=tkinter.font.Font(family="맑은 고딕", size=25, weight="bold")
 
-
+#제비뽑기 진행 함수
 def jeabi():
     jgrassLoopImglabel=tkinter.Label(window, image=jgrassLoopImg, relief="flat", bg="light yellow").place(x=-23,y=-41)
 
@@ -35,8 +35,9 @@ def jeabi():
     number_entered = tkinter.ttk.Entry(window, font=font2, width=10, textvariable=number)
     number_entered.place(x=260,y=87)
     
-    action = tkinter.Button(window, text="확인", font=font1, command=lambda:[shake(action, number_entered)])
+    action = tkinter.Button(window, text="확인", font=font1, command=lambda:[input(action, number_entered)])
     action.place(x=395,y=91)
+    
     #인원수num 입력하기(완료)
     #2~8명 제한
     #a배열 만들기
@@ -47,12 +48,28 @@ def jeabi():
     #클릭하면 역할 보이기
     #
 
-#난수 설정
-def shake(action, enteredNum):
+#입력과 배열 설정
+def input(action, enteredNum):
     action.config(state="disabled")
+    
     num = int(enteredNum.get())
+    if num>8 or num<2 :
+        print('2~8명만 가능합니다.')
+        jeabi()
+           
+    a = []
+    print('역할을 정해주세요.')
+    for i in range(0,num):
+        print('제비',i+1,' = ')
+        input(a[i])
+        
+    for j in range(0,num-1):
+        print('제비',i+1,' 역할: ',a[i])
     #for i in range(0,):
-            
+
+#난수 설정
+#def shake():
+
 #게임을 나가는 함수
 def exit_game():
     window.destroy()

@@ -36,8 +36,8 @@ myId = ''
 myPw = ''
 
 # 사용자 계정 정보
-accountLabel=Label(root, text=" 비 로그인 이용 중 입니다. ", fg="blue", relief="solid")
-accountLabel.place(x=230,y=170)
+accountLabel=Label(root, text=" 비 로그인 이용 중 입니다. ", relief="solid",bg="#d4e157")
+accountLabel.place(x=230,y=220)
 
 def setAccount(myId, myPw) :
     accountHeader = [['학번','비밀번호']]
@@ -300,17 +300,17 @@ def loginMenu() :
         loginWindow.title("로그인")
         loginWindow.geometry("280x130+600+190")
         loginWindow.resizable(width = False, height = False)
-        loginWindow['bg']='cornsilk'
+        loginWindow['bg']='#d4e157'
         whenOpen()
         loginWindow.bind('<Destroy>', whenClose)
      
         # 로그인 창에 들어갈 내용
-        idLabel = Label(loginWindow, text="학번", bg='cornsilk')
+        idLabel = Label(loginWindow, text="학번", bg='#d4e157')
         idEntry = Entry(loginWindow)
-        pwLabel = Label(loginWindow, text="비밀번호", bg='cornsilk')
+        pwLabel = Label(loginWindow, text="비밀번호", bg='#d4e157')
         pwEntry = Entry(loginWindow, show="*")
-        loginBtn = Button(loginWindow, text="일회용 로그인", bg='lightblue',command=lambda:[loginFunc(idEntry.get(), pwEntry.get())])
-        saveAccountBtn = Button(loginWindow, text="로그인 및 계정 저장", bg='lightblue',command=lambda:[saveLoginFunc(idEntry.get(), pwEntry.get())])
+        loginBtn = Button(loginWindow, text="일회용 로그인", relief="flat",bg='#a0af22',command=lambda:[loginFunc(idEntry.get(), pwEntry.get())])
+        saveAccountBtn = Button(loginWindow, text="로그인 및 계정 저장",relief="flat", bg='#a0af22',command=lambda:[saveLoginFunc(idEntry.get(), pwEntry.get())])
 
         def loginFunc(id, pw) :
             global myId, myPw
@@ -388,8 +388,6 @@ menubar.add_cascade(label="로그인", command=lambda:[duplicateLogin()])
 menubar.add_cascade(label="로그아웃", command=lambda:[logoutFunc()])
 root.config(menu=menubar)
 
-#폰트 설정
-font=tkinter.font.Font(family="맑은고딕", size=10, weight="bold")
 
 # exe 제작을 위한 이미지 경로 설정 함수
 def resource_path(relative_path):
@@ -403,7 +401,6 @@ def resource_path(relative_path):
     return os.path.join(base_path, relative_path)
 
 #주소모음 버튼 이미지
-#주소모음 버튼이미지
 homepageImgPath=resource_path("src/homepage.png")
 homepageImg=PhotoImage(file = homepageImgPath)
 ecampusImgPath=resource_path("src/ecampus.png")
@@ -432,136 +429,50 @@ phonebookImg=PhotoImage(file = phonebookImgPath)
 
 
 #주소모음 절대위치
-homepageBtn=Button(root, image = homepageImg,relief = "flat", bg="#d4e157",command=homepageAutoWindow)
+homepageBtn=Button(root, image = homepageImg,relief = "flat", bg="#d4e157",command=homepageAutoWindow,activebackground = "#d4e157")
 homepageBtn.place(x=15,y=20,width=125,height=60)
-ecampusBtn=Button(root, image = ecampusImg, relief = "flat", bg="#d4e157", command=ecampusAutoWindow)
+ecampusBtn=Button(root, image = ecampusImg, relief = "flat", bg="#d4e157", command=ecampusAutoWindow,activebackground = "#d4e157")
 ecampusBtn.place(x=15,y=90,width=125,height=60)
-dormBtn=Button(root, image = dormImg, relief = "flat", bg="#d4e157", command=dormAutoWindow)
+dormBtn=Button(root, image = dormImg, relief = "flat", bg="#d4e157", command=dormAutoWindow,activebackground = "#d4e157")
 dormBtn.place(x=15,y=160,width=125,height=60)
-gaesinBtn=Button(root, image = gaesinImg, relief = "flat", bg="#d4e157", command=geshinAutoWindow)
+gaesinBtn=Button(root, image = gaesinImg, relief = "flat", bg="#d4e157", command=geshinAutoWindow,activebackground = "#d4e157")
 gaesinBtn.place(x=15,y=230,width=125,height=60)
-cieatBtn=Button(root, image = cieatImg, relief = "flat", bg="#d4e157", command=cieatAutoWindow)
+cieatBtn=Button(root, image = cieatImg, relief = "flat", bg="#d4e157", command=cieatAutoWindow,activebackground = "#d4e157")
 cieatBtn.place(x=15,y=300,width=125,height=60)
-jobBtn=Button(root, image = jobImg, relief = "flat", bg="#d4e157", command=jobAutoWindow)
+jobBtn=Button(root, image = jobImg, relief = "flat", bg="#d4e157", command=jobAutoWindow,activebackground = "#d4e157")
 jobBtn.place(x=15,y=370,width=125,height=60)
 
-baekjunBtn=Button(root, image = baekjunImg,relief = "flat", bg="#d4e157", command=baekjuneWindow)
+baekjunBtn=Button(root, image = baekjunImg,relief = "flat", bg="#d4e157", command=baekjuneWindow,activebackground = "#d4e157")
 baekjunBtn.place(x=475,y=20,width=125,height=60)
-codeupBtn=Button(root, image = codeupImg, relief = "flat", bg="#d4e157", command=codeupWindow)
+codeupBtn=Button(root, image = codeupImg, relief = "flat", bg="#d4e157", command=codeupWindow,activebackground = "#d4e157")
 codeupBtn.place(x=475,y=90,width=125,height=60)
-replitBtn=Button(root, image = replitImg, relief = "flat", bg="#d4e157", command=replitWindow)
+replitBtn=Button(root, image = replitImg, relief = "flat", bg="#d4e157", command=replitWindow,activebackground = "#d4e157")
 replitBtn.place(x=475,y=160,width=125,height=60)
-sojungBtn=Button(root, image = sojungImg, relief = "flat", bg="#d4e157", command=sojungWindow)
+sojungBtn=Button(root, image = sojungImg, relief = "flat", bg="#d4e157", command=sojungWindow,activebackground = "#d4e157")
 sojungBtn.place(x=475,y=230,width=125,height=60)
-majorBtn=Button(root, image = majorImg, relief = "flat", bg="#d4e157", command=majorWindow)
+majorBtn=Button(root, image = majorImg, relief = "flat", bg="#d4e157", command=majorWindow,activebackground = "#d4e157")
 majorBtn.place(x=475,y=300,width=125,height=60)
-phonebookBtn=Button(root, image = phonebookImg, relief = "flat", bg="#d4e157", command=createNumberWindow)
+phonebookBtn=Button(root, image = phonebookImg, relief = "flat", bg="#d4e157", command=createNumberWindow,activebackground = "#d4e157")
 phonebookBtn.place(x=475,y=370,width=125,height=60)
-
-#주소모음 버튼
-#homepageBtn=Button(root, text="충북대학교\n홈페이지", bg="cornsilk", relief="solid", borderwidth=1, font=font, command=homepageAutoWindow)
-#ecampusBtn=Button(root, text="충북대학교\necampus", bg="cornsilk", relief="solid", borderwidth=1, font=font, command=ecampusAutoWindow)
-#dormBtn=Button(root, text="충북대학교\n학생생활관", bg="cornsilk", relief="solid", borderwidth=1, font=font, command=dormAutoWindow)
-#geshinBtn=Button(root, text="충북대학교\n개신누리", bg="cornsilk", relief="solid", borderwidth=1, font=font, command=geshinAutoWindow)
-#cieatBtn=Button(root, text="충북대학교\n씨앗", bg="cornsilk", relief="solid", borderwidth=1, font=font, command=cieatAutoWindow)
-#jobBtn=Button(root, text="충북대학교\n취업지원본부", bg="cornsilk", relief="solid", borderwidth=1, font=font, command=jobAutoWindow)
-
-#baekjuneBtn=Button(root, text="백준", bg="cornsilk", relief="solid", borderwidth=1, font=font, command=baekjuneWindow)
-#codeupBtn=Button(root, text="코드업", bg="cornsilk", relief="solid", borderwidth=1, font=font, command=codeupWindow)
-#replitBtn=Button(root, text="replit", bg="cornsilk", relief="solid", borderwidth=1, font=font, command=replitWindow)
-#sojungBtn=Button(root, text="SW사업단\n공지사항", bg="cornsilk", relief="solid", borderwidth=1, font=font, command=sojungWindow)
-#majorBtn=Button(root, text="컴공\n공지사항", bg="cornsilk", relief="solid", borderwidth=1, font=font, command=majorWindow)
-#phonebookBtn=Button(root, text="충북대학교\n전화번호", bg="cornsilk", relief="solid", borderwidth=1, font=font, command=createNumberWindow)
-
-
-#주소버튼 절대위치
-#homepageBtn.place(x=55,y=30,width=80,height=50)
-#ecampusBtn.place(x=55,y=100,width=80,height=50)
-#dormBtn.place(x=55,y=170,width=80,height=50)
-#geshinBtn.place(x=55,y=240,width=80,height=50)
-#cieatBtn.place(x=55,y=310,width=80,height=50)
-#jobBtn.place(x=55,y=380,width=80,height=50)
-
-#baekjuneBtn.place(x=505,y=30,width=80,height=50)
-#codeupBtn.place(x=505,y=100,width=80,height=50)
-#replitBtn.place(x=505,y=170,width=80,height=50)
-#sojungBtn.place(x=505,y=240,width=80,height=50)
-#majorBtn.place(x=505,y=310,width=80,height=50)
-#phonebookBtn.place(x=505,y=380,width=80,height=50)
 
 #원클릭 로고
 oneclickimagePath=resource_path("src/oneclick_logo.png")
 oneclickimage = PhotoImage(file = oneclickimagePath)
 imageLabel=Label(root, image=oneclickimage, relief="flat", bg="#d4e157")
-imageLabel.place(x=160,y=40)
+imageLabel.place(x=160,y=60)
 
 #휴게소 라벨
 playimagePath=resource_path("src/playroom.png")
 playimage = PhotoImage(file = playimagePath)
-playimagelabel=Label(root, image=playimage, relief="solid", bg="cornsilk")
-playimagelabel.place(x=148,y=215)
+playimagelabel=Label(root, image=playimage, relief="flat", bg="#d4e157")
+playimagelabel.place(x=170,y=235)
 
 #휴게소 버튼
-omokbttn=Button(root, text="오목\n게임하기",relief="solid",borderwidth=1, bg="cornsilk",font=font)
-updownbttn=Button(root, text="업다운\n게임하기", relief="solid",borderwidth=1, bg="cornsilk",font=font)
-omokbttn.place(x=195,y=390,width=70,height=36)
-updownbttn.place(x=345,y=390,width=70,height=36)
-
-#휴게소 꽃 라벨
-flowerImgPath=resource_path("src/flower.png")
-flowerImg = PhotoImage(file = flowerImgPath)
-
-omoklabel=Label(root, image=flowerImg, relief="flat", bg="cornsilk")
-omoklabel.place(x=175,y=401,width=30)
-
-updownlabel=Label(root, image=flowerImg, relief="flat", bg="cornsilk")
-updownlabel.place(x=325,y=401,width=30)
+updownbttnimagePath=resource_path("src/updownBtn.png")
+updownbttnimage = PhotoImage(file = updownbttnimagePath)
+updownbttn=Button(root, image=updownbttnimage, relief="flat",bg="#ffff89",activebackground = "#ffff89")
+updownbttn.place(x=265,y=376,width=80,height=40)
 
 
-
-
-#클로버 이미지
-#coloverImgPath=resource_path("src/clov.png")
-#cloverImg = PhotoImage(file = coloverImgPath)
-
-#homepagelabel=Label(root, image = cloverImg, relief="flat",bg="cornsilk")
-#homepagelabel.place(x=23, y=48, width=40 )
-
-#ecampuslabel=Label(root, image = cloverImg, relief="flat",bg="cornsilk")
-#ecampuslabel.place(x=23, y=118, width=40 )
-
-#dormlabel=Label(root, image = cloverImg, relief="flat",bg="cornsilk")
-#dormlabel.place(x=23, y=188, width=40 )
-
-#gaesinlabel=Label(root, image = cloverImg, relief="flat",bg="cornsilk")
-#gaesinlabel.place(x=23, y=258, width=40 )
-
-#siatlabel=Label(root, image = cloverImg, relief="flat",bg="cornsilk")
-#siatlabel.place(x=23, y=328, width=40 )
-
-#joblabel=Label(root, image = cloverImg, relief="flat",bg="cornsilk")
-#joblabel.place(x=18, y=398, width=40 )
-
-#잎 라벨이미지
-#leafImgPath=resource_path("src/leaf.png")
-#leafImg = PhotoImage(file = leafImgPath)
-
-#baekjunlabel=Label(root, image=leafImg,relief="flat", bg="cornsilk")
-#baekjunlabel.place(x=475, y=40, width=40)
-
-#codeuplabel=Label(root, image=leafImg,relief="flat", bg="cornsilk")
-#codeuplabel.place(x=475, y=110, width=40)
-
-#replitlabel=Label(root, image=leafImg,relief="flat", bg="cornsilk")
-#replitlabel.place(x=475, y=180, width=40)
-
-#swlabel=Label(root, image=leafImg,relief="flat", bg="cornsilk")
-#swlabel.place(x=475, y=250, width=40)
-
-#noticelabel=Label(root, image=leafImg,relief="flat", bg="cornsilk")
-#noticelabel.place(x=475, y=320, width=40)
-
-#numberlabel=Label(root, image=leafImg,relief="flat", bg="cornsilk")
-#numberlabel.place(x=475, y=390, width=40)
 
 root.mainloop()

@@ -300,17 +300,17 @@ def loginMenu() :
         loginWindow.title("로그인")
         loginWindow.geometry("280x130+600+190")
         loginWindow.resizable(width = False, height = False)
-        loginWindow['bg']='cornsilk'
+        loginWindow['bg']='#d4e157'
         whenOpen()
         loginWindow.bind('<Destroy>', whenClose)
      
         # 로그인 창에 들어갈 내용
-        idLabel = Label(loginWindow, text="학번", bg='cornsilk')
+        idLabel = Label(loginWindow, text="학번", bg='#d4e157')
         idEntry = Entry(loginWindow)
-        pwLabel = Label(loginWindow, text="비밀번호", bg='cornsilk')
+        pwLabel = Label(loginWindow, text="비밀번호", bg='#d4e157')
         pwEntry = Entry(loginWindow, show="*")
-        loginBtn = Button(loginWindow, text="일회용 로그인", bg='lightblue',command=lambda:[loginFunc(idEntry.get(), pwEntry.get())])
-        saveAccountBtn = Button(loginWindow, text="로그인 및 계정 저장", bg='lightblue',command=lambda:[saveLoginFunc(idEntry.get(), pwEntry.get())])
+        loginBtn = Button(loginWindow, text="일회용 로그인", relief="flat",bg='#a0af22',command=lambda:[loginFunc(idEntry.get(), pwEntry.get())])
+        saveAccountBtn = Button(loginWindow, text="로그인 및 계정 저장",relief="flat", bg='#a0af22',command=lambda:[saveLoginFunc(idEntry.get(), pwEntry.get())])
 
         def loginFunc(id, pw) :
             global myId, myPw
@@ -429,30 +429,30 @@ phonebookImg=PhotoImage(file = phonebookImgPath)
 
 
 #주소모음 절대위치
-homepageBtn=Button(root, image = homepageImg,relief = "flat", bg="#d4e157",command=homepageAutoWindow)
+homepageBtn=Button(root, image = homepageImg,relief = "flat", bg="#d4e157",command=homepageAutoWindow,activebackground = "#d4e157")
 homepageBtn.place(x=15,y=20,width=125,height=60)
-ecampusBtn=Button(root, image = ecampusImg, relief = "flat", bg="#d4e157", command=ecampusAutoWindow)
+ecampusBtn=Button(root, image = ecampusImg, relief = "flat", bg="#d4e157", command=ecampusAutoWindow,activebackground = "#d4e157")
 ecampusBtn.place(x=15,y=90,width=125,height=60)
-dormBtn=Button(root, image = dormImg, relief = "flat", bg="#d4e157", command=dormAutoWindow)
+dormBtn=Button(root, image = dormImg, relief = "flat", bg="#d4e157", command=dormAutoWindow,activebackground = "#d4e157")
 dormBtn.place(x=15,y=160,width=125,height=60)
-gaesinBtn=Button(root, image = gaesinImg, relief = "flat", bg="#d4e157", command=geshinAutoWindow)
+gaesinBtn=Button(root, image = gaesinImg, relief = "flat", bg="#d4e157", command=geshinAutoWindow,activebackground = "#d4e157")
 gaesinBtn.place(x=15,y=230,width=125,height=60)
-cieatBtn=Button(root, image = cieatImg, relief = "flat", bg="#d4e157", command=cieatAutoWindow)
+cieatBtn=Button(root, image = cieatImg, relief = "flat", bg="#d4e157", command=cieatAutoWindow,activebackground = "#d4e157")
 cieatBtn.place(x=15,y=300,width=125,height=60)
-jobBtn=Button(root, image = jobImg, relief = "flat", bg="#d4e157", command=jobAutoWindow)
+jobBtn=Button(root, image = jobImg, relief = "flat", bg="#d4e157", command=jobAutoWindow,activebackground = "#d4e157")
 jobBtn.place(x=15,y=370,width=125,height=60)
 
-baekjunBtn=Button(root, image = baekjunImg,relief = "flat", bg="#d4e157", command=baekjuneWindow)
+baekjunBtn=Button(root, image = baekjunImg,relief = "flat", bg="#d4e157", command=baekjuneWindow,activebackground = "#d4e157")
 baekjunBtn.place(x=475,y=20,width=125,height=60)
-codeupBtn=Button(root, image = codeupImg, relief = "flat", bg="#d4e157", command=codeupWindow)
+codeupBtn=Button(root, image = codeupImg, relief = "flat", bg="#d4e157", command=codeupWindow,activebackground = "#d4e157")
 codeupBtn.place(x=475,y=90,width=125,height=60)
-replitBtn=Button(root, image = replitImg, relief = "flat", bg="#d4e157", command=replitWindow)
+replitBtn=Button(root, image = replitImg, relief = "flat", bg="#d4e157", command=replitWindow,activebackground = "#d4e157")
 replitBtn.place(x=475,y=160,width=125,height=60)
-sojungBtn=Button(root, image = sojungImg, relief = "flat", bg="#d4e157", command=sojungWindow)
+sojungBtn=Button(root, image = sojungImg, relief = "flat", bg="#d4e157", command=sojungWindow,activebackground = "#d4e157")
 sojungBtn.place(x=475,y=230,width=125,height=60)
-majorBtn=Button(root, image = majorImg, relief = "flat", bg="#d4e157", command=majorWindow)
+majorBtn=Button(root, image = majorImg, relief = "flat", bg="#d4e157", command=majorWindow,activebackground = "#d4e157")
 majorBtn.place(x=475,y=300,width=125,height=60)
-phonebookBtn=Button(root, image = phonebookImg, relief = "flat", bg="#d4e157", command=createNumberWindow)
+phonebookBtn=Button(root, image = phonebookImg, relief = "flat", bg="#d4e157", command=createNumberWindow,activebackground = "#d4e157")
 phonebookBtn.place(x=475,y=370,width=125,height=60)
 
 #원클릭 로고
@@ -470,7 +470,7 @@ playimagelabel.place(x=170,y=235)
 #휴게소 버튼
 updownbttnimagePath=resource_path("src/updownBtn.png")
 updownbttnimage = PhotoImage(file = updownbttnimagePath)
-updownbttn=Button(root, image=updownbttnimage, relief="flat",bg="#ffff89")
+updownbttn=Button(root, image=updownbttnimage, relief="flat",bg="#ffff89",activebackground = "#ffff89")
 updownbttn.place(x=265,y=376,width=80,height=40)
 
 

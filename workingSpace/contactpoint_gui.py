@@ -17,25 +17,24 @@ def contactpointWindow():
     
 #교수님 이메일 
     label1=tkinter.ttk.Label(newwindow, text="")
-    label1.pack()
+    label1.grid(column=0,row=0)
 
     label2=tkinter.ttk.Label(newwindow, text="교수님 이메일")
-    label2.pack()
+    label2.grid(column=1,row=1)
 
     value=['컴퓨터공학과', '교양']
     combobox2=tkinter.ttk.Combobox(newwindow, values=value)
-    combobox2.pack()
+    combobox2.grid(column=1,row=2)
     combobox2.set("목록 선택")
 
     label3=tkinter.ttk.Label(newwindow, text="교수님 이메일 검색")
-    label3.pack()
+    label3.grid(column=3,row=1)
 
     label4=tkinter.ttk.Label(newwindow, text="")
-    label4.pack()
+    label4.grid(column=2,row=2)
 
-    ent = Entry(label4)  
-    ent.pack() 
-    
+    ent1 = Entry(newwindow)  
+    ent1.grid(column=3,row=2)
     def ent1_s():
         mailbook = []
 
@@ -51,36 +50,36 @@ def contactpointWindow():
                     print("[{}] {} {}".format(i[0], i[1], i[2])) 
                 elif a in i[0] or a in i[1] or a in i[2]:
                     print("[{}] {} {}".format(i[0], i[1], i[2]))
-                    
-    btn = Button(label4) 
+
+    btn = Button(newwindow) 
     btn.config(text = "확인")
     btn.config(command = ent1_s)
-    btn.pack() 
+    btn.grid(column=4,row=2)
 
 
 #전화번호 
     label5=tkinter.ttk.Label(newwindow, text="")
-    label5.pack()
+    label5.grid(column=0,row=3)
 
     label6=tkinter.ttk.Label(newwindow, text="")
-    label6.pack()
+    label6.grid(column=0,row=4)
 
     label7=tkinter.ttk.Label(newwindow, text="전화번호 찾기")
-    label7.pack()
+    label7.grid(column=1,row=5)
 
     values=['컴퓨터공학과', '교양 교수님', '교양교육본부']
     combobox7=tkinter.ttk.Combobox(newwindow, values=values)
-    combobox7.pack()
+    combobox7.grid(column=1,row=6)
     combobox7.set("목록 선택")
 
     label8=tkinter.ttk.Label(newwindow, text="전화번호 검색")
-    label8.pack()
+    label8.grid(column=3,row=5)
 
     label9=tkinter.ttk.Label(newwindow, text="")
-    label9.pack()
+    label9.grid(column=3,row=6)
 
-    ent = Entry(label9) 
-    ent.pack() 
+    ent2 = Entry(newwindow) 
+    ent2.grid(column=3,row=6)
     def ent2_s(): 
         phonebook = []
 
@@ -96,11 +95,11 @@ def contactpointWindow():
                     print("[{}] {} {}".format(i[0], i[1], i[2])) 
                 elif a in i[0] or a in i[1] or a in i[2]:
                     print("[{}] {} {}".format(i[0], i[1], i[2]))
-                    
-    btn = Button(label9) 
+
+    btn = Button(newwindow) 
     btn.config(text = "확인")
     btn.config(command = ent2_s)
-    btn.pack() 
+    btn.grid(column=4,row=6)
     
 font=tkinter.font.Font(family="맑은고딕", size=10, weight="bold")    
 

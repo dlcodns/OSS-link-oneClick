@@ -39,15 +39,6 @@ def jeabi():
     
     action = tkinter.Button(window, text="확인", font=font1, command=lambda:[input(action, number_entered)])
     action.place(x=395,y=91)
-    
-    #2~8명 제한
-    #a배열 만들기
-    #역할 정하기 라벨(나열 후 전체 확인)
-    #
-    #shake(num)
-    #최종 제비들 나열
-    #클릭하면 역할 보이기
-    #
 
 #입력과 배열 설정
 def input(action, enteredNum):
@@ -61,6 +52,7 @@ def input(action, enteredNum):
     if num<=8 and num>=2 :
         tkinter.Label(window, text="-- 제비마다 역할을 정해주세요. --",bg="#FDEDA6",fg="black",relief="flat", font=font1).place(x=150,y=145,width=200)
     
+    #입력창 설정
     jeabi_1 = tkinter.StringVar()
     jeabi_1_entered = tkinter.ttk.Entry(window, font=font1, width=6, textvariable=jeabi_1)
     jeabi_2 = tkinter.StringVar()
@@ -78,21 +70,17 @@ def input(action, enteredNum):
     jeabi_8 = tkinter.StringVar()
     jeabi_8_entered = tkinter.ttk.Entry(window, font=font1, width=6, textvariable=jeabi_8)
 
-    
+    #인원 수에 따라 라벨 개수와 형태를 다르게 함.
     if num>=2 and num<=4:
         for i in range(0,num):
             tkinter.Label(window, text=i+1, relief="flat",font=font3, bg="darkslategray",fg="white").place(x=80+i*90,y=190) 
         jeabi_1_entered.place(x=105,y=208)
         jeabi_2_entered.place(x=195,y=208)
-        a[0]=jeabi_1_entered
-        a[1]=jeabi_2_entered
         if num>=3:
-            jeabi_3_entered.place(x=285,y=208)
-            a[2]=jeabi_3_entered
+            jeabi_3_entered.place(x=285,y=208)   
         if num>=4:
             jeabi_4_entered.place(x=375,y=208) 
-            a[3]=jeabi_4_entered  
-                      
+             
     if num>4 and num<=8:
         for i in range(0,4):
             tkinter.Label(window, text=i+1, relief="flat",font=font3, bg="darkslategray",fg="white").place(x=80+i*90,y=170,height=33)
@@ -102,36 +90,39 @@ def input(action, enteredNum):
         jeabi_2_entered.place(x=195,y=180)
         jeabi_3_entered.place(x=285,y=180)
         jeabi_4_entered.place(x=375,y=180)
-        #a[0]=jeabi_1_entered
-        #a[1]=jeabi_2_entered
-        #a[2]=jeabi_3_entered
-        #a[3]=jeabi_4_entered         
         if num>=5:
             jeabi_5_entered.place(x=105,y=220)
-            #a[4]=jeabi_5_entered
         if num>=6:
             jeabi_6_entered.place(x=195,y=220)
-            #a[5]=jeabi_6_entered  
         if num>=7:
             jeabi_7_entered.place(x=285,y=220)
-            #a[6]=jeabi_7_entered
         if num==8:
             jeabi_8_entered.place(x=375,y=220) 
-            #a[7]=jeabi_8_entered
-    #action2 = tkinter.Button(window, text="확인", font=font1, command=lambda:[shake(jeabi_1_entered,jeabi_2_entered,jeabi_3_entered,jeabi_4_entered,jeabi_5_entered,jeabi_6_entered,jeabi_7_entered,jeabi_8_entered)])
-    #action2.place(x=395,y=220)
-     
-    for i in range(0,num):
-        print('제비',i+1,' = ')
-        input(a[i])
-        
-    for j in range(0,num-1):
-        print('제비',i+1,' 역할: ',a[i])
-    #for i in range(0,):
+            
+    #위의 모든 입력창들이 확인 한번에 입력되게 함. 확인 후 shake 호출
+    action2 = tkinter.Button(window, text="확인", font=font1, command=lambda:[shake(a,num, jeabi_1_entered,jeabi_2_entered,jeabi_3_entered,jeabi_4_entered,jeabi_5_entered,jeabi_6_entered,jeabi_7_entered,jeabi_8_entered)])
+    action2.place(x=395,y=142)
 
-#난수 설정
-def shake():
-    print('d')
+
+#배열 만들기, 랜덤 셔플 반복문, 최종 출력 함수
+def shake(a,num,A,B,C,D,E,F,G,H):
+    
+    for i in range(0,num-1):
+        a[i]=chr(65+i)
+        print(a[i])
+        
+    #난수 인덱스의 배열과 (0,num-2)의 배열을 바꾸는 과정
+    for i in range(0,num-2):
+        rand=random.randint
+        ran=rand%(num-i)+i
+        
+        temp=a[i]
+        a[i]=a[ran]
+        a[ran]=temp
+    
+    #최종 출력
+    for i in range(0, num-1):
+        print('제비',i+1,'역할',a[i])
 
 #게임을 나가는 함수
 def exit_game():

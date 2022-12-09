@@ -101,6 +101,33 @@ def contactpointWindow():
     btn.config(command = ent2_s)
     btn.grid(column=4,row=6)
     
+    #전화번호 추가
+    label10=tkinter.ttk.Label(newwindow, text="")
+    label10.grid(column=3,row=7)
+
+    label11=tkinter.ttk.Label(newwindow, text="")
+    label11.grid(column=3,row=8)
+
+    label12=tkinter.ttk.Label(newwindow, text="전화번호 추가")
+    label12.grid(column=1,row=9)
+
+    ent3 = Entry(newwindow) 
+    ent3.grid(column=1,row=10)
+    def ent3_s():
+        i = []
+        f = open("phone_book.csv",'a',newline="")
+        wr = csv.writer(f) 
+
+        a = ent3.get().split()
+        
+        wr.writerow([a[0],a[1],a[2]])
+        f.close()
+
+    btn = Button(newwindow) 
+    btn.config(text = "확인")
+    btn.config(command = ent3_s)
+    btn.grid(column=2,row=10)
+    
 font=tkinter.font.Font(family="맑은고딕", size=10, weight="bold")    
 
 b12=tkinter.Button(window, text="충북대학교\n연락망",bg="cornsilk", relief="solid",borderwidth=1,font=font,command=contactpointWindow)

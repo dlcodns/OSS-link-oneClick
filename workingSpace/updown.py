@@ -22,21 +22,20 @@ font4=tkinter.font.Font(family="맑은 고딕", size=25, weight="bold")
 ran = random.randint(1,100)
 count = 0
 
-# 위젯 없애는 함수
-def hide_button(widget):
-    widget.pack_forget()
-  
-# 위젯 다시 보여주는 함수
-def show_button(widget):
-    widget.pack()
-
 #게임 진행 함수
 def updown():
-    hide_button(startBtn)
+    TcoverImgPath=resource_path("src/Tcover.png")
+    TcoverImg=tkinter.PhotoImage(file = TcoverImgPath)
+    TcoverImglabel=tkinter.Label(window, image=TcoverImg, relief="flat", bg="#d4e157").place(x=77.5,y=80)
+    ScoverImgPath=resource_path("src/Scover.png")
+    ScoverImg=tkinter.PhotoImage(file = ScoverImgPath)
+    ScoverImglabel=tkinter.Label(window, image=ScoverImg, relief="flat", bg="#d4e157").place(x=163.5,y=230)
+    
     global ran, count
-  
-    b2=tkinter.Button(window, text="게임 종료",bg="olivedrab",relief="raised",borderwidth=1,font=font2,command=exit_game)
-    b2.place(x=200,y=300,width=100,height=50)
+    b1=tkinter.Button(window, text="재시작",bg="#385723",relief="flat",borderwidth=1,font=font2,command=updown)
+    b1.place(x=120,y=271,width=100,height=50)
+    b2=tkinter.Button(window, text="게임 종료",bg="#385723",relief="flat",borderwidth=1,font=font2,command=exit_game)
+    b2.place(x=280,y=271,width=100,height=50)
     
  
     tkinter.Label(window, text="숫자 하나를 적으세요.",bg="darkslategray",fg="white",borderwidth=2,relief="raised", font=font1).place(x=181,y=130,width=140,height=30)
@@ -55,9 +54,10 @@ def calc(enteredNum):
     
     num = int(enteredNum.get())
      
-    #b3=tkinter.Button(window, text="재시작",bg="olivedrab",relief="raised",borderwidth=1,font=font2,command=restart_game)
-   # b3.place(x=30,y=30,width=100,height=50)
-     
+    loopImgPath=resource_path("src/loop.png")
+    loopImg=tkinter.PhotoImage(file = loopImgPath)
+    loopImglabel=tkinter.Label(window, image=loopImg, relief="flat", bg="#d4e157").place(x=0,y=0)
+    
     if count < 6 :
         if ran > num:
             if count !=5:
@@ -111,7 +111,7 @@ startImgPath=resource_path("src/start.png")
 startImg=tkinter.PhotoImage(file = startImgPath)
 
 #시작 버튼 위치
-startBtn=tkinter.Button(window, image=startImg ,relief="flat", command=updown).place(x=163.5,y=230)
-startBtn.pack()
+startBtn=tkinter.Button(window, image=startImg ,relief="flat", bg="#385723", command=updown).place(x=163.5,y=230)
+
     
 window.mainloop()

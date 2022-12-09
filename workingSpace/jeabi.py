@@ -28,6 +28,8 @@ def jeabi():
     exitBtn=tkinter.Button(window, image=exitImg ,relief="flat", command=exit_game).place(x=277,y=285)
     #재시작, 종료 버튼 만들기(완료)
     
+    tkinter.Label(window, text="-- 2~8명만 가능합니다. --",bg="#FDEDA6",fg="black",relief="flat", font=font1).place(x=150,y=145,width=200)
+    
     #tkinter.Label(window, image=jnum,bg="darkslategray",fg="white",borderwidth=2,relief="raised").place(x=110,y=80,width=80,height=30)
     tkinter.Label(window, text="인원 수 입력", relief="ridge", font=font2,bg="#FAD2AA",fg="black").place(x=90,y=87,width=160)
     
@@ -54,12 +56,12 @@ def input(action, enteredNum):
     
     num = int(enteredNum.get())
     if num>8 or num<2 :
-        print('2~8명만 가능합니다.')
         jeabi()
            
     a = []
     
-    tkinter.Label(window, text="-- 제비마다 역할을 정해주세요. --",bg="#FDEDA6",fg="black",relief="flat", font=font1).place(x=150,y=145,width=200)
+    if num<=8 and num>=2 :
+        tkinter.Label(window, text="-- 제비마다 역할을 정해주세요. --",bg="#FDEDA6",fg="black",relief="flat", font=font1).place(x=150,y=145,width=200)
     
     jeabi_1 = tkinter.StringVar()
     jeabi_1_entered = tkinter.ttk.Entry(window, font=font1, width=6, textvariable=jeabi_1)

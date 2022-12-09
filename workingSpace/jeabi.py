@@ -26,7 +26,6 @@ def jeabi():
     #jtitleCover=tkinter.Label(window, bg="light yellow",relief="flat").place(x=150,y=160,width=200,height=62)
     restartBtn=tkinter.Button(window, image=restartImg ,relief="flat", command=jeabi).place(x=125,y=285)
     exitBtn=tkinter.Button(window, image=exitImg ,relief="flat", command=exit_game).place(x=277,y=285)
-    #재시작, 종료 버튼 만들기(완료)
     
     tkinter.Label(window, text="-- 2~8명만 가능합니다. --",bg="#FDEDA6",fg="black",relief="flat", font=font1).place(x=150,y=145,width=200)
     
@@ -37,10 +36,10 @@ def jeabi():
     number_entered = tkinter.ttk.Entry(window, font=font2, width=10, textvariable=number)
     number_entered.place(x=260,y=87)
     
+    
     action = tkinter.Button(window, text="확인", font=font1, command=lambda:[input(action, number_entered)])
     action.place(x=395,y=91)
     
-    #인원수num 입력하기(완료)
     #2~8명 제한
     #a배열 만들기
     #역할 정하기 라벨(나열 후 전체 확인)
@@ -59,37 +58,40 @@ def input(action, enteredNum):
         jeabi()
            
     a = []
-    
     if num<=8 and num>=2 :
         tkinter.Label(window, text="-- 제비마다 역할을 정해주세요. --",bg="#FDEDA6",fg="black",relief="flat", font=font1).place(x=150,y=145,width=200)
     
     jeabi_1 = tkinter.StringVar()
     jeabi_1_entered = tkinter.ttk.Entry(window, font=font1, width=6, textvariable=jeabi_1)
     jeabi_2 = tkinter.StringVar()
-    jeabi_2_entered = tkinter.ttk.Entry(window, font=font1, width=6, textvariable=jeabi_1)
+    jeabi_2_entered = tkinter.ttk.Entry(window, font=font1, width=6, textvariable=jeabi_2)
     jeabi_3 = tkinter.StringVar()
-    jeabi_3_entered = tkinter.ttk.Entry(window, font=font1, width=6, textvariable=jeabi_1)
+    jeabi_3_entered = tkinter.ttk.Entry(window, font=font1, width=6, textvariable=jeabi_3)
     jeabi_4 = tkinter.StringVar()
-    jeabi_4_entered = tkinter.ttk.Entry(window, font=font1, width=6, textvariable=jeabi_1)
+    jeabi_4_entered = tkinter.ttk.Entry(window, font=font1, width=6, textvariable=jeabi_4)
     jeabi_5 = tkinter.StringVar()
-    jeabi_5_entered = tkinter.ttk.Entry(window, font=font1, width=6, textvariable=jeabi_1)
+    jeabi_5_entered = tkinter.ttk.Entry(window, font=font1, width=6, textvariable=jeabi_5)
     jeabi_6 = tkinter.StringVar()
-    jeabi_6_entered = tkinter.ttk.Entry(window, font=font1, width=6, textvariable=jeabi_1)
+    jeabi_6_entered = tkinter.ttk.Entry(window, font=font1, width=6, textvariable=jeabi_6)
     jeabi_7 = tkinter.StringVar()
-    jeabi_7_entered = tkinter.ttk.Entry(window, font=font1, width=6, textvariable=jeabi_1)
+    jeabi_7_entered = tkinter.ttk.Entry(window, font=font1, width=6, textvariable=jeabi_7)
     jeabi_8 = tkinter.StringVar()
-    jeabi_8_entered = tkinter.ttk.Entry(window, font=font1, width=6, textvariable=jeabi_1)
+    jeabi_8_entered = tkinter.ttk.Entry(window, font=font1, width=6, textvariable=jeabi_8)
 
     
-    if num<=4:
+    if num>=2 and num<=4:
         for i in range(0,num):
             tkinter.Label(window, text=i+1, relief="flat",font=font3, bg="darkslategray",fg="white").place(x=80+i*90,y=190) 
         jeabi_1_entered.place(x=105,y=208)
         jeabi_2_entered.place(x=195,y=208)
+        a[0]=jeabi_1_entered
+        a[1]=jeabi_2_entered
         if num>=3:
             jeabi_3_entered.place(x=285,y=208)
+            a[2]=jeabi_3_entered
         if num>=4:
-            jeabi_4_entered.place(x=375,y=208)   
+            jeabi_4_entered.place(x=375,y=208) 
+            a[3]=jeabi_4_entered  
                       
     if num>4 and num<=8:
         for i in range(0,4):
@@ -99,16 +101,25 @@ def input(action, enteredNum):
         jeabi_1_entered.place(x=105,y=180)
         jeabi_2_entered.place(x=195,y=180)
         jeabi_3_entered.place(x=285,y=180)
-        jeabi_4_entered.place(x=375,y=180)         
+        jeabi_4_entered.place(x=375,y=180)
+        #a[0]=jeabi_1_entered
+        #a[1]=jeabi_2_entered
+        #a[2]=jeabi_3_entered
+        #a[3]=jeabi_4_entered         
         if num>=5:
             jeabi_5_entered.place(x=105,y=220)
+            #a[4]=jeabi_5_entered
         if num>=6:
-            jeabi_6_entered.place(x=195,y=220)  
+            jeabi_6_entered.place(x=195,y=220)
+            #a[5]=jeabi_6_entered  
         if num>=7:
             jeabi_7_entered.place(x=285,y=220)
+            #a[6]=jeabi_7_entered
         if num==8:
             jeabi_8_entered.place(x=375,y=220) 
-  
+            #a[7]=jeabi_8_entered
+    #action2 = tkinter.Button(window, text="확인", font=font1, command=lambda:[shake(jeabi_1_entered,jeabi_2_entered,jeabi_3_entered,jeabi_4_entered,jeabi_5_entered,jeabi_6_entered,jeabi_7_entered,jeabi_8_entered)])
+    #action2.place(x=395,y=220)
      
     for i in range(0,num):
         print('제비',i+1,' = ')
@@ -119,7 +130,8 @@ def input(action, enteredNum):
     #for i in range(0,):
 
 #난수 설정
-#def shake():
+def shake():
+    print('d')
 
 #게임을 나가는 함수
 def exit_game():

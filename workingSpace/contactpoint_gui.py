@@ -13,28 +13,19 @@ window['bg']='cornsilk'
 #연락망 새창
 def contactpointWindow():
     newwindow=tkinter.Toplevel(window)
-    newwindow.geometry("400x300")
+    newwindow.geometry("550x400")
     
 #교수님 이메일 
-    label1=tkinter.ttk.Label(newwindow, text="")
-    label1.grid(column=0,row=0)
-
-    label2=tkinter.ttk.Label(newwindow, text="교수님 이메일")
-    label2.grid(column=1,row=1)
+    label3=tkinter.ttk.Label(newwindow, text="이메일 검색")
+    label3.place(x=15,y=80)
 
     value=['컴퓨터공학과', '교양']
     combobox2=tkinter.ttk.Combobox(newwindow, values=value)
-    combobox2.grid(column=1,row=2)
-    combobox2.set("목록 선택")
-
-    label3=tkinter.ttk.Label(newwindow, text="교수님 이메일 검색")
-    label3.grid(column=3,row=1)
-
-    label4=tkinter.ttk.Label(newwindow, text="")
-    label4.grid(column=2,row=2)
+    combobox2.place(x=15,y=100,width=80,height=20)
+    combobox2.set("전체")
 
     ent1 = Entry(newwindow)  
-    ent1.grid(column=3,row=2)
+    ent1.place(x=95,y=100,width=120,height=20)
     def ent1_s():
         mailbook = []
 
@@ -54,32 +45,24 @@ def contactpointWindow():
     btn = Button(newwindow) 
     btn.config(text = "확인")
     btn.config(command = ent1_s)
-    btn.grid(column=4,row=2)
+    btn.place(x=215,y=100,width=40,height=20)
 
 
 #전화번호 
-    label5=tkinter.ttk.Label(newwindow, text="")
-    label5.grid(column=0,row=3)
-
-    label6=tkinter.ttk.Label(newwindow, text="")
-    label6.grid(column=0,row=4)
-
-    label7=tkinter.ttk.Label(newwindow, text="전화번호 찾기")
-    label7.grid(column=1,row=5)
+    label8=tkinter.ttk.Label(newwindow, text="전화번호 검색")
+    label8.place(x=15,y=140)
 
     values=['컴퓨터공학과', '교양 교수님', '교양교육본부']
     combobox7=tkinter.ttk.Combobox(newwindow, values=values)
-    combobox7.grid(column=1,row=6)
-    combobox7.set("목록 선택")
+    combobox7.place(x=15,y=160,width=80,height=20)
+    combobox7.set("전체")
 
-    label8=tkinter.ttk.Label(newwindow, text="전화번호 검색")
-    label8.grid(column=3,row=5)
 
     label9=tkinter.ttk.Label(newwindow, text="")
     label9.grid(column=3,row=6)
 
     ent2 = Entry(newwindow) 
-    ent2.grid(column=3,row=6)
+    ent2.place(x=95,y=160,width=120,height=20)
     def ent2_s(): 
         phonebook = []
 
@@ -99,25 +82,24 @@ def contactpointWindow():
     btn = Button(newwindow) 
     btn.config(text = "확인")
     btn.config(command = ent2_s)
-    btn.grid(column=4,row=6)
+    btn.place(x=215,y=160,width=40,height=20)
     
    
 #메일 추가
-    label10=tkinter.ttk.Label(newwindow, text="")
-    label10.grid(column=0,row=9)
+    label10=tkinter.ttk.Label(newwindow, text="<연락망 추가하기>")
+    label10.place(x=15,y=210)
 
-    label11=tkinter.ttk.Label(newwindow, text="")
-    label11.grid(column=0,row=10)
+    label11=tkinter.ttk.Label(newwindow, text="예시) 컴공/김민서/asdfghjkl@chungbuk.ac.kr")
+    label11.place(x=15,y=240)
 
-    label12=tkinter.ttk.Label(newwindow, text="예시) 컴공/김민서/010-0000-0000")
-    label12.grid(column=1,row=11)   
+    label12=tkinter.ttk.Label(newwindow, text="예시) 컴공/김민서/010-1234-5678")
+    label12.place(x=15,y=260)  
 
-
-    label13=tkinter.ttk.Label(newwindow, text="메일 추가")
-    label13.grid(column=1,row=12)   
+    label13=tkinter.ttk.Label(newwindow, text="메일 추가:")
+    label13.place(x=15,y=290)
 
     ent3 = Entry(newwindow) 
-    ent3.grid(column=1,row=13)
+    ent3.place(x=75,y=290,width=140,height=20)
     def ent3_s():
         f = open("mail_book.csv",'a',newline="")
         wr = csv.writer(f) 
@@ -130,14 +112,14 @@ def contactpointWindow():
     btn = Button(newwindow) 
     btn.config(text = "확인")
     btn.config(command = ent3_s)
-    btn.grid(column=2,row=13)
+    btn.place(x=215,y=290,width=40,height=20)
 
 #전화번호 추가
-    label14=tkinter.ttk.Label(newwindow, text="전화번호 추가")
-    label14.grid(column=1,row=14)
+    label14=tkinter.ttk.Label(newwindow, text="번호 추가:")
+    label14.place(x=15,y=320)
 
     ent4 = Entry(newwindow) 
-    ent4.grid(column=1,row=15)
+    ent4.place(x=75,y=320,width=140,height=20)
     def ent3_s():
         f = open("phone_book.csv",'a',newline="")
         wr = csv.writer(f) 
@@ -150,7 +132,7 @@ def contactpointWindow():
     btn = Button(newwindow) 
     btn.config(text = "확인")
     btn.config(command = ent3_s)
-    btn.grid(column=2,row=15)
+    btn.place(x=215,y=320,width=40,height=20)
     
 font=tkinter.font.Font(family="맑은고딕", size=10, weight="bold")    
 

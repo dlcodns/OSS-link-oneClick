@@ -461,17 +461,22 @@ oneclickimage = PhotoImage(file = oneclickimagePath)
 imageLabel=Label(root, image=oneclickimage, relief="flat", bg="#d4e157")
 imageLabel.place(x=160,y=60)
 
-#휴게소 라벨
+#놀이방 라벨
 playimagePath=resource_path("src/playroom.png")
 playimage = PhotoImage(file = playimagePath)
 playimagelabel=Label(root, image=playimage, relief="flat", bg="#d4e157")
-playimagelabel.place(x=170,y=235)
+playimagelabel.place(x=170,y=215)
 
-#휴게소 버튼
+#놀이방 버튼
 updownbttnimagePath=resource_path("src/updownBtn.png")
 updownbttnimage = PhotoImage(file = updownbttnimagePath)
+jaebibttnimagePath=resource_path("src/jaebiBtn.png")
+jaebibttnimage = PhotoImage(file = jaebibttnimagePath)
+
 updownbttn=Button(root, image=updownbttnimage, relief="flat",bg="#ffff89",activebackground = "#ffff89")
-updownbttn.place(x=265,y=376,width=80,height=40)
+updownbttn.place(x=216,y=358,width=72,height=32)
+jaebibttn=Button(root, image=jaebibttnimage, relief = "flat", bg="#ffff89",activebackground = "#ffff89")
+jaebibttn.place(x=314,y=358,width=72,height=32)
 
 
 

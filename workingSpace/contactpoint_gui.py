@@ -25,14 +25,15 @@ def contactpointWindow():
     emailCombobox.set("전체")
 
     emailPrint=Label(newwindow)
-    emailPrint.config(relief='sunken', width=34, height=9)
-    emailPrint.place(x=290,y=80)
+    emailPrint.config(relief='sunken', width=41, height = 7)
+    emailPrint.place(x=280,y=80)
 
     emailEnt = Entry(newwindow)  
     emailEnt.place(x=95,y=100,width=120,height=20)
 
     def searchEmail(a,b,c):
         if emailCombobox.get() == a:
+            emailCnta = 0
             mailbook = []
             print("전체")
             f = open("mail_book.csv",'r')
@@ -42,13 +43,21 @@ def contactpointWindow():
             f.close
 
             a = emailEnt.get()
+
+            emailListboxa = Listbox(newwindow, selectmode = 'extended',width=41, height = 7)
+            emailListboxa.place(x=280,y=80)            
             for i in mailbook:
+                
                     if a == "":
-                        print("[{}] {} {}".format(i[0], i[1], i[2]))
+                        emailListboxa.insert(emailCnta, "[{}] {} {}".format(i[0], i[1], i[2]))
+                        emailCnta = emailCnta+1
                     elif a in i[0] or a in i[1] or a in i[2]:
-                        print("[{}] {} {}".format(i[0], i[1], i[2]))  
+                        emailListboxa.insert(emailCnta, "[{}] {} {}".format(i[0], i[1], i[2]))
+                        emailCnta = emailCnta+1
+
 
         elif  emailCombobox.get()==b:
+                emailCntb = 0
                 mailbook = []
                 print("컴공")
                 f = open("mail_bookA.csv",'r')
@@ -58,14 +67,20 @@ def contactpointWindow():
                 f.close
 
                 a = emailEnt.get()
+
+                emailListboxb = Listbox(newwindow, selectmode = 'extended',width=41, height = 7)
+                emailListboxb.place(x=280,y=80) 
                 for i in mailbook:
                         if a == "":
-                            print("[{}] {} {}".format(i[0], i[1], i[2]))
+                            emailListboxb.insert(emailCntb, "[{}] {} {}".format(i[0], i[1], i[2]))
+                            emailCntb = emailCntb+1
                         elif a in i[0] or a in i[1] or a in i[2]:
-                            print("[{}] {} {}".format(i[0], i[1], i[2]))                        
+                            emailListboxb.insert(emailCntb, "[{}] {} {}".format(i[0], i[1], i[2]))
+                            emailCntb = emailCntb+1                    
                             
 
         elif  emailCombobox.get() == c:
+                emailCntc = 0
                 mailbook = []
                 print("교양")
                 f = open("mail_bookB.csv",'r')
@@ -75,11 +90,16 @@ def contactpointWindow():
                 f.close
 
                 a = emailEnt.get()
+
+                emailListboxc = Listbox(newwindow, selectmode = 'extended',width=41, height = 7)
+                emailListboxc.place(x=280,y=80)                
                 for i in mailbook:
                         if a == "":
-                            print("[{}] {} {}".format(i[0], i[1], i[2]))
+                            emailListboxc.insert(emailCntc, "[{}] {} {}".format(i[0], i[1], i[2]))
+                            emailCntc = emailCntc+1
                         elif a in i[0] or a in i[1] or a in i[2]:
-                            print("[{}] {} {}".format(i[0], i[1], i[2]))     
+                            emailListboxc.insert(emailCntc, "[{}] {} {}".format(i[0], i[1], i[2]))
+                            emailCntc = emailCntc+1  
       
     emailbtn = Button(newwindow) 
     emailbtn.config(text = "확인")

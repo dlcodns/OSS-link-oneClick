@@ -9,6 +9,7 @@ import sys
 #if 끝나고 라벨 프린트하기-> loop 사진에 지금까지 경로 담기(완료)
 # 정답이랑 오답 이쁘게 프린트하기, 또는 사진으로 만들기(시간이 되면)(안해도 이쁨(아마도))
 
+
 #윈도우 창 설정
 window = tkinter.Tk()
 window.title("업다운 게임")
@@ -23,8 +24,7 @@ font2=tkinter.font.Font(family="맑은 고딕", size=15, weight="bold")
 font3=tkinter.font.Font(family="맑은 고딕", size=20, weight="bold")
 font4=tkinter.font.Font(family="맑은 고딕", size=25, weight="bold")
 
-#난수 설정
-ran = random.randint(1,100)
+
 count = 0
 
 #게임 진행 함수
@@ -46,8 +46,10 @@ def updown():
     #calcCover=tkinter.Label(window, bg="#d4e157",relief="flat").place(x=164,y=230,width=170,height=60)
     #loopImg=tkinter.Label(window, bg="#385723",relief="flat").place(x=35,y=40,width=171,height=201)
     playgroundLoopImglabel=tkinter.Label(window, image=playgroundLoopImg,relief="flat", bg="#d4e157").place(x=-2,y=1)
-        
-    global ran, count
+
+    
+    global count
+    count =0 
     
     restartBtn=tkinter.Button(window, image=restartImg ,relief="flat", bg="#385723", command=updown).place(x=125,y=271)
     exitBtn=tkinter.Button(window, image=exitImg ,relief="flat", bg="#385723", command=exit_game).place(x=277,y=271)
@@ -57,23 +59,27 @@ def updown():
     #b2=tkinter.Button(window, text="게임 종료",bg="#385723",relief="flat",borderwidth=1,font=font2,command=exit_game)
     #b2.place(x=280,y=271,width=100,height=50)
     
+    ran = random.randint(1,100)
     tkinter.Label(window, text="숫자 하나를 적으세요.",bg="darkslategray",fg="white",borderwidth=2,relief="raised", font=font1).place(x=281,y=70,width=140,height=30)
 
     tkinter.Label(window, text="-- 범위 1~100 --",bg="#d4e157",fg="black",relief="flat", font=font).place(x=274,y=102,width=150,height=20)
-    
+
+
     number = tkinter.StringVar()
     number_entered = tkinter.ttk.Entry(window, font=font1, width=18, textvariable=number)
     number_entered.place(x=275,y=130)
 
-    action = tkinter.Button(window, text="확인", font=font1, command=lambda:[calc(number_entered)])
+    action = tkinter.Button(window, text="확인", font=font1, command=lambda:[calc(number_entered,ran)])
     action.place(x=431,y=126)
     
 #업다운 비교 함수          
-def calc(enteredNum):
-    global ran, count
+def calc(enteredNum,ran):
+    global count
     
     num = int(enteredNum.get())
-     
+    
+    print(ran) #터미널로 미리 알고 테스트 해보고자 씀!
+    
     if (1<=num<=100) and count < 6 :
         if ran > num:
             if count !=5:
@@ -109,7 +115,7 @@ def calc(enteredNum):
             tkinter.Label(window, text=msg, font=font2, bg="#d4e157",fg="red3",borderwidth=2,relief="flat").place(x=263,y=170,width=195,height=50)
     else:
         updown()
-        
+
 #게임을 나가는 함수
 def exit_game():
     window.destroy()
@@ -134,7 +140,6 @@ titleImg=tkinter.PhotoImage(file = titleImgPath)
 titleImglabel=tkinter.Label(window, image=titleImg, relief="flat", bg="#d4e157").place(x=77.5,y=80)
 playgroundLoopImgPath=resource_path("src/playgroundLoop.png")
 playgroundLoopImg=tkinter.PhotoImage(file = playgroundLoopImgPath)
-
 
 #버튼 이미지
 startImgPath=resource_path("src/start.png")

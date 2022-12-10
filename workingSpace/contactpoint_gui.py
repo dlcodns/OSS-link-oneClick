@@ -16,22 +16,23 @@ def contactpointWindow():
     newwindow.geometry("550x400")
 
 #교수님 이메일 
-    label3=tkinter.ttk.Label(newwindow, text="이메일 검색")
-    label3.place(x=15,y=80)
+    email=tkinter.ttk.Label(newwindow, text="이메일 검색")
+    email.place(x=15,y=80)
     
     emailValues=['전체', '컴퓨터공학과', '교양']
-    combobox2=tkinter.ttk.Combobox(newwindow, values=emailValues)
-    combobox2.place(x=15,y=100,width=80,height=20)
-    combobox2.set("전체")
+    emailCombobox=tkinter.ttk.Combobox(newwindow, values=emailValues)
+    emailCombobox.place(x=15,y=100,width=80,height=20)
+    emailCombobox.set("전체")
 
-    label4=Label(newwindow)
-    label4.config(relief='sunken', width=34, height=9)
-    label4.place(x=290,y=80)
-    ent1 = Entry(newwindow)  
-    ent1.place(x=95,y=100,width=120,height=20)
+    emailPrint=Label(newwindow)
+    emailPrint.config(relief='sunken', width=34, height=9)
+    emailPrint.place(x=290,y=80)
 
-    def ent1_s(a,b,c):
-        if combobox2.get() == a:
+    emailEnt = Entry(newwindow)  
+    emailEnt.place(x=95,y=100,width=120,height=20)
+
+    def searchEmail(a,b,c):
+        if emailCombobox.get() == a:
             mailbook = []
             print("전체")
             f = open("mail_book.csv",'r')
@@ -40,14 +41,14 @@ def contactpointWindow():
                 mailbook.append(row)
             f.close
 
-            a = ent1.get()
+            a = emailEnt.get()
             for i in mailbook:
                     if a == "":
                         print("[{}] {} {}".format(i[0], i[1], i[2]))
                     elif a in i[0] or a in i[1] or a in i[2]:
                         print("[{}] {} {}".format(i[0], i[1], i[2]))  
 
-        elif  combobox2.get()==b:
+        elif  emailCombobox.get()==b:
                 mailbook = []
                 print("컴공")
                 f = open("mail_bookA.csv",'r')
@@ -56,7 +57,7 @@ def contactpointWindow():
                     mailbook.append(row)
                 f.close
 
-                a = ent1.get()
+                a = emailEnt.get()
                 for i in mailbook:
                         if a == "":
                             print("[{}] {} {}".format(i[0], i[1], i[2]))
@@ -64,7 +65,7 @@ def contactpointWindow():
                             print("[{}] {} {}".format(i[0], i[1], i[2]))                        
                             
 
-        elif  combobox2.get() == c:
+        elif  emailCombobox.get() == c:
                 mailbook = []
                 print("교양")
                 f = open("mail_bookB.csv",'r')
@@ -73,35 +74,32 @@ def contactpointWindow():
                     mailbook.append(row)
                 f.close
 
-                a = ent1.get()
+                a = emailEnt.get()
                 for i in mailbook:
                         if a == "":
                             print("[{}] {} {}".format(i[0], i[1], i[2]))
                         elif a in i[0] or a in i[1] or a in i[2]:
                             print("[{}] {} {}".format(i[0], i[1], i[2]))     
       
-    btn = Button(newwindow) 
-    btn.config(text = "확인")
-    btn.config(command = lambda:[ent1_s(emailValues[0],emailValues[1],emailValues[2])])
-    btn.place(x=215,y=100,width=40,height=20)
+    emailbtn = Button(newwindow) 
+    emailbtn.config(text = "확인")
+    emailbtn.config(command = lambda:[searchEmail(emailValues[0],emailValues[1],emailValues[2])])
+    emailbtn.place(x=215,y=100,width=40,height=20)
 
 
 #전화번호 
-    label8=tkinter.ttk.Label(newwindow, text="전화번호 검색")
-    label8.place(x=15,y=140)
+    phone=tkinter.ttk.Label(newwindow, text="전화번호 검색")
+    phone.place(x=15,y=140)
 
-    numberValues=['전체', '컴퓨터공학과', '교양 교수님', '교양교육본부']
-    combobox7=tkinter.ttk.Combobox(newwindow, values=numberValues)
-    combobox7.place(x=15,y=160,width=80,height=20)
-    combobox7.set("전체")
+    phoneValues=['전체', '컴퓨터공학과', '교양 교수님', '교양교육본부']
+    phonecombobox=tkinter.ttk.Combobox(newwindow, values=phoneValues)
+    phonecombobox.place(x=15,y=160,width=80,height=20)
+    phonecombobox.set("전체")
 
-    label9=tkinter.ttk.Label(newwindow, text="")
-    label9.grid(column=3,row=6)
-
-    ent2 = Entry(newwindow) 
-    ent2.place(x=95,y=160,width=120,height=20)
-    def ent2_s(a,b,c,d): 
-        if  combobox7.get()==a:
+    phoneEnt = Entry(newwindow) 
+    phoneEnt.place(x=95,y=160,width=120,height=20)
+    def searchPhone(a,b,c,d): 
+        if  phonecombobox.get()==a:
             phonebook = []
             print("전체")
             f = open("phone_book.csv",'r')  
@@ -109,14 +107,14 @@ def contactpointWindow():
             for row in rdr:
                 phonebook.append(row)
             f.close
-            a = ent2.get()
+            a = phoneEnt.get()
             for i in phonebook:
                     if a == "":
                         print("[{}] {} {}".format(i[0], i[1], i[2])) 
                     elif a in i[0] or a in i[1] or a in i[2]:
                         print("[{}] {} {}".format(i[0], i[1], i[2]))    
 
-        elif  combobox7.get() == b:
+        elif  phonecombobox.get() == b:
             phonebook = []
             print("컴퓨터공학과")
             f = open("phone_bookA.csv",'r')  
@@ -124,14 +122,14 @@ def contactpointWindow():
             for row in rdr:
                 phonebook.append(row)
             f.close
-            a = ent2.get()
+            a = phoneEnt.get()
             for i in phonebook:
                     if a == "":
                         print("[{}] {} {}".format(i[0], i[1], i[2])) 
                     elif a in i[0] or a in i[1] or a in i[2]:
                         print("[{}] {} {}".format(i[0], i[1], i[2]))                         
 
-        elif combobox7.get() == c:
+        elif phonecombobox.get() == c:
             phonebook = []
             print("교양 교수님")
             f = open("phone_bookB.csv",'r')  
@@ -139,14 +137,14 @@ def contactpointWindow():
             for row in rdr:
                 phonebook.append(row)
             f.close
-            a = ent2.get()
+            a = phoneEnt.get()
             for i in phonebook:
                     if a == "":
                         print("[{}] {} {}".format(i[0], i[1], i[2])) 
                     elif a in i[0] or a in i[1] or a in i[2]:
                         print("[{}] {} {}".format(i[0], i[1], i[2]))       
 
-        elif combobox7.get() == d:
+        elif phonecombobox.get() == d:
             phonebook = []
             print("교양교육본부")
             f = open("phone_bookC.csv",'r')  
@@ -154,7 +152,7 @@ def contactpointWindow():
             for row in rdr:
                 phonebook.append(row)
             f.close
-            a = ent2.get()
+            a = phoneEnt.get()
             for i in phonebook:
                     if a == "":
                         print("[{}] {} {}".format(i[0], i[1], i[2])) 
@@ -162,60 +160,60 @@ def contactpointWindow():
                         print("[{}] {} {}".format(i[0], i[1], i[2])) 
 
 
-    btn = Button(newwindow) 
-    btn.config(text = "확인")
-    btn.config(command = lambda:[ent2_s(numberValues[0],numberValues[1],numberValues[2],numberValues[3])])
-    btn.place(x=215,y=160,width=40,height=20)
+    phonebtn = Button(newwindow) 
+    phonebtn.config(text = "확인")
+    phonebtn.config(command = lambda:[searchPhone(phoneValues[0],phoneValues[1],phoneValues[2],phoneValues[3])])
+    phonebtn.place(x=215,y=160,width=40,height=20)
     
    
 #메일 추가
-    label10=tkinter.ttk.Label(newwindow, text="<연락망 추가하기>")
-    label10.place(x=15,y=210)
+    contactAdd=tkinter.ttk.Label(newwindow, text="<연락망 추가하기>")
+    contactAdd.place(x=15,y=210)
 
-    label11=tkinter.ttk.Label(newwindow, text="예시) 컴공/김민서/asdfghjkl@chungbuk.ac.kr")
-    label11.place(x=15,y=240)
+    ex1=tkinter.ttk.Label(newwindow, text="예시) 컴공/김민서/asdfghjkl@chungbuk.ac.kr")
+    ex1.place(x=15,y=240)
 
-    label12=tkinter.ttk.Label(newwindow, text="예시) 컴공/김민서/010-1234-5678")
-    label12.place(x=15,y=260)  
+    ex2=tkinter.ttk.Label(newwindow, text="예시) 컴공/김민서/010-1234-5678")
+    ex2.place(x=15,y=260)  
 
-    label13=tkinter.ttk.Label(newwindow, text="메일 추가:")
-    label13.place(x=15,y=290)
+    emaill=tkinter.ttk.Label(newwindow, text="메일 추가:")
+    emaill.place(x=15,y=290)
 
-    ent3 = Entry(newwindow) 
-    ent3.place(x=75,y=290,width=140,height=20)
-    def ent3_s():
+    emailAddEnt = Entry(newwindow) 
+    emailAddEnt.place(x=75,y=290,width=140,height=20)
+    def emailAdd():
         f = open("mail_book.csv",'a',newline="")
         wr = csv.writer(f) 
 
-        a = ent3.get().split('/')
+        a = emailAddEnt.get().split('/')
         
         wr.writerow([a[0],a[1],a[2]])
         f.close()
 
-    btn = Button(newwindow) 
-    btn.config(text = "확인")
-    btn.config(command = ent3_s)
-    btn.place(x=215,y=290,width=40,height=20)
+    emailAddbtn = Button(newwindow) 
+    emailAddbtn.config(text = "확인")
+    emailAddbtn.config(command = emailAdd)
+    emailAddbtn.place(x=215,y=290,width=40,height=20)
 
 #전화번호 추가
-    label14=tkinter.ttk.Label(newwindow, text="번호 추가:")
-    label14.place(x=15,y=320)
+    phonee=tkinter.ttk.Label(newwindow, text="번호 추가:")
+    phonee.place(x=15,y=320)
 
-    ent4 = Entry(newwindow) 
-    ent4.place(x=75,y=320,width=140,height=20)
-    def ent3_s():
+    phoneAddEnt = Entry(newwindow) 
+    phoneAddEnt.place(x=75,y=320,width=140,height=20)
+    def phoneAdd():
         f = open("phone_book.csv",'a',newline="")
         wr = csv.writer(f) 
 
-        a = ent4.get().split('/')
+        a = phoneAddEnt.get().split('/')
         
         wr.writerow([a[0],a[1],a[2]])
         f.close()
 
-    btn = Button(newwindow) 
-    btn.config(text = "확인")
-    btn.config(command = ent3_s)
-    btn.place(x=215,y=320,width=40,height=20)
+    phoneAddbtn = Button(newwindow) 
+    phoneAddbtn.config(text = "확인")
+    phoneAddbtn.config(command = phoneAdd)
+    phoneAddbtn.place(x=215,y=320,width=40,height=20)
     
 font=tkinter.font.Font(family="맑은고딕", size=10, weight="bold")    
 

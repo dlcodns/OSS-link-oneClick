@@ -13,6 +13,7 @@ window.resizable(False,False)
 window["bg"]="#d4e157"
 
 #폰트 크기 설정
+font=tkinter.font.Font(family="맑은 고딕", size=9, weight="bold")
 font1=tkinter.font.Font(family="맑은 고딕", size=10, weight="bold")
 font2=tkinter.font.Font(family="맑은 고딕", size=15, weight="bold")
 font3=tkinter.font.Font(family="맑은 고딕", size=20, weight="bold")
@@ -51,9 +52,10 @@ def updown():
     #b2=tkinter.Button(window, text="게임 종료",bg="#385723",relief="flat",borderwidth=1,font=font2,command=exit_game)
     #b2.place(x=280,y=271,width=100,height=50)
     
- 
     tkinter.Label(window, text="숫자 하나를 적으세요.",bg="darkslategray",fg="white",borderwidth=2,relief="raised", font=font1).place(x=281,y=80,width=140,height=30)
 
+    tkinter.Label(window, text="-- 범위 1~100 --",bg="#d4e157",fg="black",relief="flat", font=font).place(x=274,y=102,width=150,height=20)
+    
     number = tkinter.StringVar()
     number_entered = tkinter.ttk.Entry(window, font=font1, width=18, textvariable=number)
     number_entered.place(x=275,y=130)

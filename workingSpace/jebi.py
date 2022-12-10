@@ -5,6 +5,11 @@ import random
 import os
 import sys
 
+#배열에 집어넣기
+#-오류 없길-
+#제비 개수 라벨지 만들기
+#제비 나열해서 버튼 만들고 이벤트 열기
+
 #윈도우 창 설정
 window = tkinter.Tk()
 window.title("제비뽑기")
@@ -19,12 +24,12 @@ font3=tkinter.font.Font(family="맑은 고딕", size=20, weight="bold")
 font4=tkinter.font.Font(family="맑은 고딕", size=25, weight="bold")
 
 #제비뽑기 진행 함수
-def jeabi():
+def jebi():
     jgrassLoopImglabel=tkinter.Label(window, image=jgrassLoopImg, relief="flat", bg="light yellow").place(x=-23,y=-41)
 
     #startCover=tkinter.Label(window, bg="light yellow",relief="flat").place(x=164,y=270,width=170,height=62)
     #jtitleCover=tkinter.Label(window, bg="light yellow",relief="flat").place(x=150,y=160,width=200,height=62)
-    restartBtn=tkinter.Button(window, image=restartImg ,relief="flat", command=jeabi).place(x=125,y=285)
+    restartBtn=tkinter.Button(window, image=restartImg ,relief="flat", command=jebi).place(x=125,y=285)
     exitBtn=tkinter.Button(window, image=exitImg ,relief="flat", command=exit_game).place(x=277,y=285)
     
     tkinter.Label(window, text="-- 2~8명만 가능합니다. --",bg="#FDEDA6",fg="black",relief="flat", font=font1).place(x=150,y=145,width=200)
@@ -46,70 +51,91 @@ def input(action, enteredNum):
     
     num = int(enteredNum.get())
     if num>8 or num<2 :
-        jeabi()
+        jebi()
            
     a = []
     if num<=8 and num>=2 :
         tkinter.Label(window, text="-- 제비마다 역할을 정해주세요. --",bg="#FDEDA6",fg="black",relief="flat", font=font1).place(x=150,y=145,width=200)
     
     #입력창 설정
-    jeabi_1 = tkinter.StringVar()
-    jeabi_1_entered = tkinter.ttk.Entry(window, font=font1, width=6, textvariable=jeabi_1)
-    jeabi_2 = tkinter.StringVar()
-    jeabi_2_entered = tkinter.ttk.Entry(window, font=font1, width=6, textvariable=jeabi_2)
-    jeabi_3 = tkinter.StringVar()
-    jeabi_3_entered = tkinter.ttk.Entry(window, font=font1, width=6, textvariable=jeabi_3)
-    jeabi_4 = tkinter.StringVar()
-    jeabi_4_entered = tkinter.ttk.Entry(window, font=font1, width=6, textvariable=jeabi_4)
-    jeabi_5 = tkinter.StringVar()
-    jeabi_5_entered = tkinter.ttk.Entry(window, font=font1, width=6, textvariable=jeabi_5)
-    jeabi_6 = tkinter.StringVar()
-    jeabi_6_entered = tkinter.ttk.Entry(window, font=font1, width=6, textvariable=jeabi_6)
-    jeabi_7 = tkinter.StringVar()
-    jeabi_7_entered = tkinter.ttk.Entry(window, font=font1, width=6, textvariable=jeabi_7)
-    jeabi_8 = tkinter.StringVar()
-    jeabi_8_entered = tkinter.ttk.Entry(window, font=font1, width=6, textvariable=jeabi_8)
+    jebi_1 = tkinter.StringVar()
+    jebi_1_entered = tkinter.ttk.Entry(window, font=font1, width=6, textvariable=jebi_1)
+    jebi_2 = tkinter.StringVar()
+    jebi_2_entered = tkinter.ttk.Entry(window, font=font1, width=6, textvariable=jebi_2)
+    jebi_3 = tkinter.StringVar()
+    jebi_3_entered = tkinter.ttk.Entry(window, font=font1, width=6, textvariable=jebi_3)
+    jebi_4 = tkinter.StringVar()
+    jebi_4_entered = tkinter.ttk.Entry(window, font=font1, width=6, textvariable=jebi_4)
+    jebi_5 = tkinter.StringVar()
+    jebi_5_entered = tkinter.ttk.Entry(window, font=font1, width=6, textvariable=jebi_5)
+    jebi_6 = tkinter.StringVar()
+    jebi_6_entered = tkinter.ttk.Entry(window, font=font1, width=6, textvariable=jebi_6)
+    jebi_7 = tkinter.StringVar()
+    jebi_7_entered = tkinter.ttk.Entry(window, font=font1, width=6, textvariable=jebi_7)
+    jebi_8 = tkinter.StringVar()
+    jebi_8_entered = tkinter.ttk.Entry(window, font=font1, width=6, textvariable=jebi_8)
 
     #인원 수에 따라 라벨 개수와 형태를 다르게 함.
     if num>=2 and num<=4:
         for i in range(0,num):
             tkinter.Label(window, text=i+1, relief="flat",font=font3, bg="darkslategray",fg="white").place(x=80+i*90,y=190) 
-        jeabi_1_entered.place(x=105,y=208)
-        jeabi_2_entered.place(x=195,y=208)
+        jebi_1_entered.place(x=105,y=208)
+        jebi_2_entered.place(x=195,y=208)
         if num>=3:
-            jeabi_3_entered.place(x=285,y=208)   
+            jebi_3_entered.place(x=285,y=208)   
         if num>=4:
-            jeabi_4_entered.place(x=375,y=208) 
+            jebi_4_entered.place(x=375,y=208) 
              
     if num>4 and num<=8:
         for i in range(0,4):
             tkinter.Label(window, text=i+1, relief="flat",font=font3, bg="darkslategray",fg="white").place(x=80+i*90,y=170,height=33)
         for i in range(4,num):
             tkinter.Label(window, text=i+1, relief="flat",font=font3, bg="darkslategray",fg="white").place(x=80+(i-4)*90,y=210,height=33)
-        jeabi_1_entered.place(x=105,y=180)
-        jeabi_2_entered.place(x=195,y=180)
-        jeabi_3_entered.place(x=285,y=180)
-        jeabi_4_entered.place(x=375,y=180)
+        jebi_1_entered.place(x=105,y=180)
+        jebi_2_entered.place(x=195,y=180)
+        jebi_3_entered.place(x=285,y=180)
+        jebi_4_entered.place(x=375,y=180)
+        a[0]=jebi_1_entered
+        a[1]=jebi_2_entered
+        a[2]=jebi_3_entered
+        #a[3]=jebi_4_entered
+        #print(a[2])
         if num>=5:
-            jeabi_5_entered.place(x=105,y=220)
+            jebi_5_entered.place(x=105,y=220)
         if num>=6:
-            jeabi_6_entered.place(x=195,y=220)
+            jebi_6_entered.place(x=195,y=220)
         if num>=7:
-            jeabi_7_entered.place(x=285,y=220)
+            jebi_7_entered.place(x=285,y=220)
         if num==8:
-            jeabi_8_entered.place(x=375,y=220) 
+            jebi_8_entered.place(x=375,y=220) 
             
     #위의 모든 입력창들이 확인 한번에 입력되게 함. 확인 후 shake 호출
-    action2 = tkinter.Button(window, text="확인", font=font1, command=lambda:[shake(a,num, jeabi_1_entered,jeabi_2_entered,jeabi_3_entered,jeabi_4_entered,jeabi_5_entered,jeabi_6_entered,jeabi_7_entered,jeabi_8_entered)])
+    action2 = tkinter.Button(window, text="확인", font=font1, command=lambda:[shake(a,num, jebi_1_entered,jebi_2_entered,jebi_3_entered,jebi_4_entered,jebi_5_entered,jebi_6_entered,jebi_7_entered,jebi_8_entered)])
     action2.place(x=395,y=142)
 
 
 #배열 만들기, 랜덤 셔플 반복문, 최종 출력 함수
-def shake(a,num,A,B,C,D,E,F,G,H):
+def shake(a,num,enteredOne,enteredTwo,enteredThree,enteredFour,enteredFive,enteredSix,enteredSeven,enteredEight):
+    num=num
     
-    for i in range(0,num-1):
-        a[i]=chr(65+i)
-        print(a[i])
+    a[0]=enteredOne
+    a[1]=enteredTwo
+    if num>=3:
+        a[2]=enteredThree  
+    if num>=4:
+        a[3]=enteredFour
+    if num>=5:
+        a[4]=enteredFive
+    if num>=6:
+        a[5]=enteredSix
+    if num>=7:
+        a[6]=enteredSeven
+    if num==8:
+        a[7]=enteredEight
+    
+    #for i in range(0,num-1):
+     #   a[i]=chr(65+i)
+      #  print(a[i])
         
     #난수 인덱스의 배열과 (0,num-2)의 배열을 바꾸는 과정
     for i in range(0,num-2):
@@ -161,6 +187,6 @@ exitImgPath=resource_path("src/exit.png")
 exitImg=tkinter.PhotoImage(file = exitImgPath)
 
 #시작 버튼 위치
-jstartBtn=tkinter.Button(window, image=jstartImg ,relief="flat",bg="light yellow", command=jeabi).place(x=174,y=270)
+jstartBtn=tkinter.Button(window, image=jstartImg ,relief="flat",bg="light yellow", command=jebi).place(x=174,y=270)
 
 window.mainloop()

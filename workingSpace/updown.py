@@ -5,11 +5,6 @@ import random
 import os
 import sys
 
-#해야 할 것
-#if 끝나고 라벨 프린트하기-> loop 사진에 지금까지 경로 담기(완료)
-# 정답이랑 오답 이쁘게 프린트하기, 또는 사진으로 만들기(시간이 되면)(안해도 이쁨(아마도))
-
-
 #윈도우 창 설정
 window = tkinter.Tk()
 window.title("업다운 게임")
@@ -24,40 +19,17 @@ font2=tkinter.font.Font(family="맑은 고딕", size=15, weight="bold")
 font3=tkinter.font.Font(family="맑은 고딕", size=20, weight="bold")
 font4=tkinter.font.Font(family="맑은 고딕", size=25, weight="bold")
 
-
 count = 0
 
 #게임 진행 함수
 def updown():
-    #TcoverImgPath=resource_path("src/Tcover.png")
-    #TcoverImg=tkinter.PhotoImage(file = TcoverImgPath)
-    #TcoverImglabel=tkinter.Label(window, image=TcoverImg, relief="flat", bg="#d4e157").place(x=77.5,y=80)
-    #ScoverImgPath=resource_path("src/Scover.png")
-    #ScoverImg=tkinter.PhotoImage(file = ScoverImgPath)
-    #ScoverImglabel=tkinter.Label(window, image=ScoverImg, relief="flat", bg="#d4e157").place(x=164,y=230,width=175)
-    #CcoverImgPath=resource_path("src/Ccover.png")
-    #CcoverImg=tkinter.PhotoImage(file = CcoverImgPath)
-    #CcoverImglabel=tkinter.Label(window, image=CcoverImg, relief="flat", bg="#d4e157").place(x=164,y=230)
-    #loopImgPath=resource_path("src/loop.png")
-    #loopImg=tkinter.PhotoImage(file = loopImgPath)
-    #loopImglabel=tkinter.Label(window, image=loopImg, relief="flat", bg="#385723").place(x=30,y=40)
-    #titleCover=tkinter.Label(window, bg="#d4e157",relief="flat").place(x=77,y=80,width=348,height=96)
-    #startCover=tkinter.Label(window, bg="#d4e157",relief="flat").place(x=164,y=230,width=170,height=60)
-    #calcCover=tkinter.Label(window, bg="#d4e157",relief="flat").place(x=164,y=230,width=170,height=60)
-    #loopImg=tkinter.Label(window, bg="#385723",relief="flat").place(x=35,y=40,width=171,height=201)
     playgroundLoopImglabel=tkinter.Label(window, image=playgroundLoopImg,relief="flat", bg="#d4e157").place(x=-2,y=1)
 
-    
     global count
     count =0 
     
     restartBtn=tkinter.Button(window, image=restartImg ,relief="flat", bg="#385723", command=updown).place(x=125,y=271)
     exitBtn=tkinter.Button(window, image=exitImg ,relief="flat", bg="#385723", command=exit_game).place(x=277,y=271)
-    
-    #b1=tkinter.Button(window, text="재시작",bg="#385723",relief="flat",borderwidth=1,font=font2,command=updown)
-    #b1.place(x=120,y=271,width=100,height=50)
-    #b2=tkinter.Button(window, text="게임 종료",bg="#385723",relief="flat",borderwidth=1,font=font2,command=exit_game)
-    #b2.place(x=280,y=271,width=100,height=50)
     
     ran = random.randint(1,100)
     tkinter.Label(window, text="숫자 하나를 적으세요.",bg="darkslategray",fg="white",borderwidth=2,relief="raised", font=font1).place(x=281,y=70,width=140,height=30)

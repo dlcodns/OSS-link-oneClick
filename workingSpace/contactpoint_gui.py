@@ -90,36 +90,81 @@ def contactpointWindow():
     label8=tkinter.ttk.Label(newwindow, text="전화번호 검색")
     label8.place(x=15,y=140)
 
-    values=['컴퓨터공학과', '교양 교수님', '교양교육본부']
-    combobox7=tkinter.ttk.Combobox(newwindow, values=values)
+    numberValues=['전체', '컴퓨터공학과', '교양 교수님', '교양교육본부']
+    combobox7=tkinter.ttk.Combobox(newwindow, values=numberValues)
     combobox7.place(x=15,y=160,width=80,height=20)
     combobox7.set("전체")
-
 
     label9=tkinter.ttk.Label(newwindow, text="")
     label9.grid(column=3,row=6)
 
     ent2 = Entry(newwindow) 
     ent2.place(x=95,y=160,width=120,height=20)
-    def ent2_s(): 
-        phonebook = []
+    def ent2_s(a,b,c,d): 
+        if  combobox7.get()==a:
+            phonebook = []
+            print("전체")
+            f = open("phone_book.csv",'r')  
+            rdr = csv.reader(f)
+            for row in rdr:
+                phonebook.append(row)
+            f.close
+            a = ent2.get()
+            for i in phonebook:
+                    if a == "":
+                        print("[{}] {} {}".format(i[0], i[1], i[2])) 
+                    elif a in i[0] or a in i[1] or a in i[2]:
+                        print("[{}] {} {}".format(i[0], i[1], i[2]))    
 
-        f = open("phone_book.csv",'r')
-        rdr = csv.reader(f)
-        for row in rdr:
-            phonebook.append(row)
-        f.close
+        elif  combobox7.get() == b:
+            phonebook = []
+            print("컴퓨터공학과")
+            f = open("phone_bookA.csv",'r')  
+            rdr = csv.reader(f)
+            for row in rdr:
+                phonebook.append(row)
+            f.close
+            a = ent2.get()
+            for i in phonebook:
+                    if a == "":
+                        print("[{}] {} {}".format(i[0], i[1], i[2])) 
+                    elif a in i[0] or a in i[1] or a in i[2]:
+                        print("[{}] {} {}".format(i[0], i[1], i[2]))                         
 
-        a = ent2.get()
-        for i in phonebook:
-                if a == "":
-                    print("[{}] {} {}".format(i[0], i[1], i[2])) 
-                elif a in i[0] or a in i[1] or a in i[2]:
-                    print("[{}] {} {}".format(i[0], i[1], i[2]))
+        elif combobox7.get() == c:
+            phonebook = []
+            print("교양 교수님")
+            f = open("phone_bookB.csv",'r')  
+            rdr = csv.reader(f)
+            for row in rdr:
+                phonebook.append(row)
+            f.close
+            a = ent2.get()
+            for i in phonebook:
+                    if a == "":
+                        print("[{}] {} {}".format(i[0], i[1], i[2])) 
+                    elif a in i[0] or a in i[1] or a in i[2]:
+                        print("[{}] {} {}".format(i[0], i[1], i[2]))       
+
+        elif combobox7.get() == d:
+            phonebook = []
+            print("교양교육본부")
+            f = open("phone_bookC.csv",'r')  
+            rdr = csv.reader(f)
+            for row in rdr:
+                phonebook.append(row)
+            f.close
+            a = ent2.get()
+            for i in phonebook:
+                    if a == "":
+                        print("[{}] {} {}".format(i[0], i[1], i[2])) 
+                    elif a in i[0] or a in i[1] or a in i[2]:
+                        print("[{}] {} {}".format(i[0], i[1], i[2])) 
+
 
     btn = Button(newwindow) 
     btn.config(text = "확인")
-    btn.config(command = ent2_s)
+    btn.config(command = lambda:[ent2_s(numberValues[0],numberValues[1],numberValues[2],numberValues[3])])
     btn.place(x=215,y=160,width=40,height=20)
     
    

@@ -120,6 +120,7 @@ def contactpointWindow():
     phoneEnt.place(x=95,y=160,width=120,height=20)
     def searchPhone(a,b,c,d): 
         if  phonecombobox.get()==a:
+            phoneCnta = 0
             phonebook = []
             print("전체")
             f = open("phone_book.csv",'r')  
@@ -128,13 +129,19 @@ def contactpointWindow():
                 phonebook.append(row)
             f.close
             a = phoneEnt.get()
+            
+            phoneListboxa = Listbox(newwindow, selectmode = 'extended',width=41, height = 7)
+            phoneListboxa.place(x=280,y=80) 
             for i in phonebook:
                     if a == "":
-                        print("[{}] {} {}".format(i[0], i[1], i[2])) 
+                        phoneListboxa.insert(phoneCnta, "[{}] {} {}".format(i[0], i[1], i[2]))
+                        phoneCnta = phoneCnta+1
                     elif a in i[0] or a in i[1] or a in i[2]:
-                        print("[{}] {} {}".format(i[0], i[1], i[2]))    
+                        phoneListboxa.insert(phoneCnta, "[{}] {} {}".format(i[0], i[1], i[2]))
+                        phoneCnta = phoneCnta+1 
 
         elif  phonecombobox.get() == b:
+            phoneCntb = 0
             phonebook = []
             print("컴퓨터공학과")
             f = open("phone_bookA.csv",'r')  
@@ -143,13 +150,19 @@ def contactpointWindow():
                 phonebook.append(row)
             f.close
             a = phoneEnt.get()
+
+            phoneListboxb = Listbox(newwindow, selectmode = 'extended',width=41, height = 7)
+            phoneListboxb.place(x=280,y=80) 
             for i in phonebook:
                     if a == "":
-                        print("[{}] {} {}".format(i[0], i[1], i[2])) 
+                        phoneListboxb.insert(phoneCntb, "[{}] {} {}".format(i[0], i[1], i[2]))
+                        phoneCntb = phoneCntb+1
                     elif a in i[0] or a in i[1] or a in i[2]:
-                        print("[{}] {} {}".format(i[0], i[1], i[2]))                         
+                        phoneListboxb.insert(phoneCntb, "[{}] {} {}".format(i[0], i[1], i[2]))
+                        phoneCntb = phoneCntb+1                        
 
         elif phonecombobox.get() == c:
+            phoneCntc = 0
             phonebook = []
             print("교양 교수님")
             f = open("phone_bookB.csv",'r')  
@@ -158,13 +171,19 @@ def contactpointWindow():
                 phonebook.append(row)
             f.close
             a = phoneEnt.get()
+
+            phoneListboxc = Listbox(newwindow, selectmode = 'extended',width=41, height = 7)
+            phoneListboxc.place(x=280,y=80) 
             for i in phonebook:
                     if a == "":
-                        print("[{}] {} {}".format(i[0], i[1], i[2])) 
+                        phoneListboxc.insert(phoneCntc, "[{}] {} {}".format(i[0], i[1], i[2]))
+                        phoneCntc = phoneCntc+1
                     elif a in i[0] or a in i[1] or a in i[2]:
-                        print("[{}] {} {}".format(i[0], i[1], i[2]))       
+                        phoneListboxc.insert(phoneCntc, "[{}] {} {}".format(i[0], i[1], i[2]))
+                        phoneCntc = phoneCntc+1 
 
         elif phonecombobox.get() == d:
+            phoneCntd = 0
             phonebook = []
             print("교양교육본부")
             f = open("phone_bookC.csv",'r')  
@@ -173,12 +192,16 @@ def contactpointWindow():
                 phonebook.append(row)
             f.close
             a = phoneEnt.get()
+
+            phoneListboxd = Listbox(newwindow, selectmode = 'extended',width=41, height = 7)
+            phoneListboxd.place(x=280,y=80) 
             for i in phonebook:
                     if a == "":
-                        print("[{}] {} {}".format(i[0], i[1], i[2])) 
+                        phoneListboxd.insert(phoneCntd, "[{}] {} {}".format(i[0], i[1], i[2]))
+                        phoneCntd = phoneCntd+1
                     elif a in i[0] or a in i[1] or a in i[2]:
-                        print("[{}] {} {}".format(i[0], i[1], i[2])) 
-
+                        phoneListboxd.insert(phoneCntd, "[{}] {} {}".format(i[0], i[1], i[2]))
+                        phoneCntd = phoneCntd+1 
 
     phonebtn = Button(newwindow) 
     phonebtn.config(text = "확인")

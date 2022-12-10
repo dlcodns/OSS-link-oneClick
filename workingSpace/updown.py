@@ -63,7 +63,7 @@ def updown():
     tkinter.Label(window, text="숫자 하나를 적으세요.",bg="darkslategray",fg="white",borderwidth=2,relief="raised", font=font1).place(x=281,y=70,width=140,height=30)
 
     tkinter.Label(window, text="-- 범위 1~100 --",bg="#d4e157",fg="black",relief="flat", font=font).place(x=274,y=102,width=150,height=20)
-
+    tkinter.Label(window, text="-- 6번의 기회 --",bg="#FFFF89",fg="black",relief="flat", font=font).place(x=90,y=47,width=65,height=20)
 
     number = tkinter.StringVar()
     number_entered = tkinter.ttk.Entry(window, font=font1, width=18, textvariable=number)

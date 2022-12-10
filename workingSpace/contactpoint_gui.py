@@ -14,37 +14,75 @@ window['bg']='cornsilk'
 def contactpointWindow():
     newwindow=tkinter.Toplevel(window)
     newwindow.geometry("550x400")
-    
+
 #교수님 이메일 
     label3=tkinter.ttk.Label(newwindow, text="이메일 검색")
     label3.place(x=15,y=80)
-
-    value=['컴퓨터공학과', '교양']
-    combobox2=tkinter.ttk.Combobox(newwindow, values=value)
+    
+    emailValues=['전체', '컴퓨터공학과', '교양']
+    combobox2=tkinter.ttk.Combobox(newwindow, values=emailValues)
     combobox2.place(x=15,y=100,width=80,height=20)
     combobox2.set("전체")
 
+    label4=Label(newwindow)
+    label4.config(relief='sunken', width=34, height=9)
+    label4.place(x=290,y=80)
     ent1 = Entry(newwindow)  
     ent1.place(x=95,y=100,width=120,height=20)
-    def ent1_s():
-        mailbook = []
 
-        f = open("mail_book.csv",'r')
-        rdr = csv.reader(f)
-        for row in rdr:
-            mailbook.append(row)
-        f.close
+    def ent1_s(a,b,c):
+        if combobox2.get() == a:
+            mailbook = []
+            print("전체")
+            f = open("mail_book.csv",'r')
+            rdr = csv.reader(f)
+            for row in rdr:
+                mailbook.append(row)
+            f.close
 
-        a = ent1.get()
-        for i in mailbook:
-                if a == "":
-                    print("[{}] {} {}".format(i[0], i[1], i[2])) 
-                elif a in i[0] or a in i[1] or a in i[2]:
-                    print("[{}] {} {}".format(i[0], i[1], i[2]))
+            a = ent1.get()
+            for i in mailbook:
+                    if a == "":
+                        print("[{}] {} {}".format(i[0], i[1], i[2]))
+                    elif a in i[0] or a in i[1] or a in i[2]:
+                        print("[{}] {} {}".format(i[0], i[1], i[2]))  
 
+        elif  combobox2.get()==b:
+                mailbook = []
+                print("컴공")
+                f = open("mail_bookA.csv",'r')
+                rdr = csv.reader(f)
+                for row in rdr:
+                    mailbook.append(row)
+                f.close
+
+                a = ent1.get()
+                for i in mailbook:
+                        if a == "":
+                            print("[{}] {} {}".format(i[0], i[1], i[2]))
+                        elif a in i[0] or a in i[1] or a in i[2]:
+                            print("[{}] {} {}".format(i[0], i[1], i[2]))                        
+                            
+
+        elif  combobox2.get() == c:
+                mailbook = []
+                print("교양")
+                f = open("mail_bookB.csv",'r')
+                rdr = csv.reader(f)
+                for row in rdr:
+                    mailbook.append(row)
+                f.close
+
+                a = ent1.get()
+                for i in mailbook:
+                        if a == "":
+                            print("[{}] {} {}".format(i[0], i[1], i[2]))
+                        elif a in i[0] or a in i[1] or a in i[2]:
+                            print("[{}] {} {}".format(i[0], i[1], i[2]))     
+      
     btn = Button(newwindow) 
     btn.config(text = "확인")
-    btn.config(command = ent1_s)
+    btn.config(command = lambda:[ent1_s(emailValues[0],emailValues[1],emailValues[2])])
     btn.place(x=215,y=100,width=40,height=20)
 
 

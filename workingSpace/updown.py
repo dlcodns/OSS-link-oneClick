@@ -5,6 +5,10 @@ import random
 import os
 import sys
 
+#해야 할 것
+#if 끝나고 라벨 프린트하기-> loop 사진에 지금까지 경로 담기(완료)
+# 정답이랑 오답 이쁘게 프린트하기, 또는 사진으로 만들기(시간이 되면)(안해도 이쁨(아마도))
+
 #윈도우 창 설정
 window = tkinter.Tk()
 window.title("업다운 게임")
@@ -37,11 +41,12 @@ def updown():
     #loopImgPath=resource_path("src/loop.png")
     #loopImg=tkinter.PhotoImage(file = loopImgPath)
     #loopImglabel=tkinter.Label(window, image=loopImg, relief="flat", bg="#385723").place(x=30,y=40)
-    titleCover=tkinter.Label(window, bg="#d4e157",relief="flat").place(x=77,y=80,width=348,height=96)
-    startCover=tkinter.Label(window, bg="#d4e157",relief="flat").place(x=164,y=230,width=170,height=60)
-    calcCover=tkinter.Label(window, bg="#d4e157",relief="flat").place(x=164,y=230,width=170,height=60)
-    loopImg=tkinter.Label(window, bg="#385723",relief="flat").place(x=35,y=40,width=171,height=201)
-    
+    #titleCover=tkinter.Label(window, bg="#d4e157",relief="flat").place(x=77,y=80,width=348,height=96)
+    #startCover=tkinter.Label(window, bg="#d4e157",relief="flat").place(x=164,y=230,width=170,height=60)
+    #calcCover=tkinter.Label(window, bg="#d4e157",relief="flat").place(x=164,y=230,width=170,height=60)
+    #loopImg=tkinter.Label(window, bg="#385723",relief="flat").place(x=35,y=40,width=171,height=201)
+    playgroundLoopImglabel=tkinter.Label(window, image=playgroundLoopImg,relief="flat", bg="#d4e157").place(x=-2,y=1)
+        
     global ran, count
     
     restartBtn=tkinter.Button(window, image=restartImg ,relief="flat", bg="#385723", command=updown).place(x=125,y=271)
@@ -52,7 +57,7 @@ def updown():
     #b2=tkinter.Button(window, text="게임 종료",bg="#385723",relief="flat",borderwidth=1,font=font2,command=exit_game)
     #b2.place(x=280,y=271,width=100,height=50)
     
-    tkinter.Label(window, text="숫자 하나를 적으세요.",bg="darkslategray",fg="white",borderwidth=2,relief="raised", font=font1).place(x=281,y=80,width=140,height=30)
+    tkinter.Label(window, text="숫자 하나를 적으세요.",bg="darkslategray",fg="white",borderwidth=2,relief="raised", font=font1).place(x=281,y=70,width=140,height=30)
 
     tkinter.Label(window, text="-- 범위 1~100 --",bg="#d4e157",fg="black",relief="flat", font=font).place(x=274,y=102,width=150,height=20)
     
@@ -69,7 +74,7 @@ def calc(enteredNum):
     
     num = int(enteredNum.get())
      
-    if count < 6 :
+    if (1<=num<=100) and count < 6 :
         if ran > num:
             if count !=5:
                 tkinter.Label(window, text="up!", font=font4, bg="#d4e157",fg="white",borderwidth=2,relief="flat").place(x=273,y=170,width=170,height=50)
@@ -79,16 +84,18 @@ def calc(enteredNum):
         elif ran == num:
             win = random.randint(1,3)
             if win == 1:
-                tkinter.Label(window, text="딩동댕~ 정답!", font=font4, bg="#d4e157",fg="white",borderwidth=2,relief="flat").place(x=240,y=230,width=124,height=30)
+                tkinter.Label(window, text="딩동댕~ 정답!", font=font4, bg="#d4e157",fg="white",borderwidth=2,relief="flat").place(x=273,y=170,width=170,height=50)
             if win == 2:
-                tkinter.Label(window, text="운이 좋으시네요. :)", font=font4, bg="#d4e157",fg="white",borderwidth=2,relief="flat").place(x=240,y=250,width=124,height=30)
+                tkinter.Label(window, text="운이 좋으시네요. :)", font=font4, bg="#d4e157",fg="white",borderwidth=2,relief="flat").place(x=273,y=170,width=170,height=50)
             if win == 3:
-                tkinter.Label(window, text="올ㅋ",bg="#d4e157", font=font4, fg="white",borderwidth=2,relief="flat").place(x=240,y=250,width=124,height=30)
+                tkinter.Label(window, text="올ㅋ",bg="#d4e157", font=font4, fg="white",borderwidth=2,relief="flat").place(x=273,y=170,width=170,height=50)
         count= count+1
-        msg = "정답은" + str(ran)
+        msg = "땡! 정답은 " + str(ran) + " 입니다."
         if count == 6 :
             tkinter.Label(window, text=msg, font=font4, bg="#d4e157",fg="white",borderwidth=2,relief="flat").place(x=240,y=250,width=200,height=30)
-
+    else:
+        updown()
+        
 #게임을 나가는 함수
 def exit_game():
     window.destroy()
@@ -111,6 +118,9 @@ playgroundImglabel=tkinter.Label(window, image=playgroundImg, relief="flat", bg=
 titleImgPath=resource_path("src/title.png")
 titleImg=tkinter.PhotoImage(file = titleImgPath)
 titleImglabel=tkinter.Label(window, image=titleImg, relief="flat", bg="#d4e157").place(x=77.5,y=80)
+playgroundLoopImgPath=resource_path("src/playgroundLoop.png")
+playgroundLoopImg=tkinter.PhotoImage(file = playgroundLoopImgPath)
+
 
 #버튼 이미지
 startImgPath=resource_path("src/start.png")

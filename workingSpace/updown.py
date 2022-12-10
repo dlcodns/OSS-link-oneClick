@@ -77,22 +77,36 @@ def calc(enteredNum):
     if (1<=num<=100) and count < 6 :
         if ran > num:
             if count !=5:
-                tkinter.Label(window, text="up!", font=font4, bg="#d4e157",fg="white",borderwidth=2,relief="flat").place(x=273,y=170,width=170,height=50)
+                tkinter.Label(window, text="up!", font=font4, bg="#d4e157",fg="light yellow",borderwidth=2,relief="flat").place(x=273,y=170,width=170,height=50)
         elif ran < num:
             if count !=5:
                 tkinter.Label(window, text="down!", font=font4, bg="#d4e157",fg="white",borderwidth=2,relief="flat").place(x=273,y=170,width=170,height=50)
         elif ran == num:
             win = random.randint(1,3)
             if win == 1:
-                tkinter.Label(window, text="딩동댕~ 정답!", font=font4, bg="#d4e157",fg="white",borderwidth=2,relief="flat").place(x=273,y=170,width=170,height=50)
+                tkinter.Label(window, text="딩동댕~ 정답!", font=font2, bg="#d4e157",fg="blue1",borderwidth=2,relief="flat").place(x=273,y=170,width=170,height=50)
             if win == 2:
-                tkinter.Label(window, text="운이 좋으시네요. :)", font=font4, bg="#d4e157",fg="white",borderwidth=2,relief="flat").place(x=273,y=170,width=170,height=50)
+                tkinter.Label(window, text="운이 좋으시네요. :)", font=font2, bg="#d4e157",fg="blue1",borderwidth=2,relief="flat").place(x=273,y=170,width=170,height=50)
             if win == 3:
-                tkinter.Label(window, text="올ㅋ",bg="#d4e157", font=font4, fg="white",borderwidth=2,relief="flat").place(x=273,y=170,width=170,height=50)
-        count= count+1
+                tkinter.Label(window, text="올ㅋ",bg="#d4e157", font=font2, fg="blue1",borderwidth=2,relief="flat").place(x=273,y=170,width=170,height=50)
+            text1 = str(count+1)+" 번째 숫자 = "+str(num)
+            tkinter.Label(window, text= text1, font=font1, bg="#6A8334",fg="light yellow",borderwidth=2,relief="flat").place(x=60,y=46+(count+1)*25,width=120,height=20)
+
+            count=6
+            return
+        text1 = str(count+1)+" 번째 숫자 = "+str(num)
+        if(count<6):
+            tkinter.Label(window, text= text1, font=font1, bg="#6A8334",fg="light yellow",borderwidth=2,relief="flat").place(x=60,y=46+(count+1)*25,width=120,height=20)
+            if ran>num:
+                tkinter.Label(window, text= "↑", font=font1, bg="#6A8334",fg="red3",borderwidth=2,relief="flat").place(x=177,y=45+(count+1)*25,width=5,height=20)
+            if ran<num:
+                tkinter.Label(window, text= "↓", font=font1, bg="#6A8334",fg="blue3",borderwidth=2,relief="flat").place(x=177,y=45+(count+1)*25,width=5,height=20)
+
+            count= count+1
+        
         msg = "땡! 정답은 " + str(ran) + " 입니다."
         if count == 6 :
-            tkinter.Label(window, text=msg, font=font4, bg="#d4e157",fg="white",borderwidth=2,relief="flat").place(x=240,y=250,width=200,height=30)
+            tkinter.Label(window, text=msg, font=font2, bg="#d4e157",fg="red3",borderwidth=2,relief="flat").place(x=263,y=170,width=195,height=50)
     else:
         updown()
         

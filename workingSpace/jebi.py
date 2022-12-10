@@ -95,11 +95,6 @@ def input(action, enteredNum):
         jebi_2_entered.place(x=195,y=180)
         jebi_3_entered.place(x=285,y=180)
         jebi_4_entered.place(x=375,y=180)
-        a[0]=jebi_1_entered
-        a[1]=jebi_2_entered
-        a[2]=jebi_3_entered
-        #a[3]=jebi_4_entered
-        #print(a[2])
         if num>=5:
             jebi_5_entered.place(x=105,y=220)
         if num>=6:
@@ -116,26 +111,23 @@ def input(action, enteredNum):
 
 #배열 만들기, 랜덤 셔플 반복문, 최종 출력 함수
 def shake(a,num,enteredOne,enteredTwo,enteredThree,enteredFour,enteredFive,enteredSix,enteredSeven,enteredEight):
+   
     num=num
     
-    a[0]=enteredOne
-    a[1]=enteredTwo
+    a.append(enteredOne.get())
+    a.append(enteredTwo.get())
     if num>=3:
-        a[2]=enteredThree  
+        a.append(enteredThree.get())
     if num>=4:
-        a[3]=enteredFour
+        a.append(enteredFour.get())
     if num>=5:
-        a[4]=enteredFive
+        a.append(enteredFive.get())
     if num>=6:
-        a[5]=enteredSix
+        a.append(enteredSix.get())
     if num>=7:
-        a[6]=enteredSeven
+        a.append(enteredSeven.get())
     if num==8:
-        a[7]=enteredEight
-    
-    #for i in range(0,num-1):
-     #   a[i]=chr(65+i)
-      #  print(a[i])
+        a.append(enteredEight.get())
         
     #난수 인덱스의 배열과 (0,num-2)의 배열을 바꾸는 과정
     for i in range(0,num-2):

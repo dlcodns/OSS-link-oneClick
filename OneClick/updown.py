@@ -33,7 +33,7 @@ def playUpDown() :
         count =0 
         answer = False
         
-        # homeBtn=Button(window, image=homeImg ,relief="flat", bg="gold", command=main).place(x=440,y=340)
+        homeBtn=Button(window, image=homeImg ,relief="flat", bg="gold", command=main).place(x=440,y=340)
         restartBtn=Button(window, image=restartImg ,relief="flat", bg="#385723", command=updown).place(x=125,y=271)
         exitBtn=Button(window, image=exitImg ,relief="flat", bg="#385723", command=exit_game).place(x=277,y=271)
         

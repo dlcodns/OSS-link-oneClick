@@ -63,100 +63,39 @@ def contactpointWindow():
 #전화번호 
 
     phoneValues=['전체', '컴퓨터공학과', '교양 교수님', '교양교육본부']
-    phonecombobox=tkinter.ttk.Combobox(newwindow, values=phoneValues)
-    phonecombobox.place(x=20,y=205,width=80,height=20)
-    phonecombobox.set("전체")
+    numberCombobox=tkinter.ttk.Combobox(newwindow, values=phoneValues)
+    numberCombobox.place(x=20,y=205,width=80,height=20)
+    numberCombobox.set("전체")
 
-    phoneEnt = Entry(newwindow) 
-    phoneEnt.place(x=100,y=205,width=115,height=20)
-    def searchPhone(a,b,c,d): 
-        if  phonecombobox.get()==a:
-            phoneCnta = 0
-            phonebook = []
-            print("전체")
-            f = open("phone_book.csv",'r')  
-            rdr = csv.reader(f)
-            for row in rdr:
-                phonebook.append(row)
-            f.close
-            a = phoneEnt.get()
-            
-            phoneListboxa = Listbox(newwindow, selectmode = 'extended',relief="flat",bg="#E2F0D9",width=38, height = 9)
-            phoneListboxa.place(x=290,y=85)    
-            for i in phonebook:
-                    if a == "":
-                        phoneListboxa.insert(phoneCnta, "[{}] {} {}".format(i[0], i[1], i[2]))
-                        phoneCnta = phoneCnta+1
-                    elif a in i[0] or a in i[1] or a in i[2]:
-                        phoneListboxa.insert(phoneCnta, "[{}] {} {}".format(i[0], i[1], i[2]))
-                        phoneCnta = phoneCnta+1 
+    numberEntry = Entry(newwindow) 
+    numberEntry.place(x=100,y=205,width=115,height=20)
 
-        elif  phonecombobox.get() == b:
-            phoneCntb = 0
-            phonebook = []
-            print("컴퓨터공학과")
-            f = open("phone_bookA.csv",'r')  
-            rdr = csv.reader(f)
-            for row in rdr:
-                phonebook.append(row)
-            f.close
-            a = phoneEnt.get()
+    def numberFind():
+        flag = 0
+        phoneCnt = 0
+        phonebook = []
+        f = open("phone_book.csv",'r') 
+        rdr = csv.reader(f)
+        for row in rdr:
+            phonebook.append(row)
+        f.close
 
-            phoneListboxb = Listbox(newwindow, selectmode = 'extended',relief="flat",bg="#E2F0D9",width=38, height = 9)
-            phoneListboxb.place(x=290,y=85) 
-            for i in phonebook:
-                    if a == "":
-                        phoneListboxb.insert(phoneCntb, "[{}] {} {}".format(i[0], i[1], i[2]))
-                        phoneCntb = phoneCntb+1
-                    elif a in i[0] or a in i[1] or a in i[2]:
-                        phoneListboxb.insert(phoneCntb, "[{}] {} {}".format(i[0], i[1], i[2]))
-                        phoneCntb = phoneCntb+1                        
+        phoneListbox = Listbox(newwindow, selectmode = 'extended',relief="flat",bg="#E2F0D9",width=38, height = 9)
+        phoneListbox.place(x=290,y=85) 
 
-        elif phonecombobox.get() == c:
-            phoneCntc = 0
-            phonebook = []
-            print("교양 교수님")
-            f = open("phone_bookB.csv",'r')  
-            rdr = csv.reader(f)
-            for row in rdr:
-                phonebook.append(row)
-            f.close
-            a = phoneEnt.get()
+        for i in phonebook:
+            if (numberCombobox.get() == i[0]) or (numberCombobox.get() == "전체"):
+                if (numberEntry.get() in i[0] or numberEntry.get() in i[1] or numberEntry.get() in i[2]):
+                    phoneListbox.insert(phoneCnt, "[{}] {} {}".format(i[0], i[1], i[2]))
+                    phoneCnt = phoneCnt+1 
+                    flag = 1
 
-            phoneListboxc = Listbox(newwindow, selectmode = 'extended',relief="flat",bg="#E2F0D9",width=38, height = 9)
-            phoneListboxc.place(x=290,y=85) 
-            for i in phonebook:
-                    if a == "":
-                        phoneListboxc.insert(phoneCntc, "[{}] {} {}".format(i[0], i[1], i[2]))
-                        phoneCntc = phoneCntc+1
-                    elif a in i[0] or a in i[1] or a in i[2]:
-                        phoneListboxc.insert(phoneCntc, "[{}] {} {}".format(i[0], i[1], i[2]))
-                        phoneCntc = phoneCntc+1 
-
-        elif phonecombobox.get() == d:
-            phoneCntd = 0
-            phonebook = []
-            print("교양교육본부")
-            f = open("phone_bookC.csv",'r')  
-            rdr = csv.reader(f)
-            for row in rdr:
-                phonebook.append(row)
-            f.close
-            a = phoneEnt.get()
-
-            phoneListboxd = Listbox(newwindow, selectmode = 'extended',relief="flat",bg="#E2F0D9",width=38, height = 9)
-            phoneListboxd.place(x=290,y=85) 
-            for i in phonebook:
-                    if a == "":
-                        phoneListboxd.insert(phoneCntd, "[{}] {} {}".format(i[0], i[1], i[2]))
-                        phoneCntd = phoneCntd+1
-                    elif a in i[0] or a in i[1] or a in i[2]:
-                        phoneListboxd.insert(phoneCntd, "[{}] {} {}".format(i[0], i[1], i[2]))
-                        phoneCntd = phoneCntd+1 
+        if flag == 0:
+            print("없음")
 
     phonebtn = Button(newwindow) 
     phonebtn.config(text = "확인",background="#E2F0D9")
-    phonebtn.config(command = lambda:[searchPhone(phoneValues[0],phoneValues[1],phoneValues[2],phoneValues[3])])
+    phonebtn.config(command = numberFind)
     phonebtn.place(x=215,y=205, width=40,height=20)
     
    

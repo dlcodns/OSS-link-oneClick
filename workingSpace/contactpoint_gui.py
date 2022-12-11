@@ -4,6 +4,9 @@ import tkinter.ttk
 import tkinter.messagebox as msgbox
 from tkinter import *
 import csv
+import pandas as pd
+import os
+import sys
 
 window=tkinter.Tk()
 window.title("One Click")
@@ -11,14 +14,18 @@ window.geometry("600x450+100+100")
 window.resizable(False,False)
 window['bg']='cornsilk'
 
+
+
 #연락망 새창
 def contactpointWindow():
+
 
     newwindow=tkinter.Toplevel(window)
     newwindow.geometry("590x430")
     newwindow['bg']='honeydew'
 
     contactpointImglabel=tkinter.Label(newwindow, image=contactpointImg, relief="flat").place(x =-1, y =-1)
+
 
 #교수님 이메일 
     
@@ -173,6 +180,40 @@ def contactpointWindow():
     memobtn.config(text = "저장",width=4,height=1 )
     memobtn.config(command = memoAdd)
     memobtn.place(x=533,y= 350)
+
+#삭제 
+
+    # delMail = Entry(newwindow) 
+    # delMail.place(x=75,y=380,width=140,height=20)
+
+    # def del_mail():
+
+    #     delmail = delMail.get()
+
+    #     dropMail = pd.read_csv("mail_book.csv")
+
+    #     new_Mail = dropMail.drop(columns= delmail, inplace = True)
+    #     new_Mail.head()
+
+    # dbtn = Button(newwindow) 
+    # dbtn.config(text = "삭제",width=4,height=1 )
+    # dbtn.config(command = del_mail)
+    # dbtn.place(x=215,y= 380)
+
+# exe 제작을 위한 이미지 경로 설정 함수
+def resource_path(relative_path):
+    """ Get absolute path to resource, works for dev and for PyInstaller """
+    try:
+        # PyInstaller creates a temp folder and stores path in _MEIPASS
+        base_path = sys._MEIPASS
+    except Exception:
+        base_path = os.path.abspath(".")
+    
+    return os.path.join(base_path, relative_path)
+
+#배경 사진
+contactpointImgPath=resource_path("src/contactpoint.png")
+contactpointImg=tkinter.PhotoImage(file= contactpointImgPath)
     
 font=tkinter.font.Font(family="맑은고딕", size=10, weight="bold")    
 

@@ -6,11 +6,6 @@ import os
 import sys
 from tkinter import *
 
-#배열에 집어넣기
-#-오류 없길-
-#제비 개수 라벨지 만들기
-#제비 나열해서 버튼 만들고 이벤트 열기
-
 #윈도우 창 설정
 window = tkinter.Tk()
 window.title("제비뽑기")
@@ -28,14 +23,12 @@ font4=tkinter.font.Font(family="맑은 고딕", size=25, weight="bold")
 def jebi():
     jgrassLoopImglabel=tkinter.Label(window, image=jgrassLoopImg, relief="flat", bg="light yellow").place(x=-23,y=-41)
 
-    #startCover=tkinter.Label(window, bg="light yellow",relief="flat").place(x=164,y=270,width=170,height=62)
-    #jtitleCover=tkinter.Label(window, bg="light yellow",relief="flat").place(x=150,y=160,width=200,height=62)
+    homeBtn=tkinter.Button(window, image=homeImg ,relief="flat", bg="gold", command=main).place(x=440,y=340)
     restartBtn=tkinter.Button(window, image=restartImg ,relief="flat", command=jebi).place(x=125,y=285)
     exitBtn=tkinter.Button(window, image=exitImg ,relief="flat", command=exit_game).place(x=277,y=285)
     
     tkinter.Label(window, text="-- 2~8명만 가능합니다. --",bg="#FDEDA6",fg="black",relief="flat", font=font1).place(x=150,y=145,width=200)
     
-    #tkinter.Label(window, image=jnum,bg="darkslategray",fg="white",borderwidth=2,relief="raised").place(x=110,y=80,width=80,height=30)
     tkinter.Label(window, text="인원 수 입력", relief="ridge", font=font2,bg="#FAD2AA",fg="black").place(x=90,y=87,width=160)
     
     number = tkinter.StringVar()
@@ -57,6 +50,7 @@ def input(action, enteredNum):
            
     a = []
     if num<=8 and num>=2 :
+        tkinter.Label(window, text="-- 빈칸도 입력 가능합니다. --",bg="#FDEDA6",fg="black",relief="flat", font=font1).place(x=162.5,y=245,width=175, height=20)
         tkinter.Label(window, text="-- 제비마다 역할을 정해주세요. --",bg="#FDEDA6",fg="black",relief="flat", font=font1).place(x=150,y=145,width=200)
     
     #입력창 설정
@@ -107,12 +101,12 @@ def input(action, enteredNum):
             jebi_8_entered.place(x=375,y=220) 
             
     #위의 모든 입력창들이 확인 한번에 입력되게 함. 확인 후 shake 호출
-    action2 = tkinter.Button(window, text="확인", font=font1, command=lambda:[shake(a,num, jebi_1_entered,jebi_2_entered,jebi_3_entered,jebi_4_entered,jebi_5_entered,jebi_6_entered,jebi_7_entered,jebi_8_entered)])
+    action2 = tkinter.Button(window, text="확인", font=font1, command=lambda:[shake(action2,a,num, jebi_1_entered,jebi_2_entered,jebi_3_entered,jebi_4_entered,jebi_5_entered,jebi_6_entered,jebi_7_entered,jebi_8_entered)])
     action2.place(x=395,y=142)
 
 
 #배열 만들기, 랜덤 셔플 반복문, 최종 출력 함수
-def shake(a,num,enteredOne,enteredTwo,enteredThree,enteredFour,enteredFive,enteredSix,enteredSeven,enteredEight):
+def shake(action2,a,num,enteredOne,enteredTwo,enteredThree,enteredFour,enteredFive,enteredSix,enteredSeven,enteredEight):
 
     num=num
     
@@ -131,7 +125,7 @@ def shake(a,num,enteredOne,enteredTwo,enteredThree,enteredFour,enteredFive,enter
     if num==8:
         a.append(enteredEight.get())
         
-    #난수 인덱스의 배열과 (0,num-1) 인덱스의 배열을 바꾸는 과정
+    #난수 인덱스의 배열과 (0,num-2)의 배열을 바꾸는 과정
     for i in range(0,num-1):
         rand=random.randint(0, 10000)
         ran=rand%(num-i)+i
@@ -139,27 +133,19 @@ def shake(a,num,enteredOne,enteredTwo,enteredThree,enteredFour,enteredFive,enter
         temp=a[i]
         a[i]=a[ran]
         a[ran]=temp
-        
-    #잘 안섞일까봐 한번 더
-    for i in range(0,num-1):
-        rand1=random.randint(0, 10000)
-        ran1=rand%(num-i)+i
-        
-        temp=a[i]
-        a[i]=a[ran1]
-        a[ran1]=temp
     
     printer(a,num)
     
-    #최종 출력
+    #잘 됐는지 터미널에서 확안
     for i in range(0, num):
         print('제비',i+1,'역할',a[i])
-
+        
 #제비버튼을 출력하는 함수
 def printer(a,num):
     num=num
     a=a
     jgrassLoopImglabel=tkinter.Label(window, image=jgrassLoopImg, relief="flat", bg="light yellow").place(x=-23,y=-41)
+    homeBtn=tkinter.Button(window, image=homeImg ,relief="flat", bg="gold", command=main).place(x=440,y=340)
     restartBtn=tkinter.Button(window, image=restartImg ,relief="flat", command=jebi).place(x=125,y=285)
     exitBtn=tkinter.Button(window, image=exitImg ,relief="flat", command=exit_game).place(x=277,y=285)
     tkinter.Label(window, text="-- 한 사람당 하나씩 뽑아보세요. --",bg="#FDEDA6",fg="black",relief="flat", font=font1).place(x=150,y=45,width=200)
@@ -250,47 +236,89 @@ def resource_path(relative_path):
         base_path = sys._MEIPASS
     except Exception:
         base_path = os.path.abspath(".")
-
+    
     return os.path.join(base_path, relative_path)
 
-#기본 이미지
-#jtitleImgPath=resource_path("src/jtitle.png")
-#jtitleImg=tkinter.PhotoImage(file = jtitleImgPath)
-#jtitleImglabel=tkinter.Label(window, image=jtitleImg, relief="flat", bg="light yellow").place(x=105,y=80)
-jgrassImgPath=resource_path("src/jgrass.png")
-jgrassImg=tkinter.PhotoImage(file = jgrassImgPath)
-jgrassImglabel=tkinter.Label(window, image=jgrassImg, relief="flat", bg="light yellow").place(x=-23,y=-41)
+def main():
+    #기본 이미지
+    jgrassImgPath=resource_path("src/jgrass.png")
+    jgrassImg=tkinter.PhotoImage(file= jgrassImgPath)
+    jgrassImglabel=tkinter.Label(window, image=jgrassImg, relief="flat", bg="light yellow").place(x=-23,y=-41)
 
-jgrassLoopImgPath=resource_path("src/jgrassLoop.png")
-jgrassLoopImg=tkinter.PhotoImage(file = jgrassLoopImgPath)
-jnumImgPath=resource_path("src/jnum.png")
-jnumImg=tkinter.PhotoImage(file = jnumImgPath)
+    jgrassLoopImgPath=resource_path("src/jgrassLoop.png")
+    jgrassLoopImg=tkinter.PhotoImage(file = jgrassLoopImgPath)
+    jnumImgPath=resource_path("src/jnum.png")
+    jnumImg=tkinter.PhotoImage(file = jnumImgPath)
 
-#버튼 이미지
-jstartImgPath=resource_path("src/jstart.png")
-jstartImg=tkinter.PhotoImage(file = jstartImgPath)
-restartImgPath=resource_path("src/restart.png")
-restartImg=tkinter.PhotoImage(file = restartImgPath)
-exitImgPath=resource_path("src/exit.png")
-exitImg=tkinter.PhotoImage(file = exitImgPath)
-jebi1ImgPath=resource_path("src/jebi_jebi1.png")
-jebi1Img=tkinter.PhotoImage(file = jebi1ImgPath)
-jebi2ImgPath=resource_path("src/jebi_jebi2.png")
-jebi2Img=tkinter.PhotoImage(file = jebi2ImgPath)
-jebi3ImgPath=resource_path("src/jebi_jebi3.png")
-jebi3Img=tkinter.PhotoImage(file = jebi3ImgPath)
-jebi4ImgPath=resource_path("src/jebi_jebi4.png")
-jebi4Img=tkinter.PhotoImage(file = jebi4ImgPath)
-jebi5ImgPath=resource_path("src/jebi_jebi5.png")
-jebi5Img=tkinter.PhotoImage(file = jebi5ImgPath)
-jebi6ImgPath=resource_path("src/jebi_jebi6.png")
-jebi6Img=tkinter.PhotoImage(file = jebi6ImgPath)
-jebi7ImgPath=resource_path("src/jebi_jebi7.png")
-jebi7Img=tkinter.PhotoImage(file = jebi7ImgPath)
-jebi8ImgPath=resource_path("src/jebi_jebi8.png")
-jebi8Img=tkinter.PhotoImage(file = jebi8ImgPath)
+    #버튼 이미지
+    jstartImgPath=resource_path("src/jstart.png")
+    jstartImg=tkinter.PhotoImage(file = jstartImgPath)
+    homeImgPath=resource_path("src/updown_home.png")
+    homeImg=tkinter.PhotoImage(file = homeImgPath)
+    restartImgPath=resource_path("src/restart.png")
+    restartImg=tkinter.PhotoImage(file = restartImgPath)
+    exitImgPath=resource_path("src/exit.png")
+    exitImg=tkinter.PhotoImage(file = exitImgPath)
+    jebi1ImgPath=resource_path("src/jebi_jebi1.png")
+    jebi1Img=tkinter.PhotoImage(file = jebi1ImgPath)
+    jebi2ImgPath=resource_path("src/jebi_jebi2.png")
+    jebi2Img=tkinter.PhotoImage(file = jebi2ImgPath)
+    jebi3ImgPath=resource_path("src/jebi_jebi3.png")
+    jebi3Img=tkinter.PhotoImage(file = jebi3ImgPath)
+    jebi4ImgPath=resource_path("src/jebi_jebi4.png")
+    jebi4Img=tkinter.PhotoImage(file = jebi4ImgPath)
+    jebi5ImgPath=resource_path("src/jebi_jebi5.png")
+    jebi5Img=tkinter.PhotoImage(file = jebi5ImgPath)
+    jebi6ImgPath=resource_path("src/jebi_jebi6.png")
+    jebi6Img=tkinter.PhotoImage(file = jebi6ImgPath)
+    jebi7ImgPath=resource_path("src/jebi_jebi7.png")
+    jebi7Img=tkinter.PhotoImage(file = jebi7ImgPath)
+    jebi8ImgPath=resource_path("src/jebi_jebi8.png")
+    jebi8Img=tkinter.PhotoImage(file = jebi8ImgPath)
 
-#시작 버튼 위치
-jstartBtn=tkinter.Button(window, image=jstartImg ,relief="flat",bg="light yellow", command=jebi).place(x=174,y=270)
+    #시작 버튼 위치
+    jstartBtn=tkinter.Button(window, image=jstartImg ,relief="flat",bg="light yellow", command=jebi).place(x=174,y=270)
 
-window.mainloop()
+    window.mainloop()
+
+if __name__ == '__main__':
+    #기본 이미지
+    jgrassImgPath=resource_path("src/jgrass.png")
+    jgrassImg=tkinter.PhotoImage(file= jgrassImgPath)
+    jgrassImglabel=tkinter.Label(window, image=jgrassImg, relief="flat", bg="light yellow").place(x=-23,y=-41)
+
+    jgrassLoopImgPath=resource_path("src/jgrassLoop.png")
+    jgrassLoopImg=tkinter.PhotoImage(file = jgrassLoopImgPath)
+    jnumImgPath=resource_path("src/jnum.png")
+    jnumImg=tkinter.PhotoImage(file = jnumImgPath)
+
+    #버튼 이미지
+    jstartImgPath=resource_path("src/jstart.png")
+    jstartImg=tkinter.PhotoImage(file = jstartImgPath)
+    homeImgPath=resource_path("src/updown_home.png")
+    homeImg=tkinter.PhotoImage(file = homeImgPath)
+    restartImgPath=resource_path("src/restart.png")
+    restartImg=tkinter.PhotoImage(file = restartImgPath)
+    exitImgPath=resource_path("src/exit.png")
+    exitImg=tkinter.PhotoImage(file = exitImgPath)
+    jebi1ImgPath=resource_path("src/jebi_jebi1.png")
+    jebi1Img=tkinter.PhotoImage(file = jebi1ImgPath)
+    jebi2ImgPath=resource_path("src/jebi_jebi2.png")
+    jebi2Img=tkinter.PhotoImage(file = jebi2ImgPath)
+    jebi3ImgPath=resource_path("src/jebi_jebi3.png")
+    jebi3Img=tkinter.PhotoImage(file = jebi3ImgPath)
+    jebi4ImgPath=resource_path("src/jebi_jebi4.png")
+    jebi4Img=tkinter.PhotoImage(file = jebi4ImgPath)
+    jebi5ImgPath=resource_path("src/jebi_jebi5.png")
+    jebi5Img=tkinter.PhotoImage(file = jebi5ImgPath)
+    jebi6ImgPath=resource_path("src/jebi_jebi6.png")
+    jebi6Img=tkinter.PhotoImage(file = jebi6ImgPath)
+    jebi7ImgPath=resource_path("src/jebi_jebi7.png")
+    jebi7Img=tkinter.PhotoImage(file = jebi7ImgPath)
+    jebi8ImgPath=resource_path("src/jebi_jebi8.png")
+    jebi8Img=tkinter.PhotoImage(file = jebi8ImgPath)
+
+    #시작 버튼 위치
+    jstartBtn=tkinter.Button(window, image=jstartImg ,relief="flat",bg="light yellow", command=jebi).place(x=174,y=270)
+
+    window.mainloop()

@@ -37,7 +37,7 @@ myPw = ''
 
 # 사용자 계정 정보
 accountLabel=Label(root, text=" 비 로그인 이용 중 입니다. ", relief="solid",bg="#d4e157")
-accountLabel.place(x=230,y=30)
+accountLabel.place(x=230,y=220)
 
 def setAccount(myId, myPw) :
     accountHeader = [['학번','비밀번호']]
@@ -64,7 +64,7 @@ def readAccount():
                 myPw = tmp[i][1]
                 if myId != '' and myPw != '' :
                     accountLabel.configure(text=" {} 님이 로그인 중 입니다. ".format(myId), fg="blue", relief="solid")
-                    accountLabel.place(x=205, y=30)
+                    accountLabel.place(x=205, y=170)
                     win32file.SetFileAttributes('userAccount.csv', 2)
                 
 def writeCsv(filename, the_list):
@@ -279,7 +279,7 @@ def logoutFunc() :
     else :
         messagebox.showinfo("로그아웃", "로그아웃 되었습니다.")
         accountLabel.configure(text=" 비 로그인 이용 중 입니다. ", fg="blue", relief="solid")
-        accountLabel.place(x=230,y=30)
+        accountLabel.place(x=230,y=170)
         myId = ''
         myPw = ''
 
@@ -323,7 +323,7 @@ def loginMenu() :
                 messagebox.showinfo("일회용 로그인", "로그인 되었습니다.")
                 loginWindow.destroy()
                 accountLabel.configure(text=" {} 님이 로그인 중 입니다. ".format(myId), fg="blue", relief="solid")
-                accountLabel.place(x=205, y=30)
+                accountLabel.place(x=205, y=170)
 
         def saveLoginFunc(id, pw) :
             global myId, myPw
@@ -337,7 +337,7 @@ def loginMenu() :
                 writeAccount(myId, myPw)
                 loginWindow.destroy()
                 accountLabel.configure(text=" {} 님이 로그인 중 입니다. ".format(myId), fg="blue", relief="solid")
-                accountLabel.place(x=205, y=30)
+                accountLabel.place(x=205, y=170)
             
         idLabel.grid(row=0, column=0, padx=10, pady=10)
         idEntry.grid(row=0, column=1, padx=10, pady=10)

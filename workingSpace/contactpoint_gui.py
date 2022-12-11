@@ -1,6 +1,7 @@
 import tkinter
 import tkinter.font
 import tkinter.ttk
+import tkinter.messagebox as msgbox
 from tkinter import *
 import csv
 
@@ -12,8 +13,10 @@ window['bg']='cornsilk'
 
 image1=tkinter.PhotoImage(file="contactpoint.png")
 
+
 #연락망 새창
 def contactpointWindow():
+
 
     newwindow=tkinter.Toplevel(window)
     newwindow.geometry("590x400")
@@ -21,6 +24,7 @@ def contactpointWindow():
 
     label=tkinter.Label(newwindow, image=image1)
     label.place(x =-1, y =-1)
+
 
 #교수님 이메일 
     
@@ -115,6 +119,8 @@ def contactpointWindow():
         wr.writerow([a[0],a[1],a[2]])
         f.close()
 
+        msgbox.showinfo( "알림", "저장되었습니다." )
+
     emailAddbtn = Button(newwindow) 
     emailAddbtn.config(text = "확인",background="#E2F0D9")
     emailAddbtn.config(command = emailAdd)
@@ -134,6 +140,8 @@ def contactpointWindow():
         
         wr.writerow([a[0],a[1],a[2]])
         f.close()
+
+        msgbox.showinfo( "알림", "저장되었습니다." )
 
     phoneAddbtn = Button(newwindow) 
     phoneAddbtn.config(text = "확인",background="#E2F0D9")

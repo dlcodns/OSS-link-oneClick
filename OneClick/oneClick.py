@@ -15,6 +15,7 @@ import csv
 import win32file            # https://gentlesark.tistory.com/112 conda 설치
 from updown import *
 from jebi import *
+from contactpoint import *
 
 chromedriver_autoinstaller.install(True)                         # 크롬 드라이버 자동 설치
 chrome_options = Options()
@@ -351,39 +352,6 @@ def loginMenu() :
         pwEntry.grid(row=1, column=1, padx=10, pady=10)
         loginBtn.grid(row=2, column=0, padx=10, pady=10)
         saveAccountBtn.grid(row=2, column=1, padx=10, pady=10)
-        
-        
-
-#전화번호부 새창
-def createNumberWindow():
-    newwindow=Toplevel(root)
-    newwindow.geometry("400x400")
-
-    #교수님 이메일 찾기
-    label1=Label(newwindow, text="교수님 이메일 찾기")
-    label1.pack()
-
-    value=['교양', '컴퓨터공학과']
-    combobox1=Combobox(newwindow, values=value)
-    combobox1.pack()
-    combobox1.set("목록 선택")
-
-    #전화번호 찾기
-    label2=Label(newwindow, text="전화번호 찾기")
-    label2.pack()
-
-    values=['교양교육본부', '행정지원실', '교양교육원', 'RC교육센터','의사소통센터','교양교수님', '컴공교수님']
-    combobox2=Combobox(newwindow, values=values)
-    combobox2.pack()
-    combobox2.set("목록 선택")
-
-    #전화번호 적을 리스트
-    listbox = Listbox(newwindow, selectmode='extended')
-    listbox.insert(0,"0")
-    listbox.insert(0,"1")
-    listbox.insert(0,"2")
-    listbox.insert(0,"3")
-    listbox.pack()
 
 
 # GUI Section------------------------------------------------------------
@@ -458,7 +426,7 @@ sojungBtn=Button(root, image = sojungImg, relief = "flat", bg="#d4e157", command
 sojungBtn.place(x=475,y=230,width=125,height=60)
 majorBtn=Button(root, image = majorImg, relief = "flat", bg="#d4e157", command=majorWindow,activebackground = "#d4e157")
 majorBtn.place(x=475,y=300,width=125,height=60)
-phonebookBtn=Button(root, image = phonebookImg, relief = "flat", bg="#d4e157", command=createNumberWindow,activebackground = "#d4e157")
+phonebookBtn=Button(root, image = phonebookImg, relief = "flat", bg="#d4e157", command=lambda:[showContactpoint()],activebackground = "#d4e157")
 phonebookBtn.place(x=475,y=370,width=125,height=60)
 
 #원클릭 로고

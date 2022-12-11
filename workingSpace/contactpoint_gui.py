@@ -12,10 +12,8 @@ window['bg']='cornsilk'
 
 image1=tkinter.PhotoImage(file="contactpoint.png")
 
-
 #연락망 새창
 def contactpointWindow():
-
 
     newwindow=tkinter.Toplevel(window)
     newwindow.geometry("590x400")
@@ -24,7 +22,6 @@ def contactpointWindow():
     label=tkinter.Label(newwindow, image=image1)
     label.place(x =-1, y =-1)
 
-
 #교수님 이메일 
     
     emailValues=['전체', '컴퓨터공학과', '교양']
@@ -32,82 +29,35 @@ def contactpointWindow():
     emailCombobox.place(x=20,y=118,width=80,height=20)
     emailCombobox.set("전체")
 
-    emailEnt = Entry(newwindow)  
-    emailEnt.place(x=100,y=118,width=115,height=20)
+    emailEntry = Entry(newwindow)  
+    emailEntry.place(x=100,y=118,width=115,height=20)
 
-    def searchEmail(a,b,c):
-        if emailCombobox.get() == a:
-            emailCnta = 0
-            mailbook = []
-            print("전체")
-            f = open("mail_book.csv",'r')
-            rdr = csv.reader(f)
-            for row in rdr:
-                mailbook.append(row)
-            f.close
+    def emailFind():
+        flag = 0
+        mailCnt = 0
+        mailbook = []
+        f = open("mail_book.csv",'r')
+        rdr = csv.reader(f)
+        for row in rdr:
+            mailbook.append(row)
+        f.close
 
-            a = emailEnt.get()
+        emailListbox = Listbox(newwindow, selectmode = 'extended',relief="flat",bg="#E2F0D9",width=38, height = 9)
+        emailListbox.place(x=290,y=85)  
 
-            emailListboxa = Listbox(newwindow, selectmode = 'extended',relief="flat",bg="#E2F0D9",width=38, height = 9)
-            emailListboxa.place(x=290,y=85)            
-            for i in mailbook:
-                
-                    if a == "":
-                        emailListboxa.insert(emailCnta, "[{}] {} {}".format(i[0], i[1], i[2]))
-                        emailCnta = emailCnta+1
-                    elif a in i[0] or a in i[1] or a in i[2]:
-                        emailListboxa.insert(emailCnta, "[{}] {} {}".format(i[0], i[1], i[2]))
-                        emailCnta = emailCnta+1
+        for i in mailbook:
+            if (emailCombobox.get() == i[0]) or (emailCombobox.get() == "전체"):
+                if (emailEntry.get() in i[0] or emailEntry.get() in i[1] or emailEntry.get() in i[2]):
+                    emailListbox.insert(mailCnt, "[{}] {} {}".format(i[0], i[1], i[2]))
+                    mailCnt = mailCnt+1 
+                    flag = 1
 
+        if flag == 0:
+            print("없음")
 
-        elif  emailCombobox.get()==b:
-                emailCntb = 0
-                mailbook = []
-                print("컴공")
-                f = open("mail_bookA.csv",'r')
-                rdr = csv.reader(f)
-                for row in rdr:
-                    mailbook.append(row)
-                f.close
-
-                a = emailEnt.get()
-
-                emailListboxb = Listbox(newwindow, selectmode = 'extended',relief="flat",bg="#E2F0D9",width=38, height = 9)
-                emailListboxb.place(x=290,y=85) 
-                for i in mailbook:
-                        if a == "":
-                            emailListboxb.insert(emailCntb, "[{}] {} {}".format(i[0], i[1], i[2]))
-                            emailCntb = emailCntb+1
-                        elif a in i[0] or a in i[1] or a in i[2]:
-                            emailListboxb.insert(emailCntb, "[{}] {} {}".format(i[0], i[1], i[2]))
-                            emailCntb = emailCntb+1                    
-                            
-
-        elif  emailCombobox.get() == c:
-                emailCntc = 0
-                mailbook = []
-                print("교양")
-                f = open("mail_bookB.csv",'r')
-                rdr = csv.reader(f)
-                for row in rdr:
-                    mailbook.append(row)
-                f.close
-
-                a = emailEnt.get()
-
-                emailListboxc = Listbox(newwindow, selectmode = 'extended',relief="flat",bg="#E2F0D9",width=38, height = 9)
-                emailListboxc.place(x=290,y=85)                
-                for i in mailbook:
-                        if a == "":
-                            emailListboxc.insert(emailCntc, "[{}] {} {}".format(i[0], i[1], i[2]))
-                            emailCntc = emailCntc+1
-                        elif a in i[0] or a in i[1] or a in i[2]:
-                            emailListboxc.insert(emailCntc, "[{}] {} {}".format(i[0], i[1], i[2]))
-                            emailCntc = emailCntc+1  
-      
     emailbtn = Button(newwindow) 
     emailbtn.config(text = "확인",background="#E2F0D9")
-    emailbtn.config(command = lambda:[searchEmail(emailValues[0],emailValues[1],emailValues[2])])
+    emailbtn.config(command = emailFind)
     emailbtn.place(x=215,y=118,width=40,height=20)
 
 #전화번호 

@@ -139,6 +139,15 @@ def shake(a,num,enteredOne,enteredTwo,enteredThree,enteredFour,enteredFive,enter
         temp=a[i]
         a[i]=a[ran]
         a[ran]=temp
+        
+    #잘 안섞일까봐 한번 더
+    for i in range(0,num-1):
+        rand1=random.randint(0, 10000)
+        ran1=rand%(num-i)+i
+        
+        temp=a[i]
+        a[i]=a[ran1]
+        a[ran1]=temp
     
     printer(a,num)
     
@@ -146,6 +155,7 @@ def shake(a,num,enteredOne,enteredTwo,enteredThree,enteredFour,enteredFive,enter
     for i in range(0, num):
         print('제비',i+1,'역할',a[i])
 
+#제비버튼을 출력하는 함수
 def printer(a,num):
     num=num
     a=a
@@ -153,21 +163,80 @@ def printer(a,num):
     restartBtn=tkinter.Button(window, image=restartImg ,relief="flat", command=jebi).place(x=125,y=285)
     exitBtn=tkinter.Button(window, image=exitImg ,relief="flat", command=exit_game).place(x=277,y=285)
     tkinter.Label(window, text="-- 한 사람당 하나씩 뽑아보세요. --",bg="#FDEDA6",fg="black",relief="flat", font=font1).place(x=150,y=45,width=200)
-    openBtn=tkinter.Button(window,text="전체 공개",relief="ridge", font=font1,bg="#FAD2AA",fg="black").place(x=200,y=233,width=100)
-    button1=tkinter.Button(window, image=jebi1Img,relief="flat",bg="#FDEDA6").place(x=90+18,y=70+3)
-    button2=tkinter.Button(window, image=jebi2Img,relief="flat",bg="#FDEDA6").place(x=160+18,y=70+3)
+    openBtn=tkinter.Button(window,text="전체 공개",relief="ridge", font=font1,bg="#FAD2AA",fg="black",command=lambda:[all(a)]).place(x=200,y=233,width=100)
+    button1=tkinter.Button(window, image=jebi1Img,relief="flat",bg="#FDEDA6",command=lambda:[open1(a)]).place(x=90+18,y=70+3)
+    button2=tkinter.Button(window, image=jebi2Img,relief="flat",bg="#FDEDA6",command=lambda:[open2(a)]).place(x=160+18,y=70+3)
     if num>=3:
-        button3=tkinter.Button(window, image=jebi3Img,relief="flat",bg="#FDEDA6").place(x=230+18,y=70+3)
+        button3=tkinter.Button(window, image=jebi3Img,relief="flat",bg="#FDEDA6",command=lambda:[open3(a)]).place(x=230+18,y=70+3)
     if num>=4:    
-        button4=tkinter.Button(window, image=jebi4Img,relief="flat",bg="#FDEDA6").place(x=300+18,y=70+3)
+        button4=tkinter.Button(window, image=jebi4Img,relief="flat",bg="#FDEDA6",command=lambda:[open4(a)]).place(x=300+18,y=70+3)
     if num>=5:    
-        button5=tkinter.Button(window, image=jebi5Img,relief="flat",bg="#FDEDA6").place(x=90+18,y=149+3)
+        button5=tkinter.Button(window, image=jebi5Img,relief="flat",bg="#FDEDA6",command=lambda:[open5(a)]).place(x=90+18,y=149+3)
     if num>=6:    
-        button6=tkinter.Button(window, image=jebi6Img,relief="flat",bg="#FDEDA6").place(x=160+18,y=149+3)
+        button6=tkinter.Button(window, image=jebi6Img,relief="flat",bg="#FDEDA6",command=lambda:[open6(a)]).place(x=160+18,y=149+3)
     if num>=7:    
-        button7=tkinter.Button(window, image=jebi7Img,relief="flat",bg="#FDEDA6").place(x=230+18,y=149+3)
+        button7=tkinter.Button(window, image=jebi7Img,relief="flat",bg="#FDEDA6",command=lambda:[open7(a)]).place(x=230+18,y=149+3)
     if num==8:    
-        button8=tkinter.Button(window, image=jebi8Img,relief="flat",bg="#FDEDA6").place(x=300+18,y=149+3)
+        button8=tkinter.Button(window, image=jebi8Img,relief="flat",bg="#FDEDA6",command=lambda:[open8(a)]).place(x=300+18,y=149+3)
+    
+def all(a):
+    a=a
+    open1(a)
+    open2(a) 
+    open3(a)    
+    open4(a)       
+    open5(a)    
+    open6(a)    
+    open7(a)    
+    open8(a)    
+
+def open1(a):
+    a=a
+    text1="제비 1\n\n"+a[0]
+    tkinter.Label(window,text= text1,bg="#FDEDA6",fg="black",relief="flat", font=font1).place(x=108,y=73,width=70, height=81)  
+    return
+
+def open2(a):
+    a=a
+    text2="제비 2\n\n"+a[1]
+    tkinter.Label(window,text= text2,bg="#FDEDA6",fg="black",relief="flat", font=font1).place(x=178,y=73,width=70, height=81)  
+    return
+    
+def open3(a):
+    a=a
+    text3="제비 3\n\n"+a[2]
+    tkinter.Label(window,text= text3,bg="#FDEDA6",fg="black",relief="flat", font=font1).place(x=248,y=73,width=70, height=81)  
+    return
+
+def open4(a):
+    a=a
+    text4="제비 4\n\n"+a[3]
+    tkinter.Label(window,text= text4,bg="#FDEDA6",fg="black",relief="flat", font=font1).place(x=318,y=73,width=70, height=81)  
+    return
+
+def open5(a):
+    a=a
+    text5="제비 5\n\n"+a[4]
+    tkinter.Label(window,text= text5,bg="#FDEDA6",fg="black",relief="flat", font=font1).place(x=108,y=154,width=70, height=81)  
+    return
+
+def open6(a):
+    a=a
+    text6="제비 6\n\n"+a[5]
+    tkinter.Label(window,text= text6,bg="#FDEDA6",fg="black",relief="flat", font=font1).place(x=178,y=154,width=70, height=81)  
+    return
+
+def open7(a):
+    a=a
+    text7="제비 7\n\n"+a[6]
+    tkinter.Label(window,text= text7,bg="#FDEDA6",fg="black",relief="flat", font=font1).place(x=248,y=154,width=70, height=81)  
+    return
+
+def open8(a):
+    a=a
+    text8="제비 8\n\n"+a[7]
+    tkinter.Label(window,text= text8,bg="#FDEDA6",fg="black",relief="flat", font=font1).place(x=318,y=154,width=70, height=81)  
+    return
 
 #게임을 나가는 함수
 def exit_game():

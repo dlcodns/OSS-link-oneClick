@@ -68,6 +68,10 @@ def readAccount():
                     accountLabel.configure(text=" {} 님이 로그인 중 입니다. ".format(myId), fg="blue", relief="solid")
                     accountLabel.place(x=205, y=30)
                     win32file.SetFileAttributes('userAccount.csv', 2)
+                else :
+                    accountLabel.configure(text=" 비 로그인 이용 중 입니다. ", fg="black", relief="solid")
+                    accountLabel.place(x=230, y=30)
+                    win32file.SetFileAttributes('userAccount.csv', 2)
                 
 def writeCsv(filename, the_list):
     with open(filename, 'w', newline = '') as f:

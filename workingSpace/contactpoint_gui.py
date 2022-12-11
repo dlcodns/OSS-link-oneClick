@@ -11,20 +11,14 @@ window.geometry("600x450+100+100")
 window.resizable(False,False)
 window['bg']='cornsilk'
 
-image1=tkinter.PhotoImage(file="contactpoint.png")
-
-
 #연락망 새창
 def contactpointWindow():
 
-
     newwindow=tkinter.Toplevel(window)
-    newwindow.geometry("590x400")
+    newwindow.geometry("590x430")
     newwindow['bg']='honeydew'
 
-    label=tkinter.Label(newwindow, image=image1)
-    label.place(x =-1, y =-1)
-
+    contactpointImglabel=tkinter.Label(newwindow, image=contactpointImg, relief="flat").place(x =-1, y =-1)
 
 #교수님 이메일 
     
@@ -47,7 +41,7 @@ def contactpointWindow():
         f.close
 
         emailListbox = Listbox(newwindow, selectmode = 'extended',relief="flat",bg="#E2F0D9",width=38, height = 9)
-        emailListbox.place(x=290,y=85)  
+        emailListbox.place(x=290,y=83)  
 
         for i in mailbook:
             if (emailCombobox.get() == i[0]) or (emailCombobox.get() == "전체"):
@@ -147,6 +141,38 @@ def contactpointWindow():
     phoneAddbtn.config(text = "확인",background="#E2F0D9")
     phoneAddbtn.config(command = phoneAdd)
     phoneAddbtn.place(x=215,y=350,width=40,height=20)
+
+#메모장
+    memoCnt = 0    
+    memo = []
+
+    f = open("memo.csv",'r')
+    rdr = csv.reader(f)
+    for row in rdr:
+        memo.append(row)
+    f.close
+
+    memolistbox = Listbox(newwindow,selectmode = 'extended',relief="flat",bg="#DAE3F3")
+    memolistbox.place(x=280,y=270,width=290, height = 80)
+
+    for i in memo:
+        memolistbox.insert(memoCnt, i)
+        memoCnt=memoCnt+1  
+
+    memoEntry = Entry(newwindow)
+    memoEntry.place(x = 278, y = 350,width=255, height =25)  
+     
+    def memoAdd():
+        f = open("memo.csv",'a',newline="")
+        wr = csv.writer(f) 
+        a = memoEntry.get().split('/')
+        wr.writerow([a[0]])       
+        f.close()
+    
+    memobtn = Button(newwindow) 
+    memobtn.config(text = "저장",width=4,height=1 )
+    memobtn.config(command = memoAdd)
+    memobtn.place(x=533,y= 350)
     
 font=tkinter.font.Font(family="맑은고딕", size=10, weight="bold")    
 

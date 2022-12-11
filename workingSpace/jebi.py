@@ -4,6 +4,7 @@ import tkinter.ttk
 import random
 import os
 import sys
+from tkinter import *
 
 #배열에 집어넣기
 #-오류 없길-
@@ -52,6 +53,7 @@ def input(action, enteredNum):
     num = int(enteredNum.get())
     if num>8 or num<2 :
         jebi()
+        return
            
     a = []
     if num<=8 and num>=2 :
@@ -111,7 +113,7 @@ def input(action, enteredNum):
 
 #배열 만들기, 랜덤 셔플 반복문, 최종 출력 함수
 def shake(a,num,enteredOne,enteredTwo,enteredThree,enteredFour,enteredFive,enteredSix,enteredSeven,enteredEight):
-   
+
     num=num
     
     a.append(enteredOne.get())
@@ -129,18 +131,43 @@ def shake(a,num,enteredOne,enteredTwo,enteredThree,enteredFour,enteredFive,enter
     if num==8:
         a.append(enteredEight.get())
         
-    #난수 인덱스의 배열과 (0,num-2)의 배열을 바꾸는 과정
-    for i in range(0,num-2):
-        rand=random.randint
+    #난수 인덱스의 배열과 (0,num-1) 인덱스의 배열을 바꾸는 과정
+    for i in range(0,num-1):
+        rand=random.randint(0, 10000)
         ran=rand%(num-i)+i
         
         temp=a[i]
         a[i]=a[ran]
         a[ran]=temp
     
+    printer(a,num)
+    
     #최종 출력
-    for i in range(0, num-1):
+    for i in range(0, num):
         print('제비',i+1,'역할',a[i])
+
+def printer(a,num):
+    num=num
+    a=a
+    jgrassLoopImglabel=tkinter.Label(window, image=jgrassLoopImg, relief="flat", bg="light yellow").place(x=-23,y=-41)
+    restartBtn=tkinter.Button(window, image=restartImg ,relief="flat", command=jebi).place(x=125,y=285)
+    exitBtn=tkinter.Button(window, image=exitImg ,relief="flat", command=exit_game).place(x=277,y=285)
+    tkinter.Label(window, text="-- 한 사람당 하나씩 뽑아보세요. --",bg="#FDEDA6",fg="black",relief="flat", font=font1).place(x=150,y=45,width=200)
+    openBtn=tkinter.Button(window,text="전체 공개",relief="ridge", font=font1,bg="#FAD2AA",fg="black").place(x=200,y=233,width=100)
+    button1=tkinter.Button(window, image=jebi1Img,relief="flat",bg="#FDEDA6").place(x=90+18,y=70+3)
+    button2=tkinter.Button(window, image=jebi2Img,relief="flat",bg="#FDEDA6").place(x=160+18,y=70+3)
+    if num>=3:
+        button3=tkinter.Button(window, image=jebi3Img,relief="flat",bg="#FDEDA6").place(x=230+18,y=70+3)
+    if num>=4:    
+        button4=tkinter.Button(window, image=jebi4Img,relief="flat",bg="#FDEDA6").place(x=300+18,y=70+3)
+    if num>=5:    
+        button5=tkinter.Button(window, image=jebi5Img,relief="flat",bg="#FDEDA6").place(x=90+18,y=149+3)
+    if num>=6:    
+        button6=tkinter.Button(window, image=jebi6Img,relief="flat",bg="#FDEDA6").place(x=160+18,y=149+3)
+    if num>=7:    
+        button7=tkinter.Button(window, image=jebi7Img,relief="flat",bg="#FDEDA6").place(x=230+18,y=149+3)
+    if num==8:    
+        button8=tkinter.Button(window, image=jebi8Img,relief="flat",bg="#FDEDA6").place(x=300+18,y=149+3)
 
 #게임을 나가는 함수
 def exit_game():
@@ -177,6 +204,22 @@ restartImgPath=resource_path("src/restart.png")
 restartImg=tkinter.PhotoImage(file = restartImgPath)
 exitImgPath=resource_path("src/exit.png")
 exitImg=tkinter.PhotoImage(file = exitImgPath)
+jebi1ImgPath=resource_path("src/jebi_jebi1.png")
+jebi1Img=tkinter.PhotoImage(file = jebi1ImgPath)
+jebi2ImgPath=resource_path("src/jebi_jebi2.png")
+jebi2Img=tkinter.PhotoImage(file = jebi2ImgPath)
+jebi3ImgPath=resource_path("src/jebi_jebi3.png")
+jebi3Img=tkinter.PhotoImage(file = jebi3ImgPath)
+jebi4ImgPath=resource_path("src/jebi_jebi4.png")
+jebi4Img=tkinter.PhotoImage(file = jebi4ImgPath)
+jebi5ImgPath=resource_path("src/jebi_jebi5.png")
+jebi5Img=tkinter.PhotoImage(file = jebi5ImgPath)
+jebi6ImgPath=resource_path("src/jebi_jebi6.png")
+jebi6Img=tkinter.PhotoImage(file = jebi6ImgPath)
+jebi7ImgPath=resource_path("src/jebi_jebi7.png")
+jebi7Img=tkinter.PhotoImage(file = jebi7ImgPath)
+jebi8ImgPath=resource_path("src/jebi_jebi8.png")
+jebi8Img=tkinter.PhotoImage(file = jebi8ImgPath)
 
 #시작 버튼 위치
 jstartBtn=tkinter.Button(window, image=jstartImg ,relief="flat",bg="light yellow", command=jebi).place(x=174,y=270)

@@ -10,11 +10,17 @@ window.geometry("600x450+100+100")
 window.resizable(False,False)
 window['bg']='cornsilk'
 
+image1=tkinter.PhotoImage(file="contactpoint.png")
+
 #연락망 새창
 def contactpointWindow():
-    newwindow=tkinter.Toplevel(window)
-    newwindow.geometry("550x400")
 
+    newwindow=tkinter.Toplevel(window)
+    newwindow.geometry("590x400")
+    newwindow['bg']='honeydew'
+
+    label=tkinter.Label(newwindow, image=image1)
+    label.place(x =-1, y =-1)
 #교수님 이메일 
     email=tkinter.ttk.Label(newwindow, text="이메일 검색")
     email.place(x=15,y=80)

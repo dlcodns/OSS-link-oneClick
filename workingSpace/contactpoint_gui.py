@@ -12,8 +12,10 @@ window['bg']='cornsilk'
 
 image1=tkinter.PhotoImage(file="contactpoint.png")
 
+
 #연락망 새창
 def contactpointWindow():
+
 
     newwindow=tkinter.Toplevel(window)
     newwindow.geometry("590x400")
@@ -21,21 +23,17 @@ def contactpointWindow():
 
     label=tkinter.Label(newwindow, image=image1)
     label.place(x =-1, y =-1)
+
+
 #교수님 이메일 
-    email=tkinter.ttk.Label(newwindow, text="이메일 검색")
-    email.place(x=15,y=80)
     
     emailValues=['전체', '컴퓨터공학과', '교양']
-    emailCombobox=tkinter.ttk.Combobox(newwindow, values=emailValues)
-    emailCombobox.place(x=15,y=100,width=80,height=20)
+    emailCombobox=tkinter.ttk.Combobox(newwindow, values=emailValues, background="#E2F0D9")
+    emailCombobox.place(x=20,y=118,width=80,height=20)
     emailCombobox.set("전체")
 
-    emailPrint=Label(newwindow)
-    emailPrint.config(relief='sunken', width=41, height = 7)
-    emailPrint.place(x=280,y=80)
-
     emailEnt = Entry(newwindow)  
-    emailEnt.place(x=95,y=100,width=120,height=20)
+    emailEnt.place(x=100,y=118,width=115,height=20)
 
     def searchEmail(a,b,c):
         if emailCombobox.get() == a:
@@ -50,8 +48,8 @@ def contactpointWindow():
 
             a = emailEnt.get()
 
-            emailListboxa = Listbox(newwindow, selectmode = 'extended',width=41, height = 7)
-            emailListboxa.place(x=280,y=80)            
+            emailListboxa = Listbox(newwindow, selectmode = 'extended',relief="flat",bg="#E2F0D9",width=38, height = 9)
+            emailListboxa.place(x=290,y=85)            
             for i in mailbook:
                 
                     if a == "":
@@ -74,8 +72,8 @@ def contactpointWindow():
 
                 a = emailEnt.get()
 
-                emailListboxb = Listbox(newwindow, selectmode = 'extended',width=41, height = 7)
-                emailListboxb.place(x=280,y=80) 
+                emailListboxb = Listbox(newwindow, selectmode = 'extended',relief="flat",bg="#E2F0D9",width=38, height = 9)
+                emailListboxb.place(x=290,y=85) 
                 for i in mailbook:
                         if a == "":
                             emailListboxb.insert(emailCntb, "[{}] {} {}".format(i[0], i[1], i[2]))
@@ -97,8 +95,8 @@ def contactpointWindow():
 
                 a = emailEnt.get()
 
-                emailListboxc = Listbox(newwindow, selectmode = 'extended',width=41, height = 7)
-                emailListboxc.place(x=280,y=80)                
+                emailListboxc = Listbox(newwindow, selectmode = 'extended',relief="flat",bg="#E2F0D9",width=38, height = 9)
+                emailListboxc.place(x=290,y=85)                
                 for i in mailbook:
                         if a == "":
                             emailListboxc.insert(emailCntc, "[{}] {} {}".format(i[0], i[1], i[2]))
@@ -108,22 +106,19 @@ def contactpointWindow():
                             emailCntc = emailCntc+1  
       
     emailbtn = Button(newwindow) 
-    emailbtn.config(text = "확인")
+    emailbtn.config(text = "확인",background="#E2F0D9")
     emailbtn.config(command = lambda:[searchEmail(emailValues[0],emailValues[1],emailValues[2])])
-    emailbtn.place(x=215,y=100,width=40,height=20)
-
+    emailbtn.place(x=215,y=118,width=40,height=20)
 
 #전화번호 
-    phone=tkinter.ttk.Label(newwindow, text="전화번호 검색")
-    phone.place(x=15,y=140)
 
     phoneValues=['전체', '컴퓨터공학과', '교양 교수님', '교양교육본부']
     phonecombobox=tkinter.ttk.Combobox(newwindow, values=phoneValues)
-    phonecombobox.place(x=15,y=160,width=80,height=20)
+    phonecombobox.place(x=20,y=205,width=80,height=20)
     phonecombobox.set("전체")
 
     phoneEnt = Entry(newwindow) 
-    phoneEnt.place(x=95,y=160,width=120,height=20)
+    phoneEnt.place(x=100,y=205,width=115,height=20)
     def searchPhone(a,b,c,d): 
         if  phonecombobox.get()==a:
             phoneCnta = 0
@@ -136,8 +131,8 @@ def contactpointWindow():
             f.close
             a = phoneEnt.get()
             
-            phoneListboxa = Listbox(newwindow, selectmode = 'extended',width=41, height = 7)
-            phoneListboxa.place(x=280,y=80) 
+            phoneListboxa = Listbox(newwindow, selectmode = 'extended',relief="flat",bg="#E2F0D9",width=38, height = 9)
+            phoneListboxa.place(x=290,y=85)    
             for i in phonebook:
                     if a == "":
                         phoneListboxa.insert(phoneCnta, "[{}] {} {}".format(i[0], i[1], i[2]))
@@ -157,8 +152,8 @@ def contactpointWindow():
             f.close
             a = phoneEnt.get()
 
-            phoneListboxb = Listbox(newwindow, selectmode = 'extended',width=41, height = 7)
-            phoneListboxb.place(x=280,y=80) 
+            phoneListboxb = Listbox(newwindow, selectmode = 'extended',relief="flat",bg="#E2F0D9",width=38, height = 9)
+            phoneListboxb.place(x=290,y=85) 
             for i in phonebook:
                     if a == "":
                         phoneListboxb.insert(phoneCntb, "[{}] {} {}".format(i[0], i[1], i[2]))
@@ -178,8 +173,8 @@ def contactpointWindow():
             f.close
             a = phoneEnt.get()
 
-            phoneListboxc = Listbox(newwindow, selectmode = 'extended',width=41, height = 7)
-            phoneListboxc.place(x=280,y=80) 
+            phoneListboxc = Listbox(newwindow, selectmode = 'extended',relief="flat",bg="#E2F0D9",width=38, height = 9)
+            phoneListboxc.place(x=290,y=85) 
             for i in phonebook:
                     if a == "":
                         phoneListboxc.insert(phoneCntc, "[{}] {} {}".format(i[0], i[1], i[2]))
@@ -199,8 +194,8 @@ def contactpointWindow():
             f.close
             a = phoneEnt.get()
 
-            phoneListboxd = Listbox(newwindow, selectmode = 'extended',width=41, height = 7)
-            phoneListboxd.place(x=280,y=80) 
+            phoneListboxd = Listbox(newwindow, selectmode = 'extended',relief="flat",bg="#E2F0D9",width=38, height = 9)
+            phoneListboxd.place(x=290,y=85) 
             for i in phonebook:
                     if a == "":
                         phoneListboxd.insert(phoneCntd, "[{}] {} {}".format(i[0], i[1], i[2]))
@@ -210,26 +205,18 @@ def contactpointWindow():
                         phoneCntd = phoneCntd+1 
 
     phonebtn = Button(newwindow) 
-    phonebtn.config(text = "확인")
+    phonebtn.config(text = "확인",background="#E2F0D9")
     phonebtn.config(command = lambda:[searchPhone(phoneValues[0],phoneValues[1],phoneValues[2],phoneValues[3])])
-    phonebtn.place(x=215,y=160,width=40,height=20)
+    phonebtn.place(x=215,y=205, width=40,height=20)
     
    
 #메일 추가
-    contactAdd=tkinter.ttk.Label(newwindow, text="<연락망 추가하기>")
-    contactAdd.place(x=15,y=210)
 
-    ex1=tkinter.ttk.Label(newwindow, text="예시) 컴공/김민서/asdfghjkl@chungbuk.ac.kr")
-    ex1.place(x=15,y=240)
-
-    ex2=tkinter.ttk.Label(newwindow, text="예시) 컴공/김민서/010-1234-5678")
-    ex2.place(x=15,y=260)  
-
-    emaill=tkinter.ttk.Label(newwindow, text="메일 추가:")
-    emaill.place(x=15,y=290)
+    emaill=tkinter.ttk.Label(newwindow, text="메일 추가", background="#CCF4D9")
+    emaill.place(x=18,y=320)
 
     emailAddEnt = Entry(newwindow) 
-    emailAddEnt.place(x=75,y=290,width=140,height=20)
+    emailAddEnt.place(x=75,y=320,width=140,height=20)
     def emailAdd():
         f = open("mail_book.csv",'a',newline="")
         wr = csv.writer(f) 
@@ -240,16 +227,16 @@ def contactpointWindow():
         f.close()
 
     emailAddbtn = Button(newwindow) 
-    emailAddbtn.config(text = "확인")
+    emailAddbtn.config(text = "확인",background="#E2F0D9")
     emailAddbtn.config(command = emailAdd)
-    emailAddbtn.place(x=215,y=290,width=40,height=20)
+    emailAddbtn.place(x=215,y=320,width=40,height=20)
 
 #전화번호 추가
-    phonee=tkinter.ttk.Label(newwindow, text="번호 추가:")
-    phonee.place(x=15,y=320)
+    phonee=tkinter.ttk.Label(newwindow, text="번호 추가", background="#CCF4D9")
+    phonee.place(x=18,y=350)
 
     phoneAddEnt = Entry(newwindow) 
-    phoneAddEnt.place(x=75,y=320,width=140,height=20)
+    phoneAddEnt.place(x=75,y=350,width=140,height=20)
     def phoneAdd():
         f = open("phone_book.csv",'a',newline="")
         wr = csv.writer(f) 
@@ -260,9 +247,9 @@ def contactpointWindow():
         f.close()
 
     phoneAddbtn = Button(newwindow) 
-    phoneAddbtn.config(text = "확인")
+    phoneAddbtn.config(text = "확인",background="#E2F0D9")
     phoneAddbtn.config(command = phoneAdd)
-    phoneAddbtn.place(x=215,y=320,width=40,height=20)
+    phoneAddbtn.place(x=215,y=350,width=40,height=20)
     
 font=tkinter.font.Font(family="맑은고딕", size=10, weight="bold")    
 

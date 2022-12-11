@@ -32,7 +32,7 @@ def check_prep(path):
 path = "./oneClickData"
 check_prep(path)
 
-chromedriver_autoinstaller.install(True)                         # 크롬 드라이버 자동 설치
+chromedriver_autoinstaller.install(path=path)                         # 크롬 드라이버 자동 설치
 chrome_options = Options()
 chrome_options.add_experimental_option("detach", True)      # 창 꺼지지 않는 옵션
 chrome_options.add_argument('incognito')                    # 시크릿 모드로 실행

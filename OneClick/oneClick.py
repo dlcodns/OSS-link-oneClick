@@ -16,6 +16,21 @@ import win32file            # https://gentlesark.tistory.com/112 conda 설치
 from updown import *
 from jebi import *
 from contactpoint import *
+import ctypes
+
+# oneClickData 폴더 생성 및 숨김 처리
+def check_prep(path):
+    if not os.path.exists(path):
+        os.makedirs(path)
+        FILE_ATTRIBUTE_HIDDEN = 0x02
+        ret = ctypes.windll.kernel32.SetFileAttributesW(path, FILE_ATTRIBUTE_HIDDEN)
+    else :
+        os.popen(path)
+        FILE_ATTRIBUTE_HIDDEN = 0x02
+        ret = ctypes.windll.kernel32.SetFileAttributesW(path, FILE_ATTRIBUTE_HIDDEN)
+
+path = "./oneClickData"
+check_prep(path)
 
 chromedriver_autoinstaller.install(True)                         # 크롬 드라이버 자동 설치
 chrome_options = Options()

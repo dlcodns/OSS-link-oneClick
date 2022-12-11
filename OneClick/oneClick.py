@@ -13,6 +13,7 @@ import os
 import sys
 import csv
 import win32file            # https://gentlesark.tistory.com/112 conda 설치
+from updown import *
 
 chromedriver_autoinstaller.install(True)                         # 크롬 드라이버 자동 설치
 chrome_options = Options()
@@ -473,11 +474,9 @@ updownbttnimage = PhotoImage(file = updownbttnimagePath)
 jaebibttnimagePath=resource_path("src/jaebiBtn.png")
 jaebibttnimage = PhotoImage(file = jaebibttnimagePath)
 
-updownbttn=Button(root, image=updownbttnimage, relief="flat",bg="#ffff89",activebackground = "#ffff89")
+updownbttn=Button(root, image=updownbttnimage, relief="flat",bg="#ffff89",activebackground = "#ffff89", command=lambda:[playUpDown()])
 updownbttn.place(x=216,y=358,width=72,height=32)
 jaebibttn=Button(root, image=jaebibttnimage, relief = "flat", bg="#ffff89",activebackground = "#ffff89")
 jaebibttn.place(x=314,y=358,width=72,height=32)
-
-
 
 root.mainloop()

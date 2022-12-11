@@ -116,23 +116,23 @@ def resource_path(relative_path):
 
 def main():
     #기본 이미지
-    playgroundImgPath=resource_path("src/playground.png")
+    playgroundImgPath=resource_path("src/updown_playground.png")
     playgroundImg=tkinter.PhotoImage(file = playgroundImgPath)
     playgroundImglabel=tkinter.Label(window, image=playgroundImg, relief="flat", bg="#d4e157").place(x=-2,y=1)
-    titleImgPath=resource_path("src/title.png")
+    titleImgPath=resource_path("src/updown_title.png")
     titleImg=tkinter.PhotoImage(file = titleImgPath)
     titleImglabel=tkinter.Label(window, image=titleImg, relief="flat", bg="#d4e157").place(x=77.5,y=80)
-    playgroundLoopImgPath=resource_path("src/playgroundLoop.png")
+    playgroundLoopImgPath=resource_path("src/updown_playgroundLoop.png")
     playgroundLoopImg=tkinter.PhotoImage(file = playgroundLoopImgPath)
 
     #버튼 이미지
-    startImgPath=resource_path("src/start.png")
+    startImgPath=resource_path("src/updown_start.png")
     startImg=tkinter.PhotoImage(file = startImgPath)
-    homeImgPath=resource_path("src/home.png")
+    homeImgPath=resource_path("src/updown_home.png")
     homeImg=tkinter.PhotoImage(file = homeImgPath)
-    restartImgPath=resource_path("src/restart.png")
+    restartImgPath=resource_path("src/updown_restart.png")
     restartImg=tkinter.PhotoImage(file = restartImgPath)
-    exitImgPath=resource_path("src/exit.png")
+    exitImgPath=resource_path("src/updown_exit.png")
     exitImg=tkinter.PhotoImage(file = exitImgPath)
 
     #시작 버튼 위치
@@ -142,23 +142,23 @@ def main():
 
 if __name__ == '__main__':
     #기본 이미지
-    playgroundImgPath=resource_path("src/playground.png")
+    playgroundImgPath=resource_path("src/updown_playground.png")
     playgroundImg=tkinter.PhotoImage(file = playgroundImgPath)
     playgroundImglabel=tkinter.Label(window, image=playgroundImg, relief="flat", bg="#d4e157").place(x=-2,y=1)
-    titleImgPath=resource_path("src/title.png")
+    titleImgPath=resource_path("src/updown_title.png")
     titleImg=tkinter.PhotoImage(file = titleImgPath)
     titleImglabel=tkinter.Label(window, image=titleImg, relief="flat", bg="#d4e157").place(x=77.5,y=80)
-    playgroundLoopImgPath=resource_path("src/playgroundLoop.png")
+    playgroundLoopImgPath=resource_path("src/updown_playgroundLoop.png")
     playgroundLoopImg=tkinter.PhotoImage(file = playgroundLoopImgPath)
     
     #버튼 이미지
-    startImgPath=resource_path("src/start.png")
+    startImgPath=resource_path("src/updown_start.png")
     startImg=tkinter.PhotoImage(file = startImgPath)
-    homeImgPath=resource_path("src/home.png")
+    homeImgPath=resource_path("src/updown_home.png")
     homeImg=tkinter.PhotoImage(file = homeImgPath)
-    restartImgPath=resource_path("src/restart.png")
+    restartImgPath=resource_path("src/updown_restart.png")
     restartImg=tkinter.PhotoImage(file = restartImgPath)
-    exitImgPath=resource_path("src/exit.png")
+    exitImgPath=resource_path("src/updown_exit.png")
     exitImg=tkinter.PhotoImage(file = exitImgPath)
 
     #시작 버튼 위치

@@ -19,15 +19,19 @@ font2=tkinter.font.Font(family="맑은 고딕", size=15, weight="bold")
 font3=tkinter.font.Font(family="맑은 고딕", size=20, weight="bold")
 font4=tkinter.font.Font(family="맑은 고딕", size=25, weight="bold")
 
+
 count = 0
+answer = False # 정답 맞췃는지 확인
 
 #게임 진행 함수
-def updown():
+def updown(isReset=False):
     playgroundLoopImglabel=tkinter.Label(window, image=playgroundLoopImg,relief="flat", bg="#d4e157").place(x=-2,y=1)
 
-    global count
+    global count, answer
     count =0 
+    answer = False
     
+    homeBtn=tkinter.Button(window, image=homeImg ,relief="flat", bg="gold", command=main).place(x=440,y=340)
     restartBtn=tkinter.Button(window, image=restartImg ,relief="flat", bg="#385723", command=updown).place(x=125,y=271)
     exitBtn=tkinter.Button(window, image=exitImg ,relief="flat", bg="#385723", command=exit_game).place(x=277,y=271)
     
@@ -36,6 +40,9 @@ def updown():
 
     tkinter.Label(window, text="-- 범위 1~100 --",bg="#d4e157",fg="black",relief="flat", font=font).place(x=274,y=102,width=150,height=20)
     tkinter.Label(window, text="-- 6번의 기회 --",bg="#FFFF89",fg="black",relief="flat", font=font).place(x=90,y=47,width=65,height=20)
+
+    if isReset:
+        tkinter.Label(window, text="범위는 1~100입니다.", font=font2, bg="#d4e157",fg="black",borderwidth=2,relief="flat").place(x=265,y=170,height=50)
 
     number = tkinter.StringVar()
     number_entered = tkinter.ttk.Entry(window, font=font1, width=18, textvariable=number)
@@ -46,27 +53,27 @@ def updown():
     
 #업다운 비교 함수          
 def calc(enteredNum,ran):
-    global count
+    global count, answer
     
     num = int(enteredNum.get())
     
-    print(ran) #터미널로 미리 알고 테스트 해보고자 씀!
+    print(count, ran) #터미널로 미리 알고 테스트 해보고자 씀!
     
-    if (1<=num<=100) and count < 6 :
+    if (not answer) and (1<=num<=100) and count < 6 :
         if ran > num:
             if count !=5:
-                tkinter.Label(window, text="up!", font=font4, bg="#d4e157",fg="light yellow",borderwidth=2,relief="flat").place(x=273,y=170,width=170,height=50)
+                tkinter.Label(window, text="up!", font=font4, bg="#d4e157",fg="light yellow",borderwidth=2,relief="flat").place(x=263,y=170,width=200,height=50)
         elif ran < num:
             if count !=5:
-                tkinter.Label(window, text="down!", font=font4, bg="#d4e157",fg="white",borderwidth=2,relief="flat").place(x=273,y=170,width=170,height=50)
+                tkinter.Label(window, text="down!", font=font4, bg="#d4e157",fg="white",borderwidth=2,relief="flat").place(x=263,y=170,width=200,height=50)
         elif ran == num:
             win = random.randint(1,3)
             if win == 1:
-                tkinter.Label(window, text="딩동댕~ 정답!", font=font2, bg="#d4e157",fg="blue1",borderwidth=2,relief="flat").place(x=273,y=170,width=170,height=50)
+                tkinter.Label(window, text="딩동댕~ 정답!", font=font2, bg="#d4e157",fg="blue1",borderwidth=2,relief="flat").place(x=263,y=170,width=200,height=50)
             if win == 2:
-                tkinter.Label(window, text="운이 좋으시네요. :)", font=font2, bg="#d4e157",fg="blue1",borderwidth=2,relief="flat").place(x=273,y=170,width=170,height=50)
+                tkinter.Label(window, text="운이 좋으시네요. :)", font=font2, bg="#d4e157",fg="blue1",borderwidth=2,relief="flat").place(x=263,y=170,width=200,height=50)
             if win == 3:
-                tkinter.Label(window, text="올ㅋ",bg="#d4e157", font=font2, fg="blue1",borderwidth=2,relief="flat").place(x=273,y=170,width=170,height=50)
+                tkinter.Label(window, text="올ㅋ",bg="#d4e157", font=font2, fg="blue1",borderwidth=2,relief="flat").place(x=263,y=170,width=200,height=50)
             text1 = str(count+1)+" 번째 숫자 = "+str(num)
             tkinter.Label(window, text= text1, font=font1, bg="#6A8334",fg="light yellow",borderwidth=2,relief="flat").place(x=60,y=46+(count+1)*25,width=120,height=20)
 
@@ -85,8 +92,12 @@ def calc(enteredNum,ran):
         msg = "땡! 정답은 " + str(ran) + " 입니다."
         if count == 6 :
             tkinter.Label(window, text=msg, font=font2, bg="#d4e157",fg="red3",borderwidth=2,relief="flat").place(x=263,y=170,width=195,height=50)
-    else:
-        updown()
+            
+    elif not(1 <= num <= 100):
+        count=0
+        updown(True)
+    elif answer:
+        pass
 
 #게임을 나가는 함수
 def exit_game():
@@ -103,25 +114,54 @@ def resource_path(relative_path):
 
     return os.path.join(base_path, relative_path)
 
-#기본 이미지
-playgroundImgPath=resource_path("src/playground.png")
-playgroundImg=tkinter.PhotoImage(file = playgroundImgPath)
-playgroundImglabel=tkinter.Label(window, image=playgroundImg, relief="flat", bg="#d4e157").place(x=-2,y=1)
-titleImgPath=resource_path("src/title.png")
-titleImg=tkinter.PhotoImage(file = titleImgPath)
-titleImglabel=tkinter.Label(window, image=titleImg, relief="flat", bg="#d4e157").place(x=77.5,y=80)
-playgroundLoopImgPath=resource_path("src/playgroundLoop.png")
-playgroundLoopImg=tkinter.PhotoImage(file = playgroundLoopImgPath)
+def main():
+    #기본 이미지
+    playgroundImgPath=resource_path("src/playground.png")
+    playgroundImg=tkinter.PhotoImage(file = playgroundImgPath)
+    playgroundImglabel=tkinter.Label(window, image=playgroundImg, relief="flat", bg="#d4e157").place(x=-2,y=1)
+    titleImgPath=resource_path("src/title.png")
+    titleImg=tkinter.PhotoImage(file = titleImgPath)
+    titleImglabel=tkinter.Label(window, image=titleImg, relief="flat", bg="#d4e157").place(x=77.5,y=80)
+    playgroundLoopImgPath=resource_path("src/playgroundLoop.png")
+    playgroundLoopImg=tkinter.PhotoImage(file = playgroundLoopImgPath)
 
-#버튼 이미지
-startImgPath=resource_path("src/start.png")
-startImg=tkinter.PhotoImage(file = startImgPath)
-restartImgPath=resource_path("src/restart.png")
-restartImg=tkinter.PhotoImage(file = restartImgPath)
-exitImgPath=resource_path("src/exit.png")
-exitImg=tkinter.PhotoImage(file = exitImgPath)
+    #버튼 이미지
+    startImgPath=resource_path("src/start.png")
+    startImg=tkinter.PhotoImage(file = startImgPath)
+    homeImgPath=resource_path("src/home.png")
+    homeImg=tkinter.PhotoImage(file = homeImgPath)
+    restartImgPath=resource_path("src/restart.png")
+    restartImg=tkinter.PhotoImage(file = restartImgPath)
+    exitImgPath=resource_path("src/exit.png")
+    exitImg=tkinter.PhotoImage(file = exitImgPath)
 
-#시작 버튼 위치
-startBtn=tkinter.Button(window, image=startImg ,relief="flat", bg="#385723", command=updown).place(x=163.5,y=230)
+    #시작 버튼 위치
+    startBtn=tkinter.Button(window, image=startImg ,relief="flat", bg="#385723", command=updown).place(x=163.5,y=230)
 
-window.mainloop()
+    window.mainloop()
+
+if __name__ == '__main__':
+    #기본 이미지
+    playgroundImgPath=resource_path("src/playground.png")
+    playgroundImg=tkinter.PhotoImage(file = playgroundImgPath)
+    playgroundImglabel=tkinter.Label(window, image=playgroundImg, relief="flat", bg="#d4e157").place(x=-2,y=1)
+    titleImgPath=resource_path("src/title.png")
+    titleImg=tkinter.PhotoImage(file = titleImgPath)
+    titleImglabel=tkinter.Label(window, image=titleImg, relief="flat", bg="#d4e157").place(x=77.5,y=80)
+    playgroundLoopImgPath=resource_path("src/playgroundLoop.png")
+    playgroundLoopImg=tkinter.PhotoImage(file = playgroundLoopImgPath)
+    
+    #버튼 이미지
+    startImgPath=resource_path("src/start.png")
+    startImg=tkinter.PhotoImage(file = startImgPath)
+    homeImgPath=resource_path("src/home.png")
+    homeImg=tkinter.PhotoImage(file = homeImgPath)
+    restartImgPath=resource_path("src/restart.png")
+    restartImg=tkinter.PhotoImage(file = restartImgPath)
+    exitImgPath=resource_path("src/exit.png")
+    exitImg=tkinter.PhotoImage(file = exitImgPath)
+
+    #시작 버튼 위치
+    startBtn=tkinter.Button(window, image=startImg ,relief="flat", bg="#385723", command=updown).place(x=163.5,y=230)
+
+    window.mainloop()

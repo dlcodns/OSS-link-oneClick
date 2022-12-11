@@ -35,7 +35,6 @@ def jebi():
     number_entered = tkinter.ttk.Entry(window, font=font2, width=10, textvariable=number)
     number_entered.place(x=260,y=87)
     
-    
     action = tkinter.Button(window, text="확인", font=font1, command=lambda:[input(action, number_entered)])
     action.place(x=395,y=91)
 
@@ -125,7 +124,7 @@ def shake(action2,a,num,enteredOne,enteredTwo,enteredThree,enteredFour,enteredFi
     if num==8:
         a.append(enteredEight.get())
         
-    #난수 인덱스의 배열과 (0,num-2)의 배열을 바꾸는 과정
+    #난수 인덱스의 배열과 (0,num-1)의 배열을 바꾸는 과정
     for i in range(0,num-1):
         rand=random.randint(0, 10000)
         ran=rand%(num-i)+i
@@ -133,10 +132,19 @@ def shake(action2,a,num,enteredOne,enteredTwo,enteredThree,enteredFour,enteredFi
         temp=a[i]
         a[i]=a[ran]
         a[ran]=temp
+        
+        #잘 안섞일까봐 한번 더
+    for i in range(0,num-1):
+        rand1=random.randint(0, 10000)
+        ran1=rand%(num-i)+i
+
+        temp=a[i]
+        a[i]=a[ran1]
+        a[ran1]=temp
     
     printer(a,num)
     
-    #잘 됐는지 터미널에서 확안
+    #잘 됐는지 터미널에서 확인
     for i in range(0, num):
         print('제비',i+1,'역할',a[i])
         
@@ -149,7 +157,7 @@ def printer(a,num):
     restartBtn=tkinter.Button(window, image=restartImg ,relief="flat", command=jebi).place(x=125,y=285)
     exitBtn=tkinter.Button(window, image=exitImg ,relief="flat", command=exit_game).place(x=277,y=285)
     tkinter.Label(window, text="-- 한 사람당 하나씩 뽑아보세요. --",bg="#FDEDA6",fg="black",relief="flat", font=font1).place(x=150,y=45,width=200)
-    openBtn=tkinter.Button(window,text="전체 공개",relief="ridge", font=font1,bg="#FAD2AA",fg="black",command=lambda:[all(a)]).place(x=200,y=233,width=100)
+    openBtn=tkinter.Button(window,text="전체 공개",relief="ridge", font=font1,bg="#FAD2AA",fg="black",command=lambda:[all(a,num)]).place(x=200,y=233,width=100)
     button1=tkinter.Button(window, image=jebi1Img,relief="flat",bg="#FDEDA6",command=lambda:[open1(a)]).place(x=90+18,y=70+3)
     button2=tkinter.Button(window, image=jebi2Img,relief="flat",bg="#FDEDA6",command=lambda:[open2(a)]).place(x=160+18,y=70+3)
     if num>=3:
@@ -165,16 +173,23 @@ def printer(a,num):
     if num==8:    
         button8=tkinter.Button(window, image=jebi8Img,relief="flat",bg="#FDEDA6",command=lambda:[open8(a)]).place(x=300+18,y=149+3)
     
-def all(a):
+def all(a,num):
     a=a
+    num=num
     open1(a)
     open2(a) 
-    open3(a)    
-    open4(a)       
-    open5(a)    
-    open6(a)    
-    open7(a)    
-    open8(a)    
+    if num>=3:
+        open3(a) 
+    if num>=4:    
+        open4(a)
+    if num>=5:    
+        open5(a)
+    if num>=6:    
+        open6(a)
+    if num>=7:    
+        open7(a)
+    if num==8:
+        open8(a)      
 
 def open1(a):
     a=a
@@ -203,25 +218,25 @@ def open4(a):
 def open5(a):
     a=a
     text5="제비 5\n\n"+a[4]
-    tkinter.Label(window,text= text5,bg="#FDEDA6",fg="black",relief="flat", font=font1).place(x=108,y=154,width=70, height=81)  
+    tkinter.Label(window,text= text5,bg="#FDEDA6",fg="black",relief="flat", font=font1).place(x=108,y=154,width=70, height=78)  
     return
 
 def open6(a):
     a=a
     text6="제비 6\n\n"+a[5]
-    tkinter.Label(window,text= text6,bg="#FDEDA6",fg="black",relief="flat", font=font1).place(x=178,y=154,width=70, height=81)  
+    tkinter.Label(window,text= text6,bg="#FDEDA6",fg="black",relief="flat", font=font1).place(x=178,y=154,width=70, height=78)  
     return
 
 def open7(a):
     a=a
     text7="제비 7\n\n"+a[6]
-    tkinter.Label(window,text= text7,bg="#FDEDA6",fg="black",relief="flat", font=font1).place(x=248,y=154,width=70, height=81)  
+    tkinter.Label(window,text= text7,bg="#FDEDA6",fg="black",relief="flat", font=font1).place(x=248,y=154,width=70, height=78)  
     return
 
 def open8(a):
     a=a
     text8="제비 8\n\n"+a[7]
-    tkinter.Label(window,text= text8,bg="#FDEDA6",fg="black",relief="flat", font=font1).place(x=318,y=154,width=70, height=81)  
+    tkinter.Label(window,text= text8,bg="#FDEDA6",fg="black",relief="flat", font=font1).place(x=318,y=154,width=70, height=78)  
     return
 
 #게임을 나가는 함수
@@ -241,23 +256,23 @@ def resource_path(relative_path):
 
 def main():
     #기본 이미지
-    jgrassImgPath=resource_path("src/jgrass.png")
+    jgrassImgPath=resource_path("src/jebi_grass.png")
     jgrassImg=tkinter.PhotoImage(file= jgrassImgPath)
     jgrassImglabel=tkinter.Label(window, image=jgrassImg, relief="flat", bg="light yellow").place(x=-23,y=-41)
 
-    jgrassLoopImgPath=resource_path("src/jgrassLoop.png")
+    jgrassLoopImgPath=resource_path("src/jebi_grassLoop.png")
     jgrassLoopImg=tkinter.PhotoImage(file = jgrassLoopImgPath)
-    jnumImgPath=resource_path("src/jnum.png")
+    jnumImgPath=resource_path("src/jebi_num.png")
     jnumImg=tkinter.PhotoImage(file = jnumImgPath)
 
     #버튼 이미지
-    jstartImgPath=resource_path("src/jstart.png")
+    jstartImgPath=resource_path("src/jebi_start.png")
     jstartImg=tkinter.PhotoImage(file = jstartImgPath)
-    homeImgPath=resource_path("src/updown_home.png")
+    homeImgPath=resource_path("src/jebi_home.png")
     homeImg=tkinter.PhotoImage(file = homeImgPath)
-    restartImgPath=resource_path("src/restart.png")
+    restartImgPath=resource_path("src/jebi_restart.png")
     restartImg=tkinter.PhotoImage(file = restartImgPath)
-    exitImgPath=resource_path("src/exit.png")
+    exitImgPath=resource_path("src/jebi_exit.png")
     exitImg=tkinter.PhotoImage(file = exitImgPath)
     jebi1ImgPath=resource_path("src/jebi_jebi1.png")
     jebi1Img=tkinter.PhotoImage(file = jebi1ImgPath)
@@ -283,23 +298,23 @@ def main():
 
 if __name__ == '__main__':
     #기본 이미지
-    jgrassImgPath=resource_path("src/jgrass.png")
+    jgrassImgPath=resource_path("src/jebi_grass.png")
     jgrassImg=tkinter.PhotoImage(file= jgrassImgPath)
     jgrassImglabel=tkinter.Label(window, image=jgrassImg, relief="flat", bg="light yellow").place(x=-23,y=-41)
 
-    jgrassLoopImgPath=resource_path("src/jgrassLoop.png")
+    jgrassLoopImgPath=resource_path("src/jebi_grassLoop.png")
     jgrassLoopImg=tkinter.PhotoImage(file = jgrassLoopImgPath)
-    jnumImgPath=resource_path("src/jnum.png")
+    jnumImgPath=resource_path("src/jebi_num.png")
     jnumImg=tkinter.PhotoImage(file = jnumImgPath)
 
     #버튼 이미지
-    jstartImgPath=resource_path("src/jstart.png")
+    jstartImgPath=resource_path("src/jebi_start.png")
     jstartImg=tkinter.PhotoImage(file = jstartImgPath)
-    homeImgPath=resource_path("src/updown_home.png")
+    homeImgPath=resource_path("src/jebi_home.png")
     homeImg=tkinter.PhotoImage(file = homeImgPath)
-    restartImgPath=resource_path("src/restart.png")
+    restartImgPath=resource_path("src/jebi_restart.png")
     restartImg=tkinter.PhotoImage(file = restartImgPath)
-    exitImgPath=resource_path("src/exit.png")
+    exitImgPath=resource_path("src/jebi_exit.png")
     exitImg=tkinter.PhotoImage(file = exitImgPath)
     jebi1ImgPath=resource_path("src/jebi_jebi1.png")
     jebi1Img=tkinter.PhotoImage(file = jebi1ImgPath)

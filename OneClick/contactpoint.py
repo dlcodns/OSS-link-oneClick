@@ -169,7 +169,10 @@ def showContactpoint():
         wr.writerow([a[0],a[1],a[2]])
         f.close()
 
+        emailAddEnt.delete(0,END)
+
         msgbox.showinfo( "알림", "저장되었습니다." )
+        newwindow.lift()
 
     emailAddbtn = Button(newwindow) 
     emailAddbtn.config(text = "확인",background="#E2F0D9")
@@ -191,7 +194,9 @@ def showContactpoint():
         wr.writerow([a[0],a[1],a[2]])
         f.close()
 
+        phoneAddEnt.delete(0,END)
         msgbox.showinfo( "알림", "저장되었습니다." )
+        newwindow.lift()
 
     phoneAddbtn = Button(newwindow) 
     phoneAddbtn.config(text = "확인",background="#E2F0D9")
@@ -224,6 +229,24 @@ def showContactpoint():
         a = memoEntry.get().split('/')
         wr.writerow([a[0]])       
         f.close()
+
+        memoCnt = 0    
+        memo = []
+
+        f = open("./oneClickData/memo.csv",'r')
+        rdr = csv.reader(f)
+        for row in rdr:
+            memo.append(row)
+        f.close
+
+        memolistbox = Listbox(newwindow,selectmode = 'extended',relief="flat",bg="#DAE3F3")
+        memolistbox.place(x=280,y=270,width=290, height = 80)
+
+        for i in memo:
+            memolistbox.insert(memoCnt, i)
+            memoCnt=memoCnt+1  
+
+        memoEntry.delete(0,END)
     
     memobtn = Button(newwindow) 
     memobtn.config(text = "저장",width=4,height=1 )

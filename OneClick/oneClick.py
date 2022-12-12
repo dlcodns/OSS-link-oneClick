@@ -409,7 +409,7 @@ def loginMenu() :
             else :
                 myId = id
                 myPw = pw
-                messagebox.showinfo("일회용 로그인", "로그인 되었습니다.")
+                messagebox.showinfo("로그인 유지", "로그인 되었습니다.")
                 writeAccount(myId, myPw)
                 loginWindow.destroy()
                 accountLabel.configure(text=" {} 님이 로그인 중 입니다. ".format(myId), fg="blue", relief="solid")

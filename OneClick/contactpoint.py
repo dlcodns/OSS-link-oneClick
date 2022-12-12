@@ -78,7 +78,7 @@ def showContactpoint():
 
 #교수님 이메일 
     
-    emailValues=['전체', '컴퓨터공학과', '교양']
+    emailValues=['전체', '컴퓨터공학과', '교양(교수님)','SW사업단']
     emailCombobox=tkinter.ttk.Combobox(newwindow, values=emailValues, state="readonly", background="#E2F0D9")
     emailCombobox.place(x=20,y=118,width=80,height=20)
     emailCombobox.set("전체")
@@ -116,7 +116,7 @@ def showContactpoint():
 
 #전화번호 
 
-    phoneValues=['전체', '컴퓨터공학과', '교양 교수님', '교양교육본부']
+    phoneValues=['전체', '컴퓨터공학과','전자정보대학', '교양(교수님)', '교양교육본부', '국제교류본부','취업지원본부','SW사업단']
     numberCombobox=tkinter.ttk.Combobox(newwindow, state="readonly", values=phoneValues)
     numberCombobox.place(x=20,y=205,width=80,height=20)
     numberCombobox.set("전체")

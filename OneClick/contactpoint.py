@@ -83,7 +83,7 @@ def showContactpoint():
     emailCombobox.place(x=20,y=118,width=80,height=20)
     emailCombobox.set("전체")
 
-    emailEntry = Entry(newwindow)  
+    emailEntry = Entry(newwindow, justify='center')  
     emailEntry.place(x=100,y=118,width=115,height=20)
 
     def emailFind():
@@ -121,7 +121,7 @@ def showContactpoint():
     numberCombobox.place(x=20,y=205,width=80,height=20)
     numberCombobox.set("전체")
 
-    numberEntry = Entry(newwindow) 
+    numberEntry = Entry(newwindow, justify='center') 
     numberEntry.place(x=100,y=205,width=115,height=20)
 
     def numberFind():

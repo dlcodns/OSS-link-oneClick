@@ -33,17 +33,17 @@ def showContactpoint():
     memoCsvtPath = resource_path('oneClickData/memo.csv')
 
     if not os.path.isfile('oneClickData/mail_book.csv'):
-        mailbook = []
+        mailbookFile = []
         f = open(mailCsvtPath,'r')
         rdr = csv.reader(f)
         for row in rdr:
-            mailbook.append(row)
+            mailbookFile.append(row)
         f.close
         f = open('oneClickData/mail_book.csv','w', newline='')
         wr = csv.writer(f)
-        wr.writerows(mailbook)
+        wr.writerows(mailbookFile)
         f.close()
-    
+
     if not os.path.isfile('oneClickData/phone_book.csv'):
         phonebookFile = []
         f = open(phonebookCsvtPath,'r')
@@ -55,6 +55,18 @@ def showContactpoint():
         wr = csv.writer(f)
         wr.writerows(phonebookFile)
         f.close()
+
+    if not os.path.isfile('oneClickData/memo.csv'):
+        memoFile = []
+        f = open(memoCsvtPath,'r')
+        rdr = csv.reader(f)
+        for row in rdr:
+            memoFile.append(row)
+        f.close
+        f = open('oneClickData/memo.csv','w', newline='')
+        wr = csv.writer(f)
+        wr.writerows(memoFile)
+        f.close()    
 
 
     #배경 사진

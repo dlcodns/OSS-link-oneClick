@@ -17,6 +17,7 @@ from updown import *
 from jebi import *
 from contactpoint import *
 import ctypes
+import glob
 
 
 #------------------------------------------------------------------------------------------------------------
@@ -65,6 +66,8 @@ accountLabel.place(x=230,y=30)
 def setAccount(myId, myPw) :
     accountHeader = [['학번','비밀번호']]
     accountHeader.append([myId, myPw])
+    if os.path.exists('oneClickData/userAccount.csv'):
+        win32file.SetFileAttributes('oneClickData/userAccount.csv', 0)
     writeCsv('oneClickData/userAccount.csv',accountHeader)
 
 def writeAccount(myId, myPw):
@@ -99,6 +102,52 @@ def writeCsv(filename, the_list):
         accountHeader = csv.writer(f, delimiter = ',')
         accountHeader.writerows(the_list)
         win32file.SetFileAttributes(filename, 2)
+
+def resetData() :
+    logoutFunc()
+    setAccount("", "")
+    
+    # CSV 파일 초기 생성
+    mailCsvtPath = resource_path('oneClickData/mail_book.csv')
+    phonebookCsvtPath = resource_path('oneClickData/phone_book.csv')
+    memoCsvtPath = resource_path('oneClickData/memo.csv')
+
+    # 메일 초기화
+    mailbookFile = []
+    f = open(mailCsvtPath,'r')
+    rdr = csv.reader(f)
+    for row in rdr:
+        mailbookFile.append(row)
+    f.close
+    f = open('oneClickData/mail_book.csv','w', newline='')
+    wr = csv.writer(f)
+    wr.writerows(mailbookFile)
+    f.close()
+
+    # 전화번호부 초기화
+    phonebookFile = []
+    f = open(phonebookCsvtPath,'r')
+    rdr = csv.reader(f)
+    for row in rdr:
+        phonebookFile.append(row)
+    f.close
+    f = open('oneClickData/phone_book.csv','w', newline='')
+    wr = csv.writer(f)
+    wr.writerows(phonebookFile)
+    f.close()
+
+    # 메모장 초기화
+    memoFile = []
+    f = open(memoCsvtPath,'r')
+    rdr = csv.reader(f)
+    for row in rdr:
+        memoFile.append(row)
+    f.close
+    f = open('oneClickData/memo.csv','w', newline='')
+    wr = csv.writer(f)
+    wr.writerows(memoFile)
+    f.close()    
+
 try:
     with open('oneClickData/userAccount.csv') as f:
         readAccount()
@@ -380,6 +429,7 @@ def loginMenu() :
 menubar=Menu(root)
 menubar.add_cascade(label="로그인", command=lambda:[duplicateLogin()])
 menubar.add_cascade(label="로그아웃", command=lambda:[logoutFunc()])
+menubar.add_cascade(label="저장 정보 초기화", command=lambda:[resetData()])
 root.config(menu=menubar)
 
 # exe 제작을 위한 이미지 경로 설정 함수

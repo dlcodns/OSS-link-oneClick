@@ -27,6 +27,24 @@ def showContactpoint():
         
         return os.path.join(base_path, relative_path)
 
+    # CSV 파일 초기 생성
+    mailCsvtPath = resource_path('oneClickData/mail_book.csv')
+    phonebookCsvtPath = resource_path('oneClickData/phone_book.csv')
+    memoCsvtPath = resource_path('oneClickData/memo.csv')
+
+    if not os.path.isfile('oneClickData/mail_book.csv'):
+        mailbook = []
+        f = open(mailCsvtPath,'r')
+        rdr = csv.reader(f)
+        for row in rdr:
+            mailbook.append(row)
+        f.close
+        f = open('oneClickData/mail_book.csv','w', newline='')
+        wr = csv.writer(f)
+        wr.writerows(mailbook)
+        f.close()
+
+
 
     #배경 사진
     contactpointImgPath=resource_path("src/contactpoint.png")
@@ -49,7 +67,7 @@ def showContactpoint():
         flag = 0
         mailCnt = 0
         mailbook = []
-        f = open("mail_book.csv",'r')
+        f = open("./oneClickData/mail_book.csv",'r')
         rdr = csv.reader(f)
         for row in rdr:
             mailbook.append(row)
@@ -87,7 +105,7 @@ def showContactpoint():
         flag = 0
         phoneCnt = 0
         phonebook = []
-        f = open("phone_book.csv",'r') 
+        f = open("./oneClickData/phone_book.csv",'r') 
         rdr = csv.reader(f)
         for row in rdr:
             phonebook.append(row)
@@ -120,7 +138,7 @@ def showContactpoint():
     emailAddEnt = Entry(newwindow) 
     emailAddEnt.place(x=75,y=320,width=140,height=20)
     def emailAdd():
-        f = open("mail_book.csv",'a',newline="")
+        f = open("./oneClickData/mail_book.csv",'a',newline="")
         wr = csv.writer(f) 
 
         a = emailAddEnt.get().split('/')
@@ -142,7 +160,7 @@ def showContactpoint():
     phoneAddEnt = Entry(newwindow) 
     phoneAddEnt.place(x=75,y=350,width=140,height=20)
     def phoneAdd():
-        f = open("phone_book.csv",'a',newline="")
+        f = open("./oneClickData/phone_book.csv",'a',newline="")
         wr = csv.writer(f) 
 
         a = phoneAddEnt.get().split('/')
@@ -161,7 +179,7 @@ def showContactpoint():
     memoCnt = 0    
     memo = []
 
-    f = open("memo.csv",'r')
+    f = open("./oneClickData/memo.csv",'r')
     rdr = csv.reader(f)
     for row in rdr:
         memo.append(row)
@@ -178,7 +196,7 @@ def showContactpoint():
     memoEntry.place(x = 278, y = 350,width=255, height =25)  
     
     def memoAdd():
-        f = open("memo.csv",'a',newline="")
+        f = open("./oneClickData/memo.csv",'a',newline="")
         wr = csv.writer(f) 
         a = memoEntry.get().split('/')
         wr.writerow([a[0]])       

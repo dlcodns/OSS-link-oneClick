@@ -43,7 +43,18 @@ def showContactpoint():
         wr = csv.writer(f)
         wr.writerows(mailbook)
         f.close()
-
+    
+    if not os.path.isfile('oneClickData/phone_book.csv'):
+        phonebookFile = []
+        f = open(phonebookCsvtPath,'r')
+        rdr = csv.reader(f)
+        for row in rdr:
+            phonebookFile.append(row)
+        f.close
+        f = open('oneClickData/phone_book.csv','w', newline='')
+        wr = csv.writer(f)
+        wr.writerows(phonebookFile)
+        f.close()
 
 
     #배경 사진

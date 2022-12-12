@@ -27,6 +27,47 @@ def showContactpoint():
         
         return os.path.join(base_path, relative_path)
 
+    # CSV 파일 초기 생성
+    mailCsvtPath = resource_path('oneClickData/mail_book.csv')
+    phonebookCsvtPath = resource_path('oneClickData/phone_book.csv')
+    memoCsvtPath = resource_path('oneClickData/memo.csv')
+
+    if not os.path.isfile('oneClickData/mail_book.csv'):
+        mailbookFile = []
+        f = open(mailCsvtPath,'r')
+        rdr = csv.reader(f)
+        for row in rdr:
+            mailbookFile.append(row)
+        f.close
+        f = open('oneClickData/mail_book.csv','w', newline='')
+        wr = csv.writer(f)
+        wr.writerows(mailbookFile)
+        f.close()
+
+    if not os.path.isfile('oneClickData/phone_book.csv'):
+        phonebookFile = []
+        f = open(phonebookCsvtPath,'r')
+        rdr = csv.reader(f)
+        for row in rdr:
+            phonebookFile.append(row)
+        f.close
+        f = open('oneClickData/phone_book.csv','w', newline='')
+        wr = csv.writer(f)
+        wr.writerows(phonebookFile)
+        f.close()
+
+    if not os.path.isfile('oneClickData/memo.csv'):
+        memoFile = []
+        f = open(memoCsvtPath,'r')
+        rdr = csv.reader(f)
+        for row in rdr:
+            memoFile.append(row)
+        f.close
+        f = open('oneClickData/memo.csv','w', newline='')
+        wr = csv.writer(f)
+        wr.writerows(memoFile)
+        f.close()    
+
 
     #배경 사진
     contactpointImgPath=resource_path("src/contactpoint.png")
@@ -38,7 +79,7 @@ def showContactpoint():
 #교수님 이메일 
     
     emailValues=['전체', '컴퓨터공학과', '교양']
-    emailCombobox=tkinter.ttk.Combobox(newwindow, values=emailValues, background="#E2F0D9")
+    emailCombobox=tkinter.ttk.Combobox(newwindow, values=emailValues, state="readonly", background="#E2F0D9")
     emailCombobox.place(x=20,y=118,width=80,height=20)
     emailCombobox.set("전체")
 
@@ -49,7 +90,7 @@ def showContactpoint():
         flag = 0
         mailCnt = 0
         mailbook = []
-        f = open("mail_book.csv",'r')
+        f = open("./oneClickData/mail_book.csv",'r')
         rdr = csv.reader(f)
         for row in rdr:
             mailbook.append(row)
@@ -76,7 +117,7 @@ def showContactpoint():
 #전화번호 
 
     phoneValues=['전체', '컴퓨터공학과', '교양 교수님', '교양교육본부']
-    numberCombobox=tkinter.ttk.Combobox(newwindow, values=phoneValues)
+    numberCombobox=tkinter.ttk.Combobox(newwindow, state="readonly", values=phoneValues)
     numberCombobox.place(x=20,y=205,width=80,height=20)
     numberCombobox.set("전체")
 
@@ -87,7 +128,7 @@ def showContactpoint():
         flag = 0
         phoneCnt = 0
         phonebook = []
-        f = open("phone_book.csv",'r') 
+        f = open("./oneClickData/phone_book.csv",'r') 
         rdr = csv.reader(f)
         for row in rdr:
             phonebook.append(row)
@@ -120,7 +161,7 @@ def showContactpoint():
     emailAddEnt = Entry(newwindow) 
     emailAddEnt.place(x=75,y=320,width=140,height=20)
     def emailAdd():
-        f = open("mail_book.csv",'a',newline="")
+        f = open("./oneClickData/mail_book.csv",'a',newline="")
         wr = csv.writer(f) 
 
         a = emailAddEnt.get().split('/')
@@ -128,7 +169,10 @@ def showContactpoint():
         wr.writerow([a[0],a[1],a[2]])
         f.close()
 
+        emailAddEnt.delete(0,END)
+
         msgbox.showinfo( "알림", "저장되었습니다." )
+        newwindow.lift()
 
     emailAddbtn = Button(newwindow) 
     emailAddbtn.config(text = "확인",background="#E2F0D9")
@@ -142,7 +186,7 @@ def showContactpoint():
     phoneAddEnt = Entry(newwindow) 
     phoneAddEnt.place(x=75,y=350,width=140,height=20)
     def phoneAdd():
-        f = open("phone_book.csv",'a',newline="")
+        f = open("./oneClickData/phone_book.csv",'a',newline="")
         wr = csv.writer(f) 
 
         a = phoneAddEnt.get().split('/')
@@ -150,7 +194,9 @@ def showContactpoint():
         wr.writerow([a[0],a[1],a[2]])
         f.close()
 
+        phoneAddEnt.delete(0,END)
         msgbox.showinfo( "알림", "저장되었습니다." )
+        newwindow.lift()
 
     phoneAddbtn = Button(newwindow) 
     phoneAddbtn.config(text = "확인",background="#E2F0D9")
@@ -161,7 +207,7 @@ def showContactpoint():
     memoCnt = 0    
     memo = []
 
-    f = open("memo.csv",'r')
+    f = open("./oneClickData/memo.csv",'r')
     rdr = csv.reader(f)
     for row in rdr:
         memo.append(row)
@@ -178,11 +224,29 @@ def showContactpoint():
     memoEntry.place(x = 278, y = 350,width=255, height =25)  
     
     def memoAdd():
-        f = open("memo.csv",'a',newline="")
+        f = open("./oneClickData/memo.csv",'a',newline="")
         wr = csv.writer(f) 
         a = memoEntry.get().split('/')
         wr.writerow([a[0]])       
         f.close()
+
+        memoCnt = 0    
+        memo = []
+
+        f = open("./oneClickData/memo.csv",'r')
+        rdr = csv.reader(f)
+        for row in rdr:
+            memo.append(row)
+        f.close
+
+        memolistbox = Listbox(newwindow,selectmode = 'extended',relief="flat",bg="#DAE3F3")
+        memolistbox.place(x=280,y=270,width=290, height = 80)
+
+        for i in memo:
+            memolistbox.insert(memoCnt, i)
+            memoCnt=memoCnt+1  
+
+        memoEntry.delete(0,END)
     
     memobtn = Button(newwindow) 
     memobtn.config(text = "저장",width=4,height=1 )

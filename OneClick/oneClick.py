@@ -18,6 +18,8 @@ from jebi import *
 from contactpoint import *
 import ctypes
 
+
+#------------------------------------------------------------------------------------------------------------
 # oneClickData 폴더 생성 및 숨김 처리
 def check_prep(path):
     if not os.path.exists(path):
@@ -42,6 +44,8 @@ chrome_options.add_experimental_option('excludeSwitches', ['enable-logging', "di
 chrome_service = Service('chromedriver')
 chrome_service.creationflags = 0x08000000
 
+#---------------------------------------------------------------------------------------------------------------------------
+
 #기본적인 윈도우창 설정
 root=Tk()
 root.title("One Click")
@@ -57,22 +61,23 @@ myPw = ''
 accountLabel=Label(root, text=" 비 로그인 이용 중 입니다. ", relief="solid",bg="#d4e157")
 accountLabel.place(x=230,y=30)
 
+# 계정정보 CSV파일 관련 함수
 def setAccount(myId, myPw) :
     accountHeader = [['학번','비밀번호']]
     accountHeader.append([myId, myPw])
-    writeCsv('userAccount.csv',accountHeader)
+    writeCsv('oneClickData/userAccount.csv',accountHeader)
 
 def writeAccount(myId, myPw):
     accountHeader = [['학번','비밀번호']]
     accountHeader.append([myId, myPw])
-    win32file.SetFileAttributes('userAccount.csv', 0)
-    writeCsv('userAccount.csv',accountHeader)
+    win32file.SetFileAttributes('oneClickData/userAccount.csv', 0)
+    writeCsv('oneClickData/userAccount.csv',accountHeader)
 
 def readAccount():
     global myId, myPw
     tmp = []
-    win32file.SetFileAttributes('userAccount.csv', 0)
-    with open('userAccount.csv', 'r') as f:
+    win32file.SetFileAttributes('oneClickData/userAccount.csv', 0)
+    with open('oneClickData/userAccount.csv', 'r') as f:
         reader = csv.reader(f)
         for row in reader:
             tmp.append(row)
@@ -83,11 +88,11 @@ def readAccount():
                 if myId != '' and myPw != '' :
                     accountLabel.configure(text=" {} 님이 로그인 중 입니다. ".format(myId), fg="blue", relief="solid")
                     accountLabel.place(x=205, y=30)
-                    win32file.SetFileAttributes('userAccount.csv', 2)
+                    win32file.SetFileAttributes('oneClickData/userAccount.csv', 2)
                 else :
                     accountLabel.configure(text=" 비 로그인 이용 중 입니다. ", fg="black", relief="solid")
                     accountLabel.place(x=230, y=30)
-                    win32file.SetFileAttributes('userAccount.csv', 2)
+                    win32file.SetFileAttributes('oneClickData/userAccount.csv', 2)
                 
 def writeCsv(filename, the_list):
     with open(filename, 'w', newline = '') as f:
@@ -95,7 +100,7 @@ def writeCsv(filename, the_list):
         accountHeader.writerows(the_list)
         win32file.SetFileAttributes(filename, 2)
 try:
-    with open('userAccount.csv') as f:
+    with open('oneClickData/userAccount.csv') as f:
         readAccount()
 except IOError:
     setAccount(myId, myPw)
@@ -376,7 +381,6 @@ menubar=Menu(root)
 menubar.add_cascade(label="로그인", command=lambda:[duplicateLogin()])
 menubar.add_cascade(label="로그아웃", command=lambda:[logoutFunc()])
 root.config(menu=menubar)
-
 
 # exe 제작을 위한 이미지 경로 설정 함수
 def resource_path(relative_path):

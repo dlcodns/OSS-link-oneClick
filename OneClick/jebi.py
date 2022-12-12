@@ -33,7 +33,7 @@ def playJebi() :
         tkinter.Label(window, text="인원 수 입력", relief="ridge", font=font2,bg="#FAD2AA",fg="black").place(x=90,y=87,width=160)
         
         number = tkinter.StringVar()
-        number_entered = tkinter.ttk.Entry(window, font=font2, width=10, textvariable=number)
+        number_entered = tkinter.ttk.Entry(window, font=font2, width=10, textvariable=number, justify="center")
         number_entered.place(x=260,y=87)
         
         action = tkinter.Button(window, text="확인", font=font1, command=lambda:[input(action, number_entered)])
@@ -55,21 +55,21 @@ def playJebi() :
         
         #입력창 설정
         jebi_1 = tkinter.StringVar()
-        jebi_1_entered = tkinter.ttk.Entry(window, font=font1, width=6, textvariable=jebi_1)
+        jebi_1_entered = tkinter.ttk.Entry(window, font=font1, width=6, textvariable=jebi_1, justify="center")
         jebi_2 = tkinter.StringVar()
-        jebi_2_entered = tkinter.ttk.Entry(window, font=font1, width=6, textvariable=jebi_2)
+        jebi_2_entered = tkinter.ttk.Entry(window, font=font1, width=6, textvariable=jebi_2, justify="center")
         jebi_3 = tkinter.StringVar()
-        jebi_3_entered = tkinter.ttk.Entry(window, font=font1, width=6, textvariable=jebi_3)
+        jebi_3_entered = tkinter.ttk.Entry(window, font=font1, width=6, textvariable=jebi_3, justify="center")
         jebi_4 = tkinter.StringVar()
-        jebi_4_entered = tkinter.ttk.Entry(window, font=font1, width=6, textvariable=jebi_4)
+        jebi_4_entered = tkinter.ttk.Entry(window, font=font1, width=6, textvariable=jebi_4, justify="center")
         jebi_5 = tkinter.StringVar()
-        jebi_5_entered = tkinter.ttk.Entry(window, font=font1, width=6, textvariable=jebi_5)
+        jebi_5_entered = tkinter.ttk.Entry(window, font=font1, width=6, textvariable=jebi_5, justify="center")
         jebi_6 = tkinter.StringVar()
-        jebi_6_entered = tkinter.ttk.Entry(window, font=font1, width=6, textvariable=jebi_6)
+        jebi_6_entered = tkinter.ttk.Entry(window, font=font1, width=6, textvariable=jebi_6, justify="center")
         jebi_7 = tkinter.StringVar()
-        jebi_7_entered = tkinter.ttk.Entry(window, font=font1, width=6, textvariable=jebi_7)
+        jebi_7_entered = tkinter.ttk.Entry(window, font=font1, width=6, textvariable=jebi_7, justify="center")
         jebi_8 = tkinter.StringVar()
-        jebi_8_entered = tkinter.ttk.Entry(window, font=font1, width=6, textvariable=jebi_8)
+        jebi_8_entered = tkinter.ttk.Entry(window, font=font1, width=6, textvariable=jebi_8, justify="center")
 
         #인원 수에 따라 라벨 개수와 형태를 다르게 함.
         if num>=2 and num<=4:

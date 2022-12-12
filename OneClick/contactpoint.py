@@ -4,7 +4,6 @@ import tkinter.ttk
 import tkinter.messagebox as msgbox
 from tkinter import *
 import csv
-import pandas as pd
 import os
 import sys
 

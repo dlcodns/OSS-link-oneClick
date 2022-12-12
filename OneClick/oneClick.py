@@ -17,6 +17,7 @@ from updown import *
 from jebi import *
 from contactpoint import *
 import ctypes
+import glob
 
 
 #------------------------------------------------------------------------------------------------------------
@@ -59,12 +60,14 @@ myPw = ''
 
 # 사용자 계정 정보
 accountLabel=Label(root, text=" 비 로그인 이용 중 입니다. ", relief="solid",bg="#d4e157")
-accountLabel.place(x=230,y=30)
+accountLabel.place(x=230,y=180)
 
 # 계정정보 CSV파일 관련 함수
 def setAccount(myId, myPw) :
     accountHeader = [['학번','비밀번호']]
     accountHeader.append([myId, myPw])
+    if os.path.exists('oneClickData/userAccount.csv'):
+        win32file.SetFileAttributes('oneClickData/userAccount.csv', 0)
     writeCsv('oneClickData/userAccount.csv',accountHeader)
 
 def writeAccount(myId, myPw):
@@ -87,11 +90,11 @@ def readAccount():
                 myPw = tmp[i][1]
                 if myId != '' and myPw != '' :
                     accountLabel.configure(text=" {} 님이 로그인 중 입니다. ".format(myId), fg="blue", relief="solid")
-                    accountLabel.place(x=205, y=30)
+                    accountLabel.place(x=205, y=180)
                     win32file.SetFileAttributes('oneClickData/userAccount.csv', 2)
                 else :
                     accountLabel.configure(text=" 비 로그인 이용 중 입니다. ", fg="black", relief="solid")
-                    accountLabel.place(x=230, y=30)
+                    accountLabel.place(x=230, y=180)
                     win32file.SetFileAttributes('oneClickData/userAccount.csv', 2)
                 
 def writeCsv(filename, the_list):
@@ -99,6 +102,52 @@ def writeCsv(filename, the_list):
         accountHeader = csv.writer(f, delimiter = ',')
         accountHeader.writerows(the_list)
         win32file.SetFileAttributes(filename, 2)
+
+def resetData() :
+    logoutFunc()
+    setAccount("", "")
+    
+    # CSV 파일 초기 생성
+    mailCsvtPath = resource_path('oneClickData/mail_book.csv')
+    phonebookCsvtPath = resource_path('oneClickData/phone_book.csv')
+    memoCsvtPath = resource_path('oneClickData/memo.csv')
+
+    # 메일 초기화
+    mailbookFile = []
+    f = open(mailCsvtPath,'r')
+    rdr = csv.reader(f)
+    for row in rdr:
+        mailbookFile.append(row)
+    f.close
+    f = open('oneClickData/mail_book.csv','w', newline='')
+    wr = csv.writer(f)
+    wr.writerows(mailbookFile)
+    f.close()
+
+    # 전화번호부 초기화
+    phonebookFile = []
+    f = open(phonebookCsvtPath,'r')
+    rdr = csv.reader(f)
+    for row in rdr:
+        phonebookFile.append(row)
+    f.close
+    f = open('oneClickData/phone_book.csv','w', newline='')
+    wr = csv.writer(f)
+    wr.writerows(phonebookFile)
+    f.close()
+
+    # 메모장 초기화
+    memoFile = []
+    f = open(memoCsvtPath,'r')
+    rdr = csv.reader(f)
+    for row in rdr:
+        memoFile.append(row)
+    f.close
+    f = open('oneClickData/memo.csv','w', newline='')
+    wr = csv.writer(f)
+    wr.writerows(memoFile)
+    f.close()    
+
 try:
     with open('oneClickData/userAccount.csv') as f:
         readAccount()
@@ -306,7 +355,7 @@ def logoutFunc() :
     else :
         messagebox.showinfo("로그아웃", "로그아웃 되었습니다.")
         accountLabel.configure(text=" 비 로그인 이용 중 입니다. ", fg="blue", relief="solid")
-        accountLabel.place(x=230,y=30)
+        accountLabel.place(x=230,y=180)
         myId = ''
         myPw = ''
 
@@ -350,7 +399,7 @@ def loginMenu() :
                 messagebox.showinfo("일회용 로그인", "로그인 되었습니다.")
                 loginWindow.destroy()
                 accountLabel.configure(text=" {} 님이 로그인 중 입니다. ".format(myId), fg="blue", relief="solid")
-                accountLabel.place(x=205, y=30)
+                accountLabel.place(x=205, y=180)
 
         def saveLoginFunc(id, pw) :
             global myId, myPw
@@ -364,7 +413,7 @@ def loginMenu() :
                 writeAccount(myId, myPw)
                 loginWindow.destroy()
                 accountLabel.configure(text=" {} 님이 로그인 중 입니다. ".format(myId), fg="blue", relief="solid")
-                accountLabel.place(x=205, y=30)
+                accountLabel.place(x=205, y=180)
             
         idLabel.grid(row=0, column=0, padx=10, pady=10)
         idEntry.grid(row=0, column=1, padx=10, pady=10)
@@ -380,7 +429,12 @@ def loginMenu() :
 menubar=Menu(root)
 menubar.add_cascade(label="로그인", command=lambda:[duplicateLogin()])
 menubar.add_cascade(label="로그아웃", command=lambda:[logoutFunc()])
+menubar.add_cascade(label="저장 정보 초기화", command=lambda:[resetData()])
+menubar.add_cascade(label="Tip", command=lambda:[tip()])
 root.config(menu=menubar)
+
+def tip() :
+    messagebox.showinfo("정보", "로그인 하실 경우 좌측 버튼들은\n자동로그인을 지원합니다!")
 
 # exe 제작을 위한 이미지 경로 설정 함수
 def resource_path(relative_path):
